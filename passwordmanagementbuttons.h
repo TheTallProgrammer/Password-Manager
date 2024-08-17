@@ -1,7 +1,10 @@
 #ifndef PASSWORDMANAGEMENTBUTTONS_H
 #define PASSWORDMANAGEMENTBUTTONS_H
 
+#include <memory>
 #include <QDialog>
+
+class PasswordGenerator; // forward declaration
 
 namespace Ui {
 class passwordManagementButtons;
@@ -20,6 +23,7 @@ private slots:
 
 private:
     Ui::passwordManagementButtons *ui;
+    std::unique_ptr<PasswordGenerator> myPassGen; // smart pointer
 };
 
 #endif // PASSWORDMANAGEMENTBUTTONS_H

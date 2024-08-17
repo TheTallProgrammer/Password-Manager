@@ -16,7 +16,9 @@ passwordManagementButtons::~passwordManagementButtons()
 
 void passwordManagementButtons::on_genPass_clicked()
 {
-    PasswordGenerator* myPassGen = new PasswordGenerator();
+    if(!myPassGen){
+        myPassGen = std::make_unique<PasswordGenerator>();
+    }
     myPassGen->show();
 }
 
