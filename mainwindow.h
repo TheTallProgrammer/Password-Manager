@@ -30,10 +30,10 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
+public slots:
     void on_createPassSubmitButton_clicked();
-
     void on_loginButton_clicked();
+    void updatePassword(const QString &newPassword);  // Slot to update the password
 
 private:
     Ui::MainWindow *ui;

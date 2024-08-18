@@ -17,9 +17,12 @@ public:
 
 signals:
     void resetCanceled();  // Signal emitted when cancel is clicked
+    void passwordUpdated(const QString &newPassword);  // Signal to send the new password
 
 private slots:
     void on_cancelButton_clicked();
+
+    void on_confirmButton_clicked();
 
 private:
     Ui::resetPassword *ui;

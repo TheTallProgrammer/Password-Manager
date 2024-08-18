@@ -1,14 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QRandomGenerator>
-
+#include "resetpassword.h"
+#include <QDebug>  // Include for debugging
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , myButtonsPage(std::make_unique<passwordManagementButtons>())
+    , myButtonsPage(std::make_unique<passwordManagementButtons>(this))
 {
-
     ui->setupUi(this);
     ui->createPass->hide();
     ui->login->hide();
@@ -24,13 +24,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->loginErrorLabel->setPalette(palette_loginErr);
     ui->loginErrorLabel->hide();
 
-
     if (!passwordExists()){
         ui->createPass->show();
     } else {
         ui->login->show();
     }
-
 }
 
 MainWindow::~MainWindow()
@@ -55,6 +53,16 @@ void MainWindow::on_createPassSubmitButton_clicked()
     }
 }
 
+void MainWindow::updatePassword(const QString &newPassword)
+{
+    qDebug() << "Received signal to update password.";  // Debug statement
+
+    // Reuse the createPassword function to update the password
+    createPassword(newPassword);
+
+    qDebug() << "Password updated.";  // Debug statement
+}
+
 
 QString MainWindow::passwordFilePath(){
     // Find a suitable dir for the file to be saved in
@@ -71,18 +79,47 @@ bool MainWindow::passwordExists(){
     return file.exists();
 }
 
-void MainWindow::createPassword(QString firstPassEntry){
+void MainWindow::createPassword(QString firstPassEntry) {
     QByteArray salt = generateSalt();
     QByteArray hashedPassword = hashPassword(firstPassEntry, salt);
+
+    qDebug() << "Generated salt:" << salt.toHex();  // Debug statement
+    qDebug() << "Hashed password:" << hashedPassword.toHex();  // Debug statement
+
+    qDebug() << "Attempting to save password to file...";  // Debug statement
     bool passSaved = saveToFile(hashedPassword, salt);
-    (passSaved) ? ui->creationError->setText("Password Created Successfully") : ui->creationError->setText("Password Couldn't Save.");
-    myButtonsPage->show(); // display the buttons page
+
+    if (passSaved) {
+        ui->creationError->setText("Password Created Successfully");
+        qDebug() << "Password saved successfully.";  // Debug statement
+    } else {
+        ui->creationError->setText("Password Couldn't Save.");
+        qDebug() << "Failed to save password.";  // Debug statement
+    }
+
+    myButtonsPage->show(); // Display the buttons page
     this->hide();
 }
 
 bool MainWindow::saveToFile(const QByteArray &hashedPassword, const QByteArray &salt) {
-    QFile file(passwordFilePath());
-    if (!file.open(QIODevice::WriteOnly)) {
+    QString filePath = passwordFilePath();
+    qDebug() << "Saving to file path:" << filePath;  // Debug statement
+
+    QFile file(filePath);
+
+    // Attempt to remove the file first if it exists, to ensure a fresh write
+    if (file.exists()) {
+        if (!file.remove()) {
+            qDebug() << "Failed to remove existing file.";  // Debug statement
+            return false;
+        } else {
+            qDebug() << "Existing file removed.";  // Debug statement
+        }
+    }
+
+    // Open the file for writing and ensure it is truncated to overwrite existing data
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+        qDebug() << "Failed to open file for writing.";  // Debug statement
         return false;
     }
 
@@ -90,8 +127,11 @@ bool MainWindow::saveToFile(const QByteArray &hashedPassword, const QByteArray &
     out << hashedPassword << salt;
     file.close();
 
+    qDebug() << "Successfully wrote to file.";  // Debug statement
     return true;
 }
+
+
 
 void MainWindow::on_loginButton_clicked()
 {
@@ -118,6 +158,7 @@ void MainWindow::promptForPassword(QString password){
 bool MainWindow::verifyPassword(const QString &password) {
     QByteArray savedHashedPassword, salt;
     if (!loadFromFile(savedHashedPassword, salt)) {
+        qDebug() << "Failed to load saved password.";  // Debug statement
         return false;
     }
     QByteArray hashedPassword = hashPassword(password, salt);
@@ -127,6 +168,7 @@ bool MainWindow::verifyPassword(const QString &password) {
 bool MainWindow::loadFromFile(QByteArray &hashedPassword, QByteArray &salt) {
     QFile file(passwordFilePath());
     if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "Failed to open file for reading.";  // Debug statement
         return false;
     }
 
@@ -147,5 +189,3 @@ QByteArray MainWindow::hashPassword(const QString &password, const QByteArray &s
     return hashedPassword;
 }
 // ---
-
-

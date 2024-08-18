@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>621</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,10 +15,13 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="login" native="true">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
+      <x>-90</x>
+      <y>-10</y>
       <width>1001</width>
       <height>291</height>
      </rect>
@@ -139,8 +142,8 @@
    <widget class="QWidget" name="createPass" native="true">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>240</y>
+      <x>-90</x>
+      <y>230</y>
       <width>1001</width>
       <height>381</height>
      </rect>

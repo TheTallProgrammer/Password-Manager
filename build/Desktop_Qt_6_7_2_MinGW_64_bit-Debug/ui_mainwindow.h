@@ -41,12 +41,13 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(1000, 621);
+        MainWindow->resize(800, 600);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         login = new QWidget(centralwidget);
         login->setObjectName("login");
-        login->setGeometry(QRect(0, 0, 1001, 291));
+        login->setEnabled(true);
+        login->setGeometry(QRect(-90, -10, 1001, 291));
         passwordLoginEntry = new QLineEdit(login);
         passwordLoginEntry->setObjectName("passwordLoginEntry");
         passwordLoginEntry->setGeometry(QRect(110, 110, 761, 61));
@@ -80,7 +81,7 @@ public:
         loginErrorLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
         createPass = new QWidget(centralwidget);
         createPass->setObjectName("createPass");
-        createPass->setGeometry(QRect(0, 240, 1001, 381));
+        createPass->setGeometry(QRect(-90, 230, 1001, 381));
         label_2 = new QLabel(createPass);
         label_2->setObjectName("label_2");
         label_2->setGeometry(QRect(380, 70, 231, 31));

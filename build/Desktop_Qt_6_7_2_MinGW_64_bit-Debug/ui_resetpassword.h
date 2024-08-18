@@ -27,6 +27,7 @@ public:
     QLabel *label_2;
     QPushButton *cancelButton;
     QPushButton *confirmButton;
+    QLabel *errorLabel;
 
     void setupUi(QDialog *resetPassword)
     {
@@ -38,7 +39,7 @@ public:
         passEntryOne->setGeometry(QRect(10, 190, 781, 51));
         QFont font;
         font.setFamilies({QString::fromUtf8("Bahnschrift Light")});
-        font.setPointSize(13);
+        font.setPointSize(17);
         passEntryOne->setFont(font);
         passEntryOne->setAlignment(Qt::AlignmentFlag::AlignCenter);
         passEntryTwo = new QLineEdit(resetPassword);
@@ -48,7 +49,7 @@ public:
         passEntryTwo->setAlignment(Qt::AlignmentFlag::AlignCenter);
         label = new QLabel(resetPassword);
         label->setObjectName("label");
-        label->setGeometry(QRect(250, 140, 321, 41));
+        label->setGeometry(QRect(100, 140, 631, 41));
         QFont font1;
         font1.setFamilies({QString::fromUtf8("Bahnschrift Light")});
         font1.setPointSize(22);
@@ -70,6 +71,11 @@ public:
         confirmButton->setObjectName("confirmButton");
         confirmButton->setGeometry(QRect(430, 480, 191, 101));
         confirmButton->setFont(font2);
+        errorLabel = new QLabel(resetPassword);
+        errorLabel->setObjectName("errorLabel");
+        errorLabel->setGeometry(QRect(120, 420, 541, 41));
+        errorLabel->setFont(font);
+        errorLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         retranslateUi(resetPassword);
 
@@ -79,10 +85,11 @@ public:
     void retranslateUi(QDialog *resetPassword)
     {
         resetPassword->setWindowTitle(QCoreApplication::translate("resetPassword", "Dialog", nullptr));
-        label->setText(QCoreApplication::translate("resetPassword", "Enter New Password:", nullptr));
+        label->setText(QCoreApplication::translate("resetPassword", "Enter New Password (At Least 8 Characters):", nullptr));
         label_2->setText(QCoreApplication::translate("resetPassword", "Re-Enter New Password:", nullptr));
         cancelButton->setText(QCoreApplication::translate("resetPassword", "Cancel", nullptr));
         confirmButton->setText(QCoreApplication::translate("resetPassword", "Confirm", nullptr));
+        errorLabel->setText(QString());
     } // retranslateUi
 
 };
