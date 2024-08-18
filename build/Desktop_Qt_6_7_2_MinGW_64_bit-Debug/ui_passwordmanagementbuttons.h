@@ -22,6 +22,10 @@ public:
     QPushButton *storePass;
     QPushButton *retrievePass;
     QPushButton *genPass;
+    QPushButton *exportPassButton;
+    QPushButton *resetLoginButton;
+    QPushButton *deleteAllButton;
+    QPushButton *logoutButton;
 
     void setupUi(QDialog *passwordManagementButtons)
     {
@@ -34,19 +38,38 @@ public:
         passwordManagementButtons->setFont(font);
         storePass = new QPushButton(passwordManagementButtons);
         storePass->setObjectName("storePass");
-        storePass->setGeometry(QRect(200, 60, 400, 100));
+        storePass->setGeometry(QRect(20, 50, 330, 100));
         QFont font1;
         font1.setFamilies({QString::fromUtf8("Bahnschrift Light")});
-        font1.setPointSize(26);
+        font1.setPointSize(23);
         storePass->setFont(font1);
         retrievePass = new QPushButton(passwordManagementButtons);
         retrievePass->setObjectName("retrievePass");
-        retrievePass->setGeometry(QRect(200, 240, 400, 100));
+        retrievePass->setGeometry(QRect(20, 220, 330, 100));
         retrievePass->setFont(font1);
         genPass = new QPushButton(passwordManagementButtons);
         genPass->setObjectName("genPass");
-        genPass->setGeometry(QRect(200, 420, 400, 100));
+        genPass->setGeometry(QRect(20, 390, 330, 100));
         genPass->setFont(font1);
+        exportPassButton = new QPushButton(passwordManagementButtons);
+        exportPassButton->setObjectName("exportPassButton");
+        exportPassButton->setGeometry(QRect(450, 220, 330, 100));
+        exportPassButton->setFont(font1);
+        resetLoginButton = new QPushButton(passwordManagementButtons);
+        resetLoginButton->setObjectName("resetLoginButton");
+        resetLoginButton->setGeometry(QRect(450, 50, 330, 100));
+        resetLoginButton->setFont(font1);
+        deleteAllButton = new QPushButton(passwordManagementButtons);
+        deleteAllButton->setObjectName("deleteAllButton");
+        deleteAllButton->setGeometry(QRect(450, 390, 330, 100));
+        deleteAllButton->setFont(font1);
+        logoutButton = new QPushButton(passwordManagementButtons);
+        logoutButton->setObjectName("logoutButton");
+        logoutButton->setGeometry(QRect(19, 523, 761, 61));
+        QFont font2;
+        font2.setFamilies({QString::fromUtf8("Bahnschrift Light")});
+        font2.setPointSize(24);
+        logoutButton->setFont(font2);
 
         retranslateUi(passwordManagementButtons);
 
@@ -56,9 +79,13 @@ public:
     void retranslateUi(QDialog *passwordManagementButtons)
     {
         passwordManagementButtons->setWindowTitle(QCoreApplication::translate("passwordManagementButtons", "Dialog", nullptr));
-        storePass->setText(QCoreApplication::translate("passwordManagementButtons", "Store Password", nullptr));
-        retrievePass->setText(QCoreApplication::translate("passwordManagementButtons", "Retrieve Password", nullptr));
-        genPass->setText(QCoreApplication::translate("passwordManagementButtons", "Generate Password", nullptr));
+        storePass->setText(QCoreApplication::translate("passwordManagementButtons", "Store Passwords", nullptr));
+        retrievePass->setText(QCoreApplication::translate("passwordManagementButtons", "Retrieve Passwords", nullptr));
+        genPass->setText(QCoreApplication::translate("passwordManagementButtons", "Generate Passwords", nullptr));
+        exportPassButton->setText(QCoreApplication::translate("passwordManagementButtons", "Export All Passwords", nullptr));
+        resetLoginButton->setText(QCoreApplication::translate("passwordManagementButtons", "Reset Login Password", nullptr));
+        deleteAllButton->setText(QCoreApplication::translate("passwordManagementButtons", "Delete All Data", nullptr));
+        logoutButton->setText(QCoreApplication::translate("passwordManagementButtons", "Logout", nullptr));
     } // retranslateUi
 
 };
