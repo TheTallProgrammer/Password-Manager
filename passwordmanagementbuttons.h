@@ -21,6 +21,9 @@ public:
 private slots:
     void on_genPass_clicked();
 
+
+    void on_resetLoginButton_clicked();
+
 private:
     Ui::passwordManagementButtons *ui;
     std::unique_ptr<PasswordGenerator> myPassGen; // smart pointer

@@ -22,3 +22,10 @@ void passwordManagementButtons::on_genPass_clicked()
     myPassGen->show();
 }
 
+
+
+void passwordManagementButtons::on_resetLoginButton_clicked()
+{
+
+}
+
