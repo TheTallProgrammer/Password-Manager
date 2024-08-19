@@ -23,6 +23,8 @@ void resetPassword::on_cancelButton_clicked()
 {
     qDebug() << "Cancel button clicked, emitting resetCanceled signal.";
     emit resetCanceled();  // Emit the signal first
+    ui->passEntryOne->clear();
+    ui->passEntryTwo->clear();
     this->reject();  // Use reject to close the dialog in response to cancel
 }
 
@@ -41,6 +43,8 @@ void resetPassword::on_confirmButton_clicked()
     } else {
         qDebug() << "Passwords match, emitting passwordUpdated signal.";
         emit passwordUpdated(passOne);  // Emit the new password
+        ui->passEntryOne->clear();
+        ui->passEntryTwo->clear();
         this->accept();  // Close the dialog
     }
 }

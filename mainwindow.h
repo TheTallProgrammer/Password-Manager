@@ -15,7 +15,6 @@
 #include "passwordgenerator.h"
 #include "passwordmanagementbuttons.h"
 
-
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -43,11 +42,13 @@ private:
     QByteArray generateSalt();
     QByteArray hashPassword(const QString &password, const QByteArray &salt);
     bool saveToFile(const QByteArray &hashedPassword, const QByteArray &salt);
-    void promptForPassword(QString password);
+    void promptForPassword(const QString &password);  // Pass by reference to avoid copying
     bool verifyPassword(const QString &password);
     bool loadFromFile(QByteArray &hashedPassword, QByteArray &salt);
 
     std::unique_ptr<passwordManagementButtons> myButtonsPage;
 
+    QString cachedPasswordFilePath;  // Cached file path for performance optimization
 };
+
 #endif // MAINWINDOW_H
