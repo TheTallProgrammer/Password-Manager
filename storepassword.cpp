@@ -18,10 +18,14 @@ void storePassword::on_backButton_clicked()
 {
     this->hide();
     emit emitBackClicked();
+    ui->passIdText->clear();
+    ui->passwordText->clear();
+    ui->userText->clear();
+    ui->thoughtText->clear();
     this->accept();
 }
 
 void storePassword::on_genPassButton_clicked()
 {
-    emit requestGenPassword();  // Emit the signal
+    emit requestGenPassword();
 }
