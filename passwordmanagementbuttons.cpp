@@ -14,16 +14,20 @@ passwordManagementButtons::passwordManagementButtons(QWidget *parent)
 
 passwordManagementButtons::~passwordManagementButtons()
 {
+    if (myPassGen) {
+        disconnect(myPassGen.get(), nullptr, this, nullptr);
+    }
     delete ui;
 }
 
 void passwordManagementButtons::on_genPass_clicked()
 {
     if (!myPassGen) {
-        myPassGen = std::make_unique<PasswordGenerator>();
+        myPassGen = std::make_unique<PasswordGenerator>(this);  // Pass 'this' as the parent
     }
-    myPassGen->show();
+    myPassGen->show(); // Use exec() to block until the dialog is closed
 }
+
 
 void passwordManagementButtons::on_resetLoginButton_clicked()
 {

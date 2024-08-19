@@ -91,12 +91,13 @@ public:
     QCheckBox *checkBox_27;
     QLabel *label_30;
     QCheckBox *checkBox_28;
+    QPushButton *exitButton;
 
     void setupUi(QDialog *PasswordGenerator)
     {
         if (PasswordGenerator->objectName().isEmpty())
             PasswordGenerator->setObjectName("PasswordGenerator");
-        PasswordGenerator->resize(800, 312);
+        PasswordGenerator->resize(800, 333);
         PassLength = new QLineEdit(PasswordGenerator);
         PassLength->setObjectName("PassLength");
         PassLength->setGeometry(QRect(60, 30, 150, 75));
@@ -141,18 +142,19 @@ public:
         PassCompSlider->setOrientation(Qt::Orientation::Horizontal);
         GeneratedPassLabel = new QLineEdit(PasswordGenerator);
         GeneratedPassLabel->setObjectName("GeneratedPassLabel");
-        GeneratedPassLabel->setGeometry(QRect(60, 220, 551, 81));
+        GeneratedPassLabel->setGeometry(QRect(60, 220, 691, 51));
         QFont font2;
         font2.setFamilies({QString::fromUtf8("Bahnschrift Light")});
-        font2.setPointSize(19);
+        font2.setPointSize(14);
         GeneratedPassLabel->setFont(font2);
         GeneratedPassLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
         GeneratedPassLabel->setReadOnly(true);
         CopyButton = new QPushButton(PasswordGenerator);
         CopyButton->setObjectName("CopyButton");
-        CopyButton->setGeometry(QRect(640, 220, 111, 81));
+        CopyButton->setGeometry(QRect(250, 280, 141, 41));
         QFont font3;
-        font3.setFamilies({QString::fromUtf8("Yu Gothic Medium")});
+        font3.setFamilies({QString::fromUtf8("Bahnschrift Light")});
+        font3.setPointSize(13);
         CopyButton->setFont(font3);
         excludeChar = new QWidget(PasswordGenerator);
         excludeChar->setObjectName("excludeChar");
@@ -375,6 +377,10 @@ public:
         checkBox_28->setObjectName("checkBox_28");
         checkBox_28->setGeometry(QRect(550, 60, 16, 22));
         checkBox_28->setText(QString::fromUtf8("&"));
+        exitButton = new QPushButton(PasswordGenerator);
+        exitButton->setObjectName("exitButton");
+        exitButton->setGeometry(QRect(430, 280, 141, 41));
+        exitButton->setFont(font3);
 
         retranslateUi(PasswordGenerator);
 
@@ -390,7 +396,7 @@ public:
         PassCompLabel->setText(QCoreApplication::translate("PasswordGenerator", "Password Complexity: (1-3)", nullptr));
         GenPass->setText(QCoreApplication::translate("PasswordGenerator", "Generate Password", nullptr));
         GeneratedPassLabel->setText(QString());
-        CopyButton->setText(QCoreApplication::translate("PasswordGenerator", "Copy To Clipboard", nullptr));
+        CopyButton->setText(QCoreApplication::translate("PasswordGenerator", "Copy", nullptr));
         label->setText(QCoreApplication::translate("PasswordGenerator", "Exclude Symbols:", nullptr));
         label_2->setText(QCoreApplication::translate("PasswordGenerator", "&", nullptr));
         label_3->setText(QCoreApplication::translate("PasswordGenerator", "@", nullptr));
@@ -422,6 +428,7 @@ public:
         label_28->setText(QCoreApplication::translate("PasswordGenerator", "' '", nullptr));
         label_29->setText(QCoreApplication::translate("PasswordGenerator", ",", nullptr));
         label_30->setText(QCoreApplication::translate("PasswordGenerator", ".", nullptr));
+        exitButton->setText(QCoreApplication::translate("PasswordGenerator", "Exit", nullptr));
     } // retranslateUi
 
 };

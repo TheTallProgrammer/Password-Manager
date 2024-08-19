@@ -4,7 +4,7 @@
 
 
 PasswordGenerator::PasswordGenerator(QWidget *parent)
-    : QDialog(parent)
+    : QDialog(nullptr)
     , ui(new Ui::PasswordGenerator)
 {
     ui->setupUi(this);
@@ -44,6 +44,12 @@ void PasswordGenerator::on_PassLengthSlider_sliderMoved(int position)
     *_passLength = position;
     ui->PassLength->setText(QString::number(position));
 }
+
+void PasswordGenerator::closeEvent(QCloseEvent *event) {
+    qDebug() << "PasswordGenerator is closing";
+    event->accept();  // Explicitly accept the close event to avoid any potential issues
+}
+
 
 void PasswordGenerator::on_PassCompSlider_sliderMoved(int position)
 {
@@ -245,3 +251,9 @@ void PasswordGenerator::on_checkBox_28_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '.');
 }
+
+void PasswordGenerator::on_exitButton_clicked()
+{
+    this->hide();
+}
+

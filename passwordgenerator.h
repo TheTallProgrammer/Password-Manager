@@ -9,6 +9,8 @@
 #include <QWidget>
 #include <QClipboard>
 #include <QApplication>
+#include <QCloseEvent>
+
 
 namespace Ui {
 class PasswordGenerator;
@@ -87,6 +89,8 @@ private slots:
 
     void on_checkBox_28_stateChanged(int arg1);
 
+    void on_exitButton_clicked();
+
 private:
     Ui::PasswordGenerator *ui;
     int *_passLength;
@@ -94,6 +98,7 @@ private:
     std::vector<char> *_letters;
     std::vector<char> *_numbers;
     std::vector<char> *_symbols;
+    void closeEvent(QCloseEvent *event);
 };
 
 #endif // PASSWORDGENERATOR_H
