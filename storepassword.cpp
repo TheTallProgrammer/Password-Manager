@@ -106,6 +106,7 @@ QByteArray storePassword::encryptData(const QByteArray &data)
     return result;
 }
 
+
 QByteArray storePassword::decryptData(const QByteArray &encryptedData)
 {
     QByteArray key = getMachineSpecificKey();

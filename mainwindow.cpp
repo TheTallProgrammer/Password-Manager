@@ -4,6 +4,8 @@
 #include "resetpassword.h"
 #include <QDebug>  // Include for debugging
 
+QString globalCipherKey;  // Temporary global variable for the cipher key
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -15,14 +17,16 @@ MainWindow::MainWindow(QWidget *parent)
     ui->login->hide();
 
     // UI Color setup
-    QPalette errorPalette = ui->creationError->palette();
+    QPalette errorPalette = ui->creationError_2->palette();  // Updated
     errorPalette.setColor(QPalette::WindowText, Qt::red);  // Set to red or any other color
-    ui->creationError->setPalette(errorPalette);
-    ui->loginErrorLabel->setPalette(errorPalette);
-    ui->creationError->hide();
-    ui->loginErrorLabel->hide();
+    ui->creationError_2->setPalette(errorPalette);  // Updated
+    ui->loginErrorLabel_4->setPalette(errorPalette);
+    ui->creationError_2->hide();  // Updated
+    ui->loginErrorLabel_4->hide();
 
     if (!passwordExists()){
+        globalCipherKey = generateCipherKey();  // Generate the cipher key
+        ui->cipherKeyText_2->setText(globalCipherKey);  // Updated
         ui->createPass->show();
     } else {
         ui->login->show();
@@ -31,26 +35,33 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    globalCipherKey.clear();  // Clear the cipher key
     delete ui;
 }
 
-void MainWindow::on_createPassSubmitButton_clicked()
+QString MainWindow::generateCipherKey() {
+    return QString::number(QRandomGenerator::global()->generate64(), 16).toUpper();
+}
+
+// Updated slot function names based on the likely actual names of the objects in your .ui file
+void MainWindow::on_createPassSubmitButton_2_clicked()
 {
-    QString firstPassEntry = ui->createPassEntry1->text();
-    QString secondPassEntry = ui->createPassEntry2->text();
+    QString firstPassEntry = ui->createPassEntry1_2->text();  // Updated
+    QString secondPassEntry = ui->createPassEntry2_2->text();  // Updated
+    QString email = ui->emailLabel_2->text();  // Updated
 
     int firstLen = firstPassEntry.length();
     int secondLen = secondPassEntry.length();
 
     if (firstLen < 8 || secondLen < 8){ // passwords aren't long enough
-        ui->creationError->setText("ERROR: Passwords must have at least 8 characters.");
-        ui->creationError->show();
+        ui->creationError_2->setText("ERROR: Passwords must have at least 8 characters.");  // Updated
+        ui->creationError_2->show();  // Updated
     }
     else if (firstPassEntry != secondPassEntry){ // passwords don't match
-        ui->creationError->setText("ERROR: Passwords Don't Match.");
-        ui->creationError->show();
+        ui->creationError_2->setText("ERROR: Passwords Don't Match.");  // Updated
+        ui->creationError_2->show();  // Updated
     } else {
-        ui->creationError->hide();
+        ui->creationError_2->hide();  // Updated
         createPassword(firstPassEntry);
     }
 }
@@ -76,7 +87,7 @@ QString MainWindow::passwordFilePath(){
         if (!dir.exists()){
             dir.mkpath(".");
         }
-        cachedPasswordFilePath = dir.filePath("pass.bin");
+        cachedPasswordFilePath = dir.filePath("login.bin");
     }
     return cachedPasswordFilePath;
 }
@@ -99,12 +110,12 @@ void MainWindow::createPassword(QString firstPassEntry) {
     bool passSaved = saveToFile(hashedPassword, salt);
 
     if (passSaved) {
-        ui->creationError->setText("Password Created Successfully");
+        ui->creationError_2->setText("Password Created Successfully");  // Updated
 #ifdef QT_DEBUG
         qDebug() << "Password saved successfully.";  // Debug statement
 #endif
     } else {
-        ui->creationError->setText("Password Couldn't Save.");
+        ui->creationError_2->setText("Password Couldn't Save.");  // Updated
 #ifdef QT_DEBUG
         qDebug() << "Failed to save password.";  // Debug statement
 #endif
@@ -154,14 +165,20 @@ bool MainWindow::saveToFile(const QByteArray &hashedPassword, const QByteArray &
     return true;
 }
 
-void MainWindow::on_loginButton_clicked()
+void MainWindow::on_loginButton_4_clicked()
 {
-    QString password = ui->passwordLoginEntry->text();
+    QString password = ui->passwordLoginEntry_4->text();
+    QString enteredCipherKey = ui->cipherText->text();  // Capture the entered cipher key
+
     if (password.length() < 8){
-        ui->loginErrorLabel->show();
-        ui->loginErrorLabel->setText("Password Length Insufficient.");
+        ui->loginErrorLabel_4->show();
+        ui->loginErrorLabel_4->setText("Password Length Insufficient.");
+    } else if (enteredCipherKey.isEmpty()) {
+        ui->loginErrorLabel_4->show();
+        ui->loginErrorLabel_4->setText("Cipher Key Required.");
     } else {
-        ui->loginErrorLabel->hide();
+        ui->loginErrorLabel_4->hide();
+        globalCipherKey = enteredCipherKey;  // Assign entered cipher key to global variable
         promptForPassword(password);
     }
 }
@@ -171,8 +188,8 @@ void MainWindow::promptForPassword(const QString &password){
         myButtonsPage->show();
         this->hide();
     } else {
-        ui->loginErrorLabel->setText("Incorrect Password.");
-        ui->loginErrorLabel->show();
+        ui->loginErrorLabel_4->setText("Incorrect Password.");
+        ui->loginErrorLabel_4->show();
     }
 }
 
@@ -212,3 +229,9 @@ QByteArray MainWindow::hashPassword(const QString &password, const QByteArray &s
     return QCryptographicHash::hash(password.toUtf8() + salt, QCryptographicHash::Sha256);
 }
 // ---
+
+void MainWindow::on_copyCipherButton_2_clicked()
+{
+    QClipboard *clipboard = QApplication::clipboard();
+    clipboard->setText(ui->cipherKeyText_2->text());  // Updated
+}
