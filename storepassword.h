@@ -1,3 +1,4 @@
+// storepassword.h
 #ifndef STOREPASSWORD_H
 #define STOREPASSWORD_H
 
@@ -14,6 +15,14 @@ class storePassword : public QDialog
 public:
     explicit storePassword(QWidget *parent = nullptr);
     ~storePassword();
+
+signals:
+    void requestGenPassword();  // Signal to request generating a password
+    void emitBackClicked();
+
+private slots:
+    void on_backButton_clicked();
+    void on_genPassButton_clicked();
 
 private:
     Ui::storePassword *ui;

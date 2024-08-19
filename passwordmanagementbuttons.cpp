@@ -2,6 +2,7 @@
 #include "ui_passwordmanagementbuttons.h"
 #include "passwordgenerator.h"
 #include "resetpassword.h"
+#include "storepassword.h"
 #include "mainwindow.h"  // Include MainWindow to access its methods
 #include <QDebug>
 
@@ -25,7 +26,7 @@ void passwordManagementButtons::on_genPass_clicked()
     if (!myPassGen) {
         myPassGen = std::make_unique<PasswordGenerator>(this);  // Pass 'this' as the parent
     }
-    myPassGen->show(); // Use exec() to block until the dialog is closed
+    myPassGen->show();
 }
 
 
@@ -65,3 +66,33 @@ void passwordManagementButtons::on_logoutButton_clicked()
 {
     QCoreApplication::quit();
 }
+
+void passwordManagementButtons::on_storePass_clicked()
+{
+    if(!storePass){
+        storePass = std::make_unique<storePassword>(this);
+
+        // Connect the signal emitBackClicked to handleBackStorePassword slot
+        connect(storePass.get(), &storePassword::emitBackClicked, this, &passwordManagementButtons::handleBackStorePassword);
+
+        // Connect the signal requestGenPassword to handleRequestGenPassword slot
+        connect(storePass.get(), &storePassword::requestGenPassword, this, &passwordManagementButtons::handleRequestGenPassword);
+    }
+    this->hide();
+    storePass->show();
+}
+
+void passwordManagementButtons::handleBackStorePassword(){
+    this->show();
+}
+
+void passwordManagementButtons::handleRequestGenPassword()
+{
+    if (!myPassGen) {
+        myPassGen = std::make_unique<PasswordGenerator>(this);
+    }
+    if (!myPassGen->isVisible()) {
+        myPassGen->show();
+    }
+}
+
