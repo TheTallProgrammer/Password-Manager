@@ -4,43 +4,66 @@
 #include <QDialog>
 #include <QByteArray>
 #include <QNetworkInterface>
+#include <QJsonObject>
 
+// =====================
+// Namespace Declarations
+// =====================
 namespace Ui {
 class storePassword;
 }
 
+// =====================
+// Class Declaration
+// =====================
 class storePassword : public QDialog
 {
     Q_OBJECT
 
 public:
+    // =========================
+    // Constructor & Destructor
+    // =========================
     explicit storePassword(QWidget *parent = nullptr);
     ~storePassword();
 
 signals:
-    void requestGenPassword();
-    void emitBackClicked();
+    // ===================
+    // Signal Declarations
+    // ===================
+    void requestGenPassword();  // Signal to request a new password generation
+    void emitBackClicked();  // Signal emitted when the back button is clicked
 
 private slots:
-    void on_backButton_clicked();
-    void on_genPassButton_clicked();
-    void on_storePassButton_clicked();
+    // ==================
+    // Slot Declarations
+    // ==================
+    void on_backButton_clicked();  // Handles the back button click event
+    void on_genPassButton_clicked();  // Handles the generate password button click event
+    void on_storePassButton_clicked();  // Handles the store password button click event
 
 private:
-    Ui::storePassword *ui;
+    // =====================
+    // Private Members
+    // =====================
+    Ui::storePassword *ui;  // UI pointer for the storePassword dialog
 
-    // Encryption and Decryption functions
-    QByteArray encryptData(const QByteArray &data);
-    QByteArray decryptData(const QByteArray &encryptedData);
+    // =====================
+    // Encryption Functions
+    // =====================
+    QByteArray encryptData(const QByteArray &data);  // Encrypts the given data
+    QByteArray decryptData(const QByteArray &encryptedData);  // Decrypts the given data
 
-    // Function to get a machine-specific key
-    QByteArray getMachineSpecificKey();
+    // ============================
+    // Machine-Specific Key Function
+    // ============================
+    QByteArray getMachineSpecificKey();  // Generates a machine-specific key
 
-    // Function to save encrypted data to a file
-    void saveEncryptedDataToFile(const QString &passId, const QByteArray &encryptedData);
-
-    // Function to load and decrypt data from a file (for testing)
-    QJsonObject loadAndDecryptDataFromFile(const QString &passId);
+    // ============================
+    // File Handling Functions
+    // ============================
+    void saveEncryptedDataToFile(const QString &passId, const QByteArray &encryptedData);  // Saves encrypted data to a file
+    QJsonObject loadAndDecryptDataFromFile(const QString &passId);  // Loads and decrypts data from a file (for testing)
 };
 
 #endif // STOREPASSWORD_H

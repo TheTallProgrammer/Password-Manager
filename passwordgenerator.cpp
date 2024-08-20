@@ -1,7 +1,12 @@
 #include "passwordgenerator.h"
 #include "ui_passwordgenerator.h"
-#include <QDebug>
+#include <QClipboard>
+#include <QCloseEvent>
+#include <random>
 
+// =====================
+// Constructor & Destructor
+// =====================
 
 PasswordGenerator::PasswordGenerator(QWidget *parent)
     : QDialog(nullptr)
@@ -9,21 +14,23 @@ PasswordGenerator::PasswordGenerator(QWidget *parent)
 {
     ui->setupUi(this);
     ui->excludeChar->hide();
+
     _passLength = new int(1);
     _passComp = new int(1);
 
-    _letters = new std::vector<char>(
-        {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-         'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-         'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'});
+    _letters = new std::vector<char>({
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+        'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+    });
 
-    _numbers = new std::vector<char>(
-        {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'});
+    _numbers = new std::vector<char>({'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'});
 
-    _symbols = new std::vector<char>(
-        {'!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+',
-         '[', ']', '{', '}', ';', ':', '\'', '\"', '<', '>', ',', '.', '?', '/'});
+    _symbols = new std::vector<char>({
+        '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+',
+        '[', ']', '{', '}', ';', ':', '\'', '\"', '<', '>', ',', '.', '?', '/'
+    });
 
     ui->PassLength->setText(QString::number(*_passLength));
     ui->PassComp->setText(QString::number(*_passComp));
@@ -31,12 +38,22 @@ PasswordGenerator::PasswordGenerator(QWidget *parent)
 
 PasswordGenerator::~PasswordGenerator()
 {
-    delete _passLength;  // Free the allocated memory upon destructing it (program close)
+    // Free the allocated memory upon program close
+    delete _passLength;
     delete _passComp;
     delete _letters;
     delete _numbers;
     delete _symbols;
     delete ui;
+}
+
+// =====================
+// Event Handlers
+// =====================
+
+void PasswordGenerator::closeEvent(QCloseEvent *event) {
+    qDebug() << "PasswordGenerator is closing";
+    event->accept();  // Explicitly accept the close event to avoid any potential issues
 }
 
 void PasswordGenerator::on_PassLengthSlider_sliderMoved(int position)
@@ -45,26 +62,42 @@ void PasswordGenerator::on_PassLengthSlider_sliderMoved(int position)
     ui->PassLength->setText(QString::number(position));
 }
 
-void PasswordGenerator::closeEvent(QCloseEvent *event) {
-    qDebug() << "PasswordGenerator is closing";
-    event->accept();  // Explicitly accept the close event to avoid any potential issues
-}
-
-
 void PasswordGenerator::on_PassCompSlider_sliderMoved(int position)
 {
     *_passComp = position;
     ui->PassComp->setText(QString::number(position));
-    if(position == 3) ui->excludeChar->show();
-    else ui->excludeChar->hide();
 
+    // Show or hide the excludeChar checkbox based on password complexity
+    if(position == 3) {
+        ui->excludeChar->show();
+    } else {
+        ui->excludeChar->hide();
+    }
 }
 
 void PasswordGenerator::on_GenPass_clicked()
 {
+    // Generate a new password and display it in the GeneratedPassLabel
     char* password = createPassword(*_passLength, *_passComp);
-    ui->GeneratedPassLabel->setText(password); // Placeholder for where the generated password will be set
+    ui->GeneratedPassLabel->setText(password);
+    delete[] password;  // Free the allocated memory for the password
 }
+
+void PasswordGenerator::on_CopyButton_clicked()
+{
+    QClipboard *clipboard = QApplication::clipboard();
+    QString textToCopy = ui->GeneratedPassLabel->text();
+    clipboard->setText(textToCopy);  // Copy the generated password to the clipboard
+}
+
+void PasswordGenerator::on_exitButton_clicked()
+{
+    this->hide();  // Hide the dialog instead of closing it completely
+}
+
+// =====================
+// Password Generation Logic
+// =====================
 
 char* PasswordGenerator::createPassword(int len, int comp) {
     // Dynamically allocate memory for a char array of the given size
@@ -114,26 +147,23 @@ char* PasswordGenerator::createPassword(int len, int comp) {
     return array;  // Return the pointer to the allocated array
 }
 
-void PasswordGenerator::on_CopyButton_clicked()
-{
-    QClipboard *clipboard = QApplication::clipboard();
-    QString textToCopy = ui->GeneratedPassLabel->text();
-    clipboard->setText(textToCopy);
-}
+// =====================
+// Checkbox Handlers
+// =====================
 
-void PasswordGenerator::updateSymbols(bool checked, char symbol){
-    if (checked){
+void PasswordGenerator::updateSymbols(bool checked, char symbol)
+{
+    if (checked) {
         auto it = std::remove(_symbols->begin(), _symbols->end(), symbol);
-        if (it != _symbols->end()){
-            _symbols->erase(it, _symbols->end());
+        if (it != _symbols->end()) {
+            _symbols->erase(it, _symbols->end());  // Remove symbol if checkbox is checked
         }
     } else {
-        if (std::find(_symbols->begin(), _symbols->end(), symbol) == _symbols->end()){
-            _symbols->push_back(symbol);
+        if (std::find(_symbols->begin(), _symbols->end(), symbol) == _symbols->end()) {
+            _symbols->push_back(symbol);  // Add symbol back if checkbox is unchecked
         }
     }
 }
-
 
 void PasswordGenerator::on_checkBox_1_stateChanged(int arg1)
 {
@@ -251,9 +281,3 @@ void PasswordGenerator::on_checkBox_28_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '.');
 }
-
-void PasswordGenerator::on_exitButton_clicked()
-{
-    this->hide();
-}
-
