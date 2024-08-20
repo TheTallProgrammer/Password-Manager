@@ -147,6 +147,18 @@
        <height>61</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Bahnschrift Light</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="cursorPosition">
+      <number>0</number>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="label_2">
      <property name="geometry">

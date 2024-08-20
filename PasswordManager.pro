@@ -9,6 +9,7 @@ QT += network
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    cryptoutils.cpp \
     main.cpp \
     mainwindow.cpp \
     passwordgenerator.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
     storepassword.cpp
 
 HEADERS += \
+    cryptoutils.h \
     mainwindow.h \
     passwordgenerator.h \
     passwordmanagementbuttons.h \
