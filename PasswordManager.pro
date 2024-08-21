@@ -15,6 +15,7 @@ SOURCES += \
     passwordgenerator.cpp \
     passwordmanagementbuttons.cpp \
     resetpassword.cpp \
+    retrievepassword.cpp \
     storepassword.cpp
 
 HEADERS += \
@@ -23,6 +24,7 @@ HEADERS += \
     passwordgenerator.h \
     passwordmanagementbuttons.h \
     resetpassword.h \
+    retrievepassword.h \
     storepassword.h
 
 FORMS += \
@@ -30,6 +32,7 @@ FORMS += \
     passwordgenerator.ui \
     passwordmanagementbuttons.ui \
     resetpassword.ui \
+    retrievepassword.ui \
     storepassword.ui
 
 # Default rules for deployment.

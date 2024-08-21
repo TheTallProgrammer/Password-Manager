@@ -10,6 +10,7 @@
 class PasswordGenerator;  // Forward declaration for PasswordGenerator class
 class resetPassword;      // Forward declaration for resetPassword class
 class storePassword;      // Forward declaration for storePassword class
+class retrievePassword;
 
 namespace Ui {
 class passwordManagementButtons;
@@ -41,6 +42,8 @@ private slots:
     void handleRequestGenPassword();  // Handles password generation requests
     void handleBackStorePassword();  // Handles user clicking 'Back' in the store password section
 
+    void on_retrievePass_clicked();
+
 private:
     // =====================
     // Private Members
@@ -51,6 +54,7 @@ private:
     std::unique_ptr<PasswordGenerator> myPassGen;
     std::unique_ptr<resetPassword> resetPass;
     std::unique_ptr<storePassword> storePass;
+    std::unique_ptr<retrievePassword> retrievePass;
 };
 
 #endif // PASSWORDMANAGEMENTBUTTONS_H

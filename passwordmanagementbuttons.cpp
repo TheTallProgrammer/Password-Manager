@@ -4,6 +4,7 @@
 #include "resetpassword.h"
 #include "storepassword.h"
 #include "mainwindow.h"  // Include MainWindow to access its methods
+#include "retrievepassword.h"
 
 // =============================
 // Constructor & Destructor
@@ -97,3 +98,14 @@ void passwordManagementButtons::handleRequestGenPassword()
         myPassGen->show();  // Display the password generator if not already visible
     }
 }
+
+void passwordManagementButtons::on_retrievePass_clicked()
+{
+    if (!retrievePass){
+        retrievePass = std::make_unique<retrievePassword>(this);
+    }
+    retrievePass->show();
+    this->hide(); // this will be deleted.
+    // emit signal from retrieve pass to show this object again.
+}
+

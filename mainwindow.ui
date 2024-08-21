@@ -354,9 +354,9 @@
     <widget class="QLabel" name="label_12">
      <property name="geometry">
       <rect>
-       <x>150</x>
+       <x>90</x>
        <y>425</y>
-       <width>691</width>
+       <width>801</width>
        <height>101</height>
       </rect>
      </property>
@@ -367,7 +367,7 @@
       </font>
      </property>
      <property name="text">
-      <string>WARNING: This unique cipher key will be used to encrypt/decrypt ALL of your saved data. To ensure extensive security, this program is NOT designed to save the key. It is generated ONCE. Remember this key. It's advised not to save it on the same machine as the manager.</string>
+      <string>This is a generated cipher key for you to use. Every time you open the app, you'll need to enter a cipher key. Feel free to use this one or use your own. Your cipher keys must be consistent or else data retrieval will contain encrypted data if used with different keys. It is not recommended to save the keys on your local machine.</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>

@@ -142,7 +142,7 @@ public:
         creationError_2->setAlignment(Qt::AlignmentFlag::AlignCenter);
         label_12 = new QLabel(createPass);
         label_12->setObjectName("label_12");
-        label_12->setGeometry(QRect(150, 425, 691, 101));
+        label_12->setGeometry(QRect(90, 425, 801, 101));
         QFont font4;
         font4.setFamilies({QString::fromUtf8("Bahnschrift Light")});
         font4.setPointSize(15);
@@ -206,7 +206,7 @@ public:
         createPassEntry2_2->setText(QString());
         createPassSubmitButton_2->setText(QCoreApplication::translate("MainWindow", "Create Account", nullptr));
         creationError_2->setText(QCoreApplication::translate("MainWindow", "ERROR", nullptr));
-        label_12->setText(QCoreApplication::translate("MainWindow", "WARNING: This unique cipher key will be used to encrypt/decrypt ALL of your saved data. To ensure extensive security, this program is NOT designed to save the key. It is generated ONCE. Remember this key. It's advised not to save it on the same machine as the manager.", nullptr));
+        label_12->setText(QCoreApplication::translate("MainWindow", "This is a generated cipher key for you to use. Every time you open the app, you'll need to enter a cipher key. Feel free to use this one or use your own. Your cipher keys must be consistent or else data retrieval will contain encrypted data if used with different keys. It is not recommended to save the keys on your local machine.", nullptr));
         emailText_2->setText(QString());
         emailLabel_2->setText(QCoreApplication::translate("MainWindow", "Enter Email:", nullptr));
         label_13->setText(QCoreApplication::translate("MainWindow", "Cipher Key:", nullptr));
