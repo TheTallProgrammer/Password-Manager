@@ -141,8 +141,8 @@ public:
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Segoe UI'; font-size:9pt;\"><br /></p></body></html>", nullptr));
         label_4->setText(QCoreApplication::translate("storePassword", "Thought Bank:", nullptr));
         backButton->setText(QCoreApplication::translate("storePassword", "Back", nullptr));
-        genPassButton->setText(QCoreApplication::translate("storePassword", "Generate Password", nullptr));
-        storePassButton->setText(QCoreApplication::translate("storePassword", "Store Password", nullptr));
+        genPassButton->setText(QCoreApplication::translate("storePassword", "Password Generator", nullptr));
+        storePassButton->setText(QCoreApplication::translate("storePassword", "Save New Password", nullptr));
     } // retranslateUi
 
 };

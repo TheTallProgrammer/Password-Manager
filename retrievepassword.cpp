@@ -61,7 +61,7 @@ void retrievePassword::loadPasswords()
             file.close();
 
             // Decrypt the data using the globalCipherKey from MainWindow
-            QByteArray decryptedData = CryptoUtils::decryptData(encryptedData, globalCipherKey, 10);
+            QByteArray decryptedData = CryptoUtils::decryptData(encryptedData, globalCipherKey);
             QJsonDocument doc = QJsonDocument::fromJson(decryptedData);
 
             if (!doc.isNull()) {

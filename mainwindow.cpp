@@ -61,7 +61,7 @@ void MainWindow::on_createPassSubmitButton_2_clicked()
 void MainWindow::createPassword(const QString &firstPassEntry, const QString &email) {
     QByteArray salt = CryptoUtils::hashData(QByteArray::number(QDateTime::currentMSecsSinceEpoch()), QByteArray());
     QByteArray hashedPassword = CryptoUtils::hashData(firstPassEntry.toUtf8(), salt);
-    QByteArray encryptedEmail = CryptoUtils::encryptData(email.toUtf8(), globalCipherKey, 10);
+    QByteArray encryptedEmail = CryptoUtils::encryptData(email.toUtf8(), globalCipherKey); // No keyLength needed
 
 #ifdef QT_DEBUG
     qDebug() << "Generated salt:" << salt.toHex();

@@ -85,7 +85,7 @@ void storePassword::on_storePassButton_clicked()
     qDebug() << "Original JSON data:" << jsonData;
 
     // Encrypt the JSON data using CryptoUtils with globalCipherKey from MainWindow
-    QByteArray encryptedData = CryptoUtils::encryptData(jsonData, globalCipherKey, 10);
+    QByteArray encryptedData = CryptoUtils::encryptData(jsonData, globalCipherKey);
     qDebug() << "Encrypted data (hex):" << encryptedData.toHex();
 
     // Save the encrypted data to a file
@@ -128,7 +128,7 @@ void storePassword::saveEncryptedDataToFile(const QString &passId, const QByteAr
     qDebug() << "Password data saved and encrypted in file:" << filePath;
 
     // Decrypt the data to verify it can be correctly decrypted
-    QByteArray decryptedData = CryptoUtils::decryptData(encryptedData, globalCipherKey, 10);
+    QByteArray decryptedData = CryptoUtils::decryptData(encryptedData, globalCipherKey);
     qDebug() << "Decrypted data (raw):" << decryptedData;
 
     // Optionally convert the decrypted data back to JSON for further verification

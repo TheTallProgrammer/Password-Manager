@@ -48,6 +48,8 @@ private slots:
 
     void on_deleteAllButton_clicked();
 
+    void on_exportPassButton_clicked();
+
 private:
     // =====================
     // Private Members

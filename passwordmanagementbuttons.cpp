@@ -6,6 +6,9 @@
 #include "mainwindow.h"  // Include MainWindow to access its methods
 #include "retrievepassword.h"
 #include <QCloseEvent>
+#include <QJsonDocument>
+#include <QFileDialog>
+#include "cryptoutils.h"
 
 // =============================
 // Constructor & Destructor
@@ -155,5 +158,71 @@ void passwordManagementButtons::on_deleteAllButton_clicked()
         qDebug() << "Deletion canceled by the user.";
     }
 }
+
+
+
+void passwordManagementButtons::on_exportPassButton_clicked()
+{
+    QString dirPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/PasswordManager";
+    QDir dir(dirPath);
+
+    if (!dir.exists()) {
+        QMessageBox::warning(this, "Export Failed", "No saved passwords found.");
+        return;
+    }
+
+    QJsonObject aggregatedJson;
+
+    // Iterate through all the files in the directory
+    foreach(QFileInfo item, dir.entryInfoList(QDir::Files)) {
+        QString filePath = item.absoluteFilePath();
+        QFile file(filePath);
+
+        if (file.open(QIODevice::ReadOnly)) {
+            QDataStream in(&file);
+            QByteArray encryptedData;
+            in >> encryptedData;
+            file.close();
+
+            // Decrypt the data using the globalCipherKey from MainWindow
+            QByteArray decryptedData = CryptoUtils::decryptData(encryptedData, globalCipherKey);
+            qDebug() << "Decrypted Data:" << decryptedData;  // Debug: Check the decrypted data
+
+            QJsonDocument jsonDoc = QJsonDocument::fromJson(decryptedData);
+
+            if (!jsonDoc.isNull() && jsonDoc.isObject()) {
+                QJsonObject jsonObject = jsonDoc.object();
+                aggregatedJson.insert(item.fileName(), jsonObject);
+            } else {
+                qDebug() << "Failed to parse JSON for file:" << item.fileName();  // Debug: Check for JSON parsing issues
+            }
+        } else {
+            qDebug() << "Failed to open file for reading:" << filePath;
+        }
+    }
+
+    qDebug() << "Aggregated JSON:" << QJsonDocument(aggregatedJson).toJson();  // Debug: Check the final JSON
+
+    // Convert the aggregated JSON object to a JSON document
+    QJsonDocument finalDoc(aggregatedJson);
+
+    // Open a file dialog to allow the user to choose where to save the JSON file
+    QString saveFileName = QFileDialog::getSaveFileName(this, "Export Passwords", QDir::homePath(), "JSON Files (*.json)");
+
+    if (!saveFileName.isEmpty()) {
+        QFile saveFile(saveFileName);
+
+        if (!saveFile.open(QIODevice::WriteOnly)) {
+            QMessageBox::warning(this, "Export Failed", "Failed to open file for saving.");
+            return;
+        }
+
+        saveFile.write(finalDoc.toJson());
+        saveFile.close();
+
+        QMessageBox::information(this, "Export Successful", "Passwords exported successfully.");
+    }
+}
+
 
 

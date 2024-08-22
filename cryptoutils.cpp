@@ -13,24 +13,16 @@ QString CryptoUtils::generateShortKey(int length) {
     return randomString;
 }
 
-// Generates a key using the cipher key and a specified length
-QByteArray CryptoUtils::generateKey(const QString &cipherKey, int keyLength) {
-    QByteArray combinedKey = cipherKey.toUtf8();
-
-    // Hash the combined key to generate a fixed-length key
-    QByteArray hashedKey = QCryptographicHash::hash(combinedKey, QCryptographicHash::Sha256);
-
-    // Trim the hashed key to the desired key length
-    if (keyLength < hashedKey.size()) {
-        hashedKey = hashedKey.left(keyLength);
-    }
-
-    return hashedKey;
+// Generates a key using the cipher key
+QByteArray CryptoUtils::generateKey(const QString &cipherKey) {
+    // Hash the cipher key using SHA-256 to generate a fixed-length key
+    QByteArray hashedKey = QCryptographicHash::hash(cipherKey.toUtf8(), QCryptographicHash::Sha256);
+    return hashedKey;  // Return the hashed key
 }
 
 // Encrypts data using a XOR operation with the generated key
-QByteArray CryptoUtils::encryptData(const QByteArray &data, const QString &cipherKey, int keyLength) {
-    QByteArray key = generateKey(cipherKey, keyLength);
+QByteArray CryptoUtils::encryptData(const QByteArray &data, const QString &cipherKey) {
+    QByteArray key = generateKey(cipherKey);
     QByteArray result;
 
     for (int i = 0; i < data.size(); ++i) {
@@ -41,8 +33,8 @@ QByteArray CryptoUtils::encryptData(const QByteArray &data, const QString &ciphe
 }
 
 // Decrypts data using the same XOR operation with the generated key
-QByteArray CryptoUtils::decryptData(const QByteArray &encryptedData, const QString &cipherKey, int keyLength) {
-    return encryptData(encryptedData, cipherKey, keyLength); // XOR decryption is the same as encryption
+QByteArray CryptoUtils::decryptData(const QByteArray &encryptedData, const QString &cipherKey) {
+    return encryptData(encryptedData, cipherKey); // XOR decryption is the same as encryption
 }
 
 // Hashes the data using a SHA256 hash function with optional salt
