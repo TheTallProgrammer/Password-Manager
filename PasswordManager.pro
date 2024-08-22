@@ -10,6 +10,7 @@ QT += network
 
 SOURCES += \
     cryptoutils.cpp \
+    editpassworddata.cpp \
     main.cpp \
     mainwindow.cpp \
     passwordgenerator.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
 
 HEADERS += \
     cryptoutils.h \
+    editpassworddata.h \
     mainwindow.h \
     passwordgenerator.h \
     passwordmanagementbuttons.h \
@@ -28,6 +30,7 @@ HEADERS += \
     storepassword.h
 
 FORMS += \
+    editpassworddata.ui \
     mainwindow.ui \
     passwordgenerator.ui \
     passwordmanagementbuttons.ui \
