@@ -5,6 +5,7 @@
 #include "storepassword.h"
 #include "mainwindow.h"  // Include MainWindow to access its methods
 #include "retrievepassword.h"
+#include <QCloseEvent>
 
 // =============================
 // Constructor & Destructor
@@ -22,6 +23,12 @@ passwordManagementButtons::~passwordManagementButtons()
         disconnect(myPassGen.get(), nullptr, this, nullptr);  // Ensure signals are disconnected
     }
     delete ui;
+}
+
+void passwordManagementButtons::closeEvent(QCloseEvent *event)
+{
+    QCoreApplication::quit();  // Quit the entire application
+    event->accept();  // Accept the event, allowing the window to close
 }
 
 // =======================
@@ -101,11 +108,52 @@ void passwordManagementButtons::handleRequestGenPassword()
 
 void passwordManagementButtons::on_retrievePass_clicked()
 {
-    if (!retrievePass){
-        retrievePass = std::make_unique<retrievePassword>(this);
+    if (retrievePass) {
+        // If an instance already exists, just show it
+        retrievePass->show();
+        this->hide(); // Hide the main dialog
+    } else {
+        // Create a new instance of retrievePassword
+        retrievePass = new retrievePassword(this); // Use QPointer, no need for std::unique_ptr
+        connect(retrievePass, &retrievePassword::emitBackClicked, this, &passwordManagementButtons::handleBackRetrievePassword);
+
+        retrievePass->show();
+        this->hide(); // Hide the main dialog when retrievePassword is shown
     }
-    retrievePass->show();
-    this->hide(); // this will be deleted.
-    // emit signal from retrieve pass to show this object again.
 }
+
+void passwordManagementButtons::handleBackRetrievePassword()
+{
+    this->show();  // Show the main dialog when back is clicked in retrievePassword
+
+    if (retrievePass) {
+        retrievePass->deleteLater(); // Ensure the instance is properly deleted
+        retrievePass = nullptr; // Reset the QPointer
+    }
+}
+
+void passwordManagementButtons::on_deleteAllButton_clicked()
+{
+    QString dirPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/PasswordManager";
+    QDir dir(dirPath);
+
+    // Confirmation dialog
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Delete Confirmation", "Are you certain you wish to delete all stored password data? This action is irreversible, and all saved passwords will be permanently removed.",
+                                  QMessageBox::Yes|QMessageBox::No);
+    if (reply == QMessageBox::Yes) {
+        if (dir.exists()) {
+            if (dir.removeRecursively()) {
+                qDebug() << "All data deleted successfully.";
+            } else {
+                qDebug() << "Failed to delete the folder.";
+            }
+        } else {
+            qDebug() << "Folder does not exist.";
+        }
+    } else {
+        qDebug() << "Deletion canceled by the user.";
+    }
+}
+
 

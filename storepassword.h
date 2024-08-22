@@ -47,6 +47,7 @@ private:
     // Private Members
     // =====================
     Ui::storePassword *ui;  // UI pointer for the storePassword dialog
+    void closeEvent(QCloseEvent *event);
 
     // =====================
     // Encryption Functions
@@ -58,6 +59,7 @@ private:
     // Machine-Specific Key Function
     // ============================
     QByteArray getMachineSpecificKey();  // Generates a machine-specific key
+    void clearUI(); // Clears UI
 
     // ============================
     // File Handling Functions

@@ -9,6 +9,7 @@
 #include <QStandardPaths>
 #include <QDir>
 #include <QDateTime>  // Include for handling date and time
+#include <QCloseEvent>
 
 // =====================
 // Constructor & Destructor
@@ -24,6 +25,12 @@ storePassword::~storePassword()
     delete ui;
 }
 
+void storePassword::closeEvent(QCloseEvent *event)
+{
+    QCoreApplication::quit();  // Quit the entire application
+    event->accept();  // Accept the event, allowing the window to close
+}
+
 // =====================
 // UI Signal Handlers
 // =====================
@@ -32,14 +39,16 @@ void storePassword::on_backButton_clicked()
 {
     this->hide();
     emit emitBackClicked();  // Emit signal to notify back button was clicked
+    clearUI();
+    this->accept();  // Close the dialog
+}
 
+void storePassword::clearUI(){
     // Clear UI fields
     ui->passIdText->clear();
     ui->passwordText->clear();
     ui->userText->clear();
     ui->thoughtText->clear();
-
-    this->accept();  // Close the dialog
 }
 
 void storePassword::on_genPassButton_clicked()
@@ -81,6 +90,10 @@ void storePassword::on_storePassButton_clicked()
 
     // Save the encrypted data to a file
     saveEncryptedDataToFile(passId, encryptedData);
+    clearUI();
+    this->hide();
+    emit emitBackClicked();
+    this->accept();
 }
 
 // =====================

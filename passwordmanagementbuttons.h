@@ -3,6 +3,7 @@
 
 #include <memory>    // Required for smart pointers
 #include <QDialog>   // Required for QDialog
+#include <QPointer>
 
 // =====================
 // Forward Declarations
@@ -41,8 +42,11 @@ private slots:
     void on_storePass_clicked();  // Handles the 'Store Password' button click
     void handleRequestGenPassword();  // Handles password generation requests
     void handleBackStorePassword();  // Handles user clicking 'Back' in the store password section
+    void handleBackRetrievePassword();  // Handles user clicking 'Back' in the store password section
 
     void on_retrievePass_clicked();
+
+    void on_deleteAllButton_clicked();
 
 private:
     // =====================
@@ -54,7 +58,8 @@ private:
     std::unique_ptr<PasswordGenerator> myPassGen;
     std::unique_ptr<resetPassword> resetPass;
     std::unique_ptr<storePassword> storePass;
-    std::unique_ptr<retrievePassword> retrievePass;
+    QPointer<retrievePassword> retrievePass;
+    void closeEvent(QCloseEvent *event);
 };
 
 #endif // PASSWORDMANAGEMENTBUTTONS_H

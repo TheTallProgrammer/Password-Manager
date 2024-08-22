@@ -43,6 +43,7 @@ private:
     // Private Members
     // =====================
     Ui::resetPassword *ui;  // UI pointer for the resetPassword dialog
+    void closeEvent(QCloseEvent *event);
 };
 
 #endif // RESETPASSWORD_H

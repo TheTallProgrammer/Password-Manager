@@ -1,6 +1,7 @@
 #include "resetpassword.h"
 #include "ui_resetpassword.h"
 #include <QDebug>  // Include for debugging
+#include <QCloseEvent>
 
 // =========================
 // Constructor & Destructor
@@ -19,6 +20,12 @@ resetPassword::resetPassword(QWidget *parent)
 resetPassword::~resetPassword()
 {
     delete ui;
+}
+
+void resetPassword::closeEvent(QCloseEvent *event)
+{
+    QCoreApplication::quit();  // Quit the entire application
+    event->accept();  // Accept the event, allowing the window to close
 }
 
 // ==================
