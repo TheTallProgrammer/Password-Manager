@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "CryptoUtils.h"  // Include the utility
 #include <QDebug>  // Include for debugging
+#include <QRegularExpression>  // Include for regex support
 
 QString globalCipherKey;
 
@@ -114,12 +115,21 @@ void MainWindow::on_loginButton_4_clicked()
     QString password = ui->passwordLoginEntry_4->text();
     QString enteredCipherKey = ui->cipherText->text();
 
+    // Regular expression to check if the cipher key contains only letters and numbers
+    QRegularExpression alphanumericRegex("^[a-zA-Z0-9]+$");
+
     if (password.length() < 8) {
         ui->loginErrorLabel_4->show();
         ui->loginErrorLabel_4->setText("Password Length Insufficient.");
     } else if (enteredCipherKey.isEmpty()) {
         ui->loginErrorLabel_4->show();
         ui->loginErrorLabel_4->setText("Cipher Key Required.");
+    } else if (enteredCipherKey.length() < 6) {
+        ui->loginErrorLabel_4->show();
+        ui->loginErrorLabel_4->setText("Cipher Key Length Too Short. Six Character Minimum.");
+    } else if (!alphanumericRegex.match(enteredCipherKey).hasMatch()) {
+        ui->loginErrorLabel_4->show();
+        ui->loginErrorLabel_4->setText("Cipher Key Invalid. No Symbols Allowed.");
     } else {
         ui->loginErrorLabel_4->hide();
         globalCipherKey = enteredCipherKey;
