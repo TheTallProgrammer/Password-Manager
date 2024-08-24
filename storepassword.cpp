@@ -68,13 +68,13 @@ void storePassword::on_storePassButton_clicked()
     }
 
     // Get the current date and time as a string
-    QString dateStored = QDateTime::currentDateTime().toString(Qt::ISODate);
+    QString dateStored = QDate::currentDate().toString(Qt::ISODate);
 
     // Create JSON object with user input data and the current date
     QJsonObject json;
     json["passId"] = passId;
     json["password"] = password;
-    json["user"] = ui->userText->toPlainText();
+    json["username"] = ui->userText->toPlainText();
     json["thoughts"] = ui->thoughtText->toPlainText();
     json["dateStored"] = dateStored;  // Add the date to the JSON object
 

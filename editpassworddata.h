@@ -12,13 +12,17 @@ class editPasswordData : public QDialog
     Q_OBJECT
 
 public:
-    explicit editPasswordData(QWidget *parent = nullptr);
+    explicit editPasswordData(QWidget *parent = nullptr,  QString passId = "_passid",  QString dateStored = "_date",  QString password = "_password",  QString username = "_username",  QString thoughts = "_thoughts");
     ~editPasswordData();
 
-private slots:
-    void on_pushButton_clicked();
+signals:
+    void overwriteData(const QString &passId, const QString &dateStored, const QString &password, const QString &username, const QString &thoughts);
 
-    void on_pushButton_2_clicked();
+private slots:
+
+    void on_backButton_clicked();
+
+    void on_saveButton_clicked();
 
 private:
     Ui::editPasswordData *ui;

@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->creationError_2->hide();
     ui->loginErrorLabel_4->hide();
 
+
     if (!passwordExists()) {
         globalCipherKey = CryptoUtils::generateShortKey(7);  // Generate a shorter, more user-friendly cipher key
         ui->cipherKeyText_2->setText(globalCipherKey);

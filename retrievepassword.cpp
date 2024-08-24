@@ -10,7 +10,7 @@
 #include <QStandardPaths>
 #include "mainwindow.h"  // Include this to access globalCipherKey
 #include <QMessageBox>
-
+#include "editpassworddata.h"
 
 // Constructor for the retrievePassword class
 retrievePassword::retrievePassword(QWidget *parent) :
@@ -69,6 +69,9 @@ void retrievePassword::loadPasswords()
                 QString passId = json["passId"].toString();
                 QString dateStored = json["dateStored"].toString();
                 QString password = json["password"].toString();
+                QString username = json["username"].toString();
+                QString thoughts = json["thoughts"].toString();
+
 
                 // Add a new row for this password entry
                 int rowCount = ui->tableWidget->rowCount();
@@ -94,8 +97,19 @@ void retrievePassword::loadPasswords()
 
                 // Add Edit button
                 QPushButton *editButton = new QPushButton("Edit");
-                connect(editButton, &QPushButton::clicked, this, [passId]() {
-                    // Leave blank for now, as you will implement the edit dialog later
+                connect(editButton, &QPushButton::clicked, this, [this, passId, password, dateStored, username, thoughts, rowCount]() {
+                    // Hide the retrievePassword window
+                    this->hide();
+
+                    // Create and open the editPasswordData dialog
+                    editDialog = new editPasswordData(this, passId, dateStored, password, username, thoughts);
+
+                    // Connect the signal to the slot
+                    connect(editDialog, &editPasswordData::overwriteData, this, &retrievePassword::handleOverwriteData);
+
+                    editDialog->exec();  // Open the dialog modally
+                    this->show();
+
                 });
                 ui->tableWidget->setCellWidget(rowCount, 3, editButton);
 
@@ -112,6 +126,64 @@ void retrievePassword::loadPasswords()
         }
     }
 }
+
+// Slot to handle the overwrite data signal from editPasswordData
+void retrievePassword::handleOverwriteData(const QString &newPassId, const QString &dateStored, const QString &password, const QString &username, const QString &thoughts)
+{
+    // Handle the update in your retrievePassword class
+    saveUpdatedDataToFile(newPassId, newPassId, password, username, thoughts);
+
+    // Optionally reload data
+    ui->tableWidget->clearContents();
+    ui->tableWidget->setRowCount(0);
+    loadPasswords();
+
+    // Show the retrievePassword window again
+    this->show();
+}
+
+// Function to save the updated data to the file
+void retrievePassword::saveUpdatedDataToFile(const QString &oldPassId, const QString &newPassId, const QString &password, const QString &username, const QString &thoughts)
+{
+    QString dirPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/PasswordManager/";
+    QString oldFilePath = dirPath + oldPassId + ".bin";
+    QString newFilePath = dirPath + newPassId + ".bin";
+
+    // If the passId has changed, rename the file
+    if (oldPassId != newPassId) {
+        if (QFile::exists(newFilePath)) {
+            qWarning() << "A file with the new passId already exists:" << newFilePath;
+            return;
+        }
+        if (!QFile::rename(oldFilePath, newFilePath)) {
+            qWarning() << "Failed to rename the file from" << oldFilePath << "to" << newFilePath;
+            return;
+        }
+    }
+
+    QFile file(newFilePath);
+    if (file.open(QIODevice::WriteOnly)) {
+        QJsonObject json;
+        json["passId"] = newPassId;
+        json["password"] = password;
+        json["username"] = username;
+        json["thoughts"] = thoughts;
+        json["dateStored"] = QDate::currentDate().toString(Qt::ISODate);
+
+        QJsonDocument doc(json);
+        QByteArray jsonData = doc.toJson();
+        QByteArray encryptedData = CryptoUtils::encryptData(jsonData, globalCipherKey);
+
+        QDataStream out(&file);
+        out << encryptedData;
+        file.close();
+
+        qDebug() << "Password entry updated in file:" << newFilePath;
+    } else {
+        qWarning() << "Could not open file for writing:" << newFilePath;
+    }
+}
+
 
 // Delete password entry
 void retrievePassword::deletePassword(const QString &passId, int row)
@@ -141,4 +213,3 @@ void retrievePassword::on_backButton_clicked()
     this->close(); // Close the dialog
     deleteLater(); // Safely delete the instance
 }
-
