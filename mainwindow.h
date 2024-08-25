@@ -32,6 +32,7 @@ public:
 
 signals:
     void themeLoaded(QString theme);
+    void updateThemeComboBox(QString theme);
 
 public slots:
     void on_createPassSubmitButton_2_clicked();

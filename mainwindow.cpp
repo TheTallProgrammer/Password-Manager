@@ -85,6 +85,8 @@ void MainWindow::handleUpdateTheme(QString selectedTheme)
     } else {
         qDebug() << "File does not exist at path:" << file.fileName();
     }
+
+    emit updateThemeComboBox(selectedTheme);
 }
 
 

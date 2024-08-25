@@ -53,6 +53,9 @@ private slots:
 
     void on_exportPassButton_clicked();
 
+public slots:
+    void handleUpdateThemeComboBox(QString theme);
+
 private:
     // =====================
     // Private Members

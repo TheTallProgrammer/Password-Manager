@@ -43,7 +43,7 @@ passwordManagementButtons::passwordManagementButtons(QWidget *parent)
 
     // Set initial text to "Theme: Nightshade"
     themeComboBox->setEditable(true);
-    themeComboBox->setCurrentText("Theme: Nightshade");
+    themeComboBox->setCurrentText("Themes");
     themeComboBox->lineEdit()->setAlignment(Qt::AlignCenter);
     themeComboBox->lineEdit()->setReadOnly(true);
 
@@ -80,7 +80,6 @@ void passwordManagementButtons::onThemeChanged(int index)
 
     if (index >= 0 && index < themes.size()) {
         selectedTheme = themes.at(index);
-        themeComboBox->setCurrentText("Theme: " + selectedTheme);
         qDebug() << selectedTheme + " theme selected"; // This is being printed
     }
 
@@ -92,6 +91,30 @@ void passwordManagementButtons::onThemeChanged(int index)
         emit updateTheme(selectedTheme);
     });
 }
+
+// passwordmanagementbuttons.cpp
+void passwordManagementButtons::handleUpdateThemeComboBox(QString theme)
+{
+
+    QComboBox *themeComboBox = qobject_cast<QComboBox*>(sender());
+    // Example logic: Print the theme or update the combo box selection
+    qDebug() << "Theme received in password management buttons:" << theme;
+
+    // You can perform actions based on the theme, such as updating a combo box
+    // Assuming you have a combo box named themeComboBox
+    if (theme == "Nightshade") {
+        themeComboBox->setCurrentText("Theme: " + theme);
+    } else if (theme == "Amethyst") {
+        themeComboBox->setCurrentText("Theme: " + theme);
+    } else if (theme == "Light") {
+        themeComboBox->setCurrentText("Theme: " + theme);
+    } else if (theme == "Sunset") {
+        themeComboBox->setCurrentText("Theme: " + theme);
+    } else {
+        qDebug() << "Unknown theme received:" << theme;
+    }
+}
+
 
 
 
