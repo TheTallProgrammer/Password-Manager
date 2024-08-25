@@ -222,12 +222,13 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
 
 /* General ComboBox Styles */
 
-
-/* Individual items inside the dropdown list */
-QComboBox::item {
-    padding: 5px 10px; /* Spacing inside each item */
-    min-height: 30px; /* Consistent height for each item */
+QComboBox {
+    border: 1px solid #000000;  /* Set all borders to red */
+    padding: 5px;
+    background-color: #FFFFFF;  /* Background color */
+    color: #333333;  /* Text color */
 }
+
 
 QComboBox QAbstractItemView {
 outline: 0px;

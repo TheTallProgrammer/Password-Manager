@@ -218,3 +218,4 @@ QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
 QScrollBar::add-page, QScrollBar::sub-page {
     background: none;
 }
+
