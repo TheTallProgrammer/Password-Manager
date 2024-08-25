@@ -12,6 +12,8 @@
 #include <QComboBox>
 #include <QHBoxLayout>
 #include <QLineEdit>
+#include <QThread>
+#include <QTimer>
 
 // =============================
 // Constructor & Destructor
@@ -20,6 +22,7 @@ passwordManagementButtons::passwordManagementButtons(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::passwordManagementButtons)
 {
+    qDebug() << "passwordManagementButtons thread:" << QThread::currentThread();
     ui->setupUi(this);
 
     // Create a QComboBox for themes
@@ -67,21 +70,30 @@ void passwordManagementButtons::onThemeChanged(int index)
 {
     QComboBox *themeComboBox = qobject_cast<QComboBox*>(sender());
     QString selectedTheme = "Nightshade";
-    if (!themeComboBox){
+
+    if (!themeComboBox) {
         emit updateTheme(selectedTheme);
         return;
     }
+
     QStringList themes = {"Nightshade", "Amethyst", "Light", "Sunset"};
 
     if (index >= 0 && index < themes.size()) {
         selectedTheme = themes.at(index);
         themeComboBox->setCurrentText("Theme: " + selectedTheme);
-        qDebug() << selectedTheme + " theme selected";
+        qDebug() << selectedTheme + " theme selected"; // This is being printed
     }
 
-    emit updateTheme(selectedTheme);
+    // Add this debug line to verify emission
+    qDebug() << "Emitting updateTheme with selectedTheme:" << selectedTheme;
 
+    emit updateTheme(selectedTheme); // Make sure this is being called with the correct theme
+    QTimer::singleShot(0, this, [this, selectedTheme]() {
+        emit updateTheme(selectedTheme);
+    });
 }
+
+
 
 void passwordManagementButtons::closeEvent(QCloseEvent *event)
 {

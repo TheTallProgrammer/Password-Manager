@@ -1,0 +1,123 @@
+/*-----QWidget-----*/
+QWidget {
+    background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+                                      stop:0 #FFD9B3, stop:1 #FFAD99); /* Sunset gradient for the background */
+    color: #664422; /* Dark earth tone for text, providing good contrast */
+    font-family: 'Bahnschrift Light'; /* Modern, sleek font */
+}
+
+/*-----QLabel-----*/
+QLabel {
+    background-color: transparent;
+    color: #805533; /* Darker shade of earth tone for labels */
+    font-weight: bold;
+    font-size: 14px;
+    font-family: 'Bahnschrift Light';
+}
+
+/*-----QPushButton-----*/
+QPushButton {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 #FFB366, stop:1 #FF8533); /* Vertical gradient from light to darker sunset colors */
+    color: #FFFFFF; /* White text for contrast */
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Bahnschrift Light';
+    border-radius: 8px;
+    padding: 10px;
+}
+
+QPushButton::disabled {
+    background-color: #CCB299; /* Muted brown for disabled state */
+}
+
+QPushButton::hover {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 #FFA04D, stop:1 #FF7519); /* Lighter gradient on hover */
+}
+
+QPushButton::pressed {
+    background-color: #E65C00; /* Deeper orange when pressed */
+}
+
+/*-----QCheckBox-----*/
+QCheckBox {
+    background-color: transparent;
+    color: #FF8533; /* Sunset orange for text */
+    font-size: 12px;
+    font-weight: bold;
+    font-family: 'Bahnschrift Light';
+    border: none;
+    border-radius: 5px;
+}
+
+QCheckBox::indicator {
+    background-color: #FFAD99; /* Light sunset background */
+    border: 1px solid #FF8533; /* Border color */
+    width: 12px;
+    height: 12px;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #CC5500; /* Deep sunset orange for checked state */
+    border: 1px solid #CC5500;
+}
+
+QCheckBox::indicator:unchecked:hover {
+    border: 1px solid #FF7519; /* Orange border on hover */
+}
+
+QCheckBox::disabled {
+    color: #CCB299; /* Muted brown for disabled text */
+}
+
+QCheckBox::indicator:disabled {
+    background-color: #CCB299;
+    border: 1px solid #CCB299;
+}
+
+/*-----QLineEdit-----*/
+QLineEdit {
+    background-color: #FFD9B3; /* Light sunset orange background */
+    color: #664422; /* Earth tone for text */
+    font-family: 'Bahnschrift Light';
+    border: 2px solid #FF8533; /* Sunset orange border */
+    padding: 5px;
+}
+
+/*-----QTextEdit-----*/
+QTextEdit {
+    background-color: #FFD9B3; /* Soft sunset background */
+    color: #664422; /* Earth tone for readability */
+    font-family: 'Bahnschrift Light';
+    border: 2px solid #FF8533; /* Well-defined border */
+    padding: 5px;
+}
+
+/*-----QSlider-----*/
+QSlider::groove:horizontal {
+    border: 1px solid #FF8533; /* Border color */
+    height: 8px; /* Groove height */
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                                stop:0 #FFAD99, stop:1 #FF7519); /* Horizontal gradient */
+    margin: 2px 0;
+}
+
+QSlider::handle:horizontal {
+    background: #CC5500; /* Deep sunset orange for the handle */
+    border: 1px solid #FF8533; /* Border around the handle */
+    width: 18px;
+    height: 18px;
+    margin: -5px 0;
+    border-radius: 9px;
+}
+
+QSlider::add-page:horizontal {
+    background: #FFD9B3; /* Lighter part of the slider */
+}
+
+QSlider::sub-page:horizontal {
+    background: #FF7519; /* Darker part of the slider */
+}
+
+/* Additional styling for other widgets like QListView, QTreeView, QTableView, QHeaderView, QScrollBar can also be adapted to match this sunset theme. */

@@ -23,15 +23,28 @@ MainWindow::MainWindow(QWidget *parent)
     ui->creationError_2->hide();
     ui->loginErrorLabel_4->hide();
 
+    QByteArray hashedPassword, salt, encryptedEmail;
+    QString savedTheme;
 
     if (!passwordExists()) {
         globalCipherKey = CryptoUtils::generateShortKey(7);  // Generate a shorter, more user-friendly cipher key
         ui->cipherKeyText_2->setText(globalCipherKey);
         ui->createPass->show();
+
+        // Apply the default theme "Nightshade"
+        handleUpdateTheme("Nightshade");
     } else {
+        if (loadFromFile(hashedPassword, salt, encryptedEmail, savedTheme)) {
+            handleUpdateTheme(savedTheme);  // Apply the saved theme
+        }
         ui->login->show();
     }
+
+    // Connect the updateTheme signal to the handleUpdateTheme slot
+    connect(myButtonsPage.get(), &passwordManagementButtons::updateTheme,
+            this, &MainWindow::handleUpdateTheme);
 }
+
 
 MainWindow::~MainWindow()
 {
@@ -39,7 +52,43 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-// Removed generateCipherKey() as it's now handled by CryptoUtils
+void MainWindow::handleUpdateTheme(QString selectedTheme)
+{
+    QString themeFilePath;
+
+    if (selectedTheme == "Nightshade") {
+        themeFilePath = "../../nightshadeTheme.qss";
+    } else if (selectedTheme == "Amethyst") {
+        themeFilePath = "../../amethystTheme.qss";
+    } else if (selectedTheme == "Light") {
+        themeFilePath = "../../lightTheme.qss";
+    } else if (selectedTheme == "Sunset") {
+        themeFilePath = "../../solarTheme.qss";
+    } else {
+        qDebug() << "Unknown theme selected.";
+        return;
+    }
+
+    QFile file(themeFilePath);
+    if (file.open(QFile::ReadOnly)) {
+        QString style = QLatin1String(file.readAll());
+        qApp->setStyleSheet(style);
+        file.close();
+        qDebug() << selectedTheme << " theme applied successfully.";
+
+        // Save the selected theme to the file
+        QByteArray hashedPassword, salt, encryptedEmail;
+        QString currentTheme;
+        if (loadFromFile(hashedPassword, salt, encryptedEmail, currentTheme)) {
+            saveToFile(hashedPassword, salt, encryptedEmail, selectedTheme);
+        }
+    } else {
+        qDebug() << "File does not exist at path:" << file.fileName();
+    }
+}
+
+
+
 
 void MainWindow::on_createPassSubmitButton_2_clicked()
 {
@@ -59,11 +108,11 @@ void MainWindow::on_createPassSubmitButton_2_clicked()
         createPassword(firstPassEntry, email);
     }
 }
-
 void MainWindow::createPassword(const QString &firstPassEntry, const QString &email) {
     QByteArray salt = CryptoUtils::hashData(QByteArray::number(QDateTime::currentMSecsSinceEpoch()), QByteArray());
     QByteArray hashedPassword = CryptoUtils::hashData(firstPassEntry.toUtf8(), salt);
     QByteArray encryptedEmail = CryptoUtils::encryptData(email.toUtf8(), globalCipherKey); // No keyLength needed
+    QString defaultTheme = "Nightshade";  // Default theme
 
 #ifdef QT_DEBUG
     qDebug() << "Generated salt:" << salt.toHex();
@@ -71,17 +120,17 @@ void MainWindow::createPassword(const QString &firstPassEntry, const QString &em
     qDebug() << "Encrypted email:" << encryptedEmail.toHex();
 #endif
 
-    bool passSaved = saveToFile(hashedPassword, salt, encryptedEmail);
+    bool passSaved = saveToFile(hashedPassword, salt, encryptedEmail, defaultTheme);
 
     if (passSaved) {
         ui->creationError_2->setText("Password Created Successfully");
 #ifdef QT_DEBUG
-        qDebug() << "Password and email saved successfully.";
+        qDebug() << "Password, email, and theme saved successfully.";
 #endif
     } else {
         ui->creationError_2->setText("Password Couldn't Save.");
 #ifdef QT_DEBUG
-        qDebug() << "Failed to save password and email.";
+        qDebug() << "Failed to save password, email, and theme.";
 #endif
     }
 
@@ -89,7 +138,10 @@ void MainWindow::createPassword(const QString &firstPassEntry, const QString &em
     this->hide();
 }
 
-bool MainWindow::saveToFile(const QByteArray &hashedPassword, const QByteArray &salt, const QByteArray &encryptedEmail) {
+
+
+
+bool MainWindow::saveToFile(const QByteArray &hashedPassword, const QByteArray &salt, const QByteArray &encryptedEmail, const QString &theme) {
     const QString &filePath = passwordFilePath();
 
     QFile file(filePath);
@@ -106,10 +158,12 @@ bool MainWindow::saveToFile(const QByteArray &hashedPassword, const QByteArray &
 
     QDataStream out(&file);
     out << hashedPassword << salt << encryptedEmail;
+    out << theme;  // Save the selected theme as plain text
     file.close();
 
     return true;
 }
+
 
 void MainWindow::on_loginButton_4_clicked()
 {
@@ -150,14 +204,16 @@ void MainWindow::promptForPassword(const QString &password) {
 
 bool MainWindow::verifyPassword(const QString &password) {
     QByteArray savedHashedPassword, salt, encryptedEmail;
-    if (!loadFromFile(savedHashedPassword, salt, encryptedEmail)) {
+    QString loadedTheme;  // Temporary variable to load the theme
+    if (!loadFromFile(savedHashedPassword, salt, encryptedEmail, loadedTheme)) {
         return false;
     }
     QByteArray hashedPassword = CryptoUtils::hashData(password.toUtf8(), salt);
     return hashedPassword == savedHashedPassword;
 }
 
-bool MainWindow::loadFromFile(QByteArray &hashedPassword, QByteArray &salt, QByteArray &encryptedEmail) {
+
+bool MainWindow::loadFromFile(QByteArray &hashedPassword, QByteArray &salt, QByteArray &encryptedEmail, QString &theme) {
     QFile file(passwordFilePath());
     if (!file.open(QIODevice::ReadOnly)) {
         return false;
@@ -165,6 +221,7 @@ bool MainWindow::loadFromFile(QByteArray &hashedPassword, QByteArray &salt, QByt
 
     QDataStream in(&file);
     in >> hashedPassword >> salt >> encryptedEmail;
+    in >> theme;  // Load the saved theme
     file.close();
     return true;
 }

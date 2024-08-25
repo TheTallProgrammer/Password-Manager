@@ -1,0 +1,130 @@
+/*-----QWidget-----*/
+QWidget {
+    background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+                                      stop:0 #3A1D47, stop:1 #501B6B); /* Dark amethyst background gradient */
+    color: #E0D4E5; /* Light lavender for text */
+    font-family: 'Bahnschrift Light'; /* Modern, sleek font */
+}
+
+/*-----QLabel-----*/
+QLabel {
+    background-color: transparent;
+    color: #CBAACB; /* Soft pinkish lavender for labels */
+    font-weight: bold;
+    font-size: 14px;
+    font-family: 'Bahnschrift Light';
+}
+
+/*-----QPushButton-----*/
+QPushButton {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 #9E8AB7, stop:1 #674D77); /* Gradient from lighter to darker purple */
+    color: #FFF; /* Bright white text for maximum contrast */
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Bahnschrift Light';
+    border: 2px solid #D6C1DE; /* Light purple border to enhance visibility */
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); /* Adding shadow for depth */
+}
+
+QPushButton::disabled {
+    background-color: #504153; /* Muted dark purple for disabled state */
+    color: #837E9F; /* Light grey for text when disabled */
+}
+
+QPushButton::hover {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 #BFA5CC, stop:1 #7D5FA6); /* Lighter gradient on hover for more visual feedback */
+}
+
+QPushButton::pressed {
+    background-color: #563D68; /* Very deep purple when pressed */
+    border-color: #8A77A6; /* Adjusting border color for pressed state */
+}
+
+
+/*-----QCheckBox-----*/
+QCheckBox {
+    background-color: transparent;
+    color: #CBAACB; /* Soft pinkish lavender text */
+    font-size: 12px;
+    font-weight: bold;
+    font-family: 'Bahnschrift Light';
+    border: none;
+    border-radius: 5px;
+}
+
+QCheckBox::indicator {
+    background-color: #674D77; /* Darker purple background */
+    border: 1px solid #8967AA; /* Light purple border */
+    width: 12px;
+    height: 12px;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #5A3773; /* Deeper purple for checked state */
+    border: 1px solid #D8BFD8; /* Thistle color border */
+}
+
+QCheckBox::indicator:unchecked:hover {
+    border: 1px solid #B394C0; /* Lighter purple border on hover */
+}
+
+QCheckBox::disabled {
+    color: #837E9F; /* Greyish lavender text for disabled state */
+}
+
+QCheckBox::indicator:disabled {
+    background-color: #504153; /* Muted purple background for disabled state */
+    border: 1px solid #837E9F;
+}
+
+/*-----QLineEdit-----*/
+QLineEdit {
+    background-color: #4E3546; /* Dark amethyst background */
+    color: #E0D4E5; /* Light lavender text */
+    font-family: 'Bahnschrift Light';
+    border: 2px solid #5A3773; /* Darker purple border for better visibility */
+    padding: 5px;
+}
+
+/*-----QTextEdit-----*/
+QTextEdit {
+    background-color: #4E3546; /* Dark amethyst background */
+    color: #E0D4E5; /* Light lavender text for good readability */
+    font-family: 'Bahnschrift Light';
+    border: 2px solid #5A3773; /* Clearly visible purple border */
+    padding: 5px;
+}
+
+/*-----QListView-----*/
+QListView {
+    background-color: #3A1D47; /* Dark amethyst background */
+    color: #E0D4E5; /* Light lavender for items */
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Bahnschrift Light';
+    border-radius: 4px;
+    padding: 5px;
+}
+
+QListView::item {
+    background-color: #501B6B; /* Medium amethyst for item backgrounds */
+    color: #E0D4E5; /* Light lavender for item text */
+    padding: 10px;
+}
+
+QListView::item:selected {
+    background-color: #6C488F; /* Lighter amethyst for selected item */
+    color: #FFFFFF; /* White text */
+}
+
+QListView::item:hover {
+    background-color: #7D5FA6; /* Very light purple on hover */
+    color: #FFFFFF; /* White text */
+}
+
+
+

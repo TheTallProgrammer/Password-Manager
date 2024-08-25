@@ -1,0 +1,150 @@
+/*-----QWidget-----*/
+QWidget {
+    background-color: #0D1117; /* GitHub dark background */
+    color: #C9D1D9; /* Light gray text for readability */
+    font-family: 'Bahnschrift Light'; /* Keep the modern font */
+}
+
+/*-----QLabel-----*/
+QLabel {
+    background-color: transparent;
+    color: #C9D1D9; /* Light gray to match the GitHub style */
+    font-weight: bold;
+    font-size: 14px;
+    font-family: 'Bahnschrift Light';
+}
+
+/*-----QPushButton-----*/
+QPushButton {
+    background-color: #21262D; /* Darker gray for buttons */
+    color: #58A6FF; /* GitHub's blue for button text */
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Bahnschrift Light';
+    border-radius: 8px;
+    padding: 10px;
+}
+
+QPushButton::disabled {
+    background-color: #30363D; /* Even darker gray for disabled state */
+    color: #484F58; /* Dim gray for disabled text */
+}
+
+QPushButton::hover {
+    background-color: #30363D; /* Slightly lighter gray on hover */
+}
+
+QPushButton::pressed {
+    background-color: #161B22; /* Almost black when pressed */
+}
+
+/*-----QCheckBox-----*/
+QCheckBox {
+    background-color: transparent;
+    color: #C9D1D9; /* Light gray text for visibility */
+    font-size: 12px;
+    font-weight: bold;
+    font-family: 'Bahnschrift Light';
+    border: none;
+    border-radius: 5px;
+}
+
+QCheckBox::indicator {
+    background-color: #21262D; /* Dark gray background */
+    border: 1px solid #30363D; /* Slightly darker gray border */
+    width: 12px;
+    height: 12px;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #58A6FF; /* GitHub blue for checked state */
+    border: 1px solid #58A6FF;
+}
+
+QCheckBox::indicator:unchecked:hover {
+    border: 1px solid #58A6FF; /* Highlight on hover */
+}
+
+QCheckBox::disabled {
+    color: #484F58; /* Disabled text color */
+}
+
+QCheckBox::indicator:disabled {
+    background-color: #30363D; /* Disabled indicator background */
+    border: 1px solid #484F58;
+}
+
+/*-----QLineEdit-----*/
+QLineEdit {
+    background-color: #161B22; /* Very dark background for input fields */
+    color: #C9D1D9; /* Light gray text */
+    font-family: 'Bahnschrift Light';
+    border: 2px solid #21262D; /* Slightly lighter gray border */
+    padding: 5px;
+}
+
+/*-----QTextEdit-----*/
+QTextEdit {
+    background-color: #161B22; /* Very dark background for text edit */
+    color: #C9D1D9; /* Light gray text */
+    font-family: 'Bahnschrift Light';
+    border: 2px solid #21262D; /* Slightly lighter gray border */
+    padding: 5px;
+}
+
+/*-----QListView-----*/
+QListView {
+    background-color: #0D1117; /* Background color same as QWidget */
+    color: #C9D1D9; /* Text color same as QWidget */
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Bahnschrift Light';
+    border-radius: 4px;
+    padding: 5px;
+}
+
+QListView::item {
+    background-color: #21262D; /* Dark gray for items */
+    color: #C9D1D9;
+    padding: 10px;
+}
+
+QListView::item:selected {
+    background-color: #30363D; /* Slightly lighter gray for selected item */
+    color: #58A6FF; /* GitHub blue for selected text */
+}
+
+QListView::item:hover {
+    background-color: #30363D; /* Hover background color */
+    color: #C9D1D9;
+}
+
+/*-----QTreeView, QTableView & QTableWidget, QHeaderView, QScrollBar-----*/
+/* Continue using the color scheme defined for QWidget, QLabel, QPushButton, etc., to ensure consistency */
+
+/*-----QSlider-----*/
+QSlider::groove:horizontal {
+    border: 1px solid #30363D; /* Dark border for groove */
+    height: 8px;
+    background: #21262D; /* Dark gray for the groove */
+    margin: 2px 0;
+}
+
+QSlider::handle:horizontal {
+    background: #58A6FF; /* GitHub blue for the handle */
+    border: 1px solid #21262D; /* Border color matching the groove */
+    width: 18px;
+    height: 18px;
+    margin: -5px 0;
+    border-radius: 9px;
+}
+
+QSlider::add-page:horizontal {
+    background: #30363D; /* Darker section of the slider */
+}
+
+QSlider::sub-page:horizontal {
+    background: #58A6FF; /* GitHub blue for the filled part of the slider */
+}
+
+

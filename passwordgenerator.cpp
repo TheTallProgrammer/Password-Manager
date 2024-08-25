@@ -1,7 +1,6 @@
 #include "passwordgenerator.h"
 #include "ui_passwordgenerator.h"
 #include <QClipboard>
-#include <QCloseEvent>
 #include <random>
 
 // =====================
@@ -50,11 +49,6 @@ PasswordGenerator::~PasswordGenerator()
 // =====================
 // Event Handlers
 // =====================
-
-void PasswordGenerator::closeEvent(QCloseEvent *event) {
-    qDebug() << "PasswordGenerator is closing";
-    event->accept();  // Explicitly accept the close event to avoid any potential issues
-}
 
 void PasswordGenerator::on_PassLengthSlider_sliderMoved(int position)
 {

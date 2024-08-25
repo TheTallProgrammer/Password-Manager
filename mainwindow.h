@@ -30,6 +30,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+signals:
+    void themeLoaded(QString theme);
+
 public slots:
     void on_createPassSubmitButton_2_clicked();
     void on_loginButton_4_clicked();
@@ -39,7 +42,6 @@ public slots:
 private slots:
     void on_copyCipherButton_2_clicked();
 
-
 private:
     Ui::MainWindow *ui;
     std::unique_ptr<passwordManagementButtons> myButtonsPage;
@@ -48,10 +50,10 @@ private:
     QString passwordFilePath();
     bool passwordExists();
     void createPassword(const QString &firstPassEntry, const QString &email);
-    bool saveToFile(const QByteArray &hashedPassword, const QByteArray &salt, const QByteArray &encryptedEmail);
+    bool saveToFile(const QByteArray &hashedPassword, const QByteArray &salt, const QByteArray &encryptedEmail, const QString &theme);
     void promptForPassword(const QString &password);
     bool verifyPassword(const QString &password);
-    bool loadFromFile(QByteArray &hashedPassword, QByteArray &salt, QByteArray &encryptedEmail);
+    bool loadFromFile(QByteArray &hashedPassword, QByteArray &salt, QByteArray &encryptedEmail, QString &theme);
     QString generateCipherKey();
 };
 

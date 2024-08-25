@@ -9,7 +9,7 @@
 #include <QWidget>
 #include <QClipboard>
 #include <QApplication>
-#include <QCloseEvent>
+
 
 namespace Ui {
 class PasswordGenerator;
@@ -101,7 +101,7 @@ private:
     // Private Methods
     // ====================
     // Event triggered when the window is closed
-    void closeEvent(QCloseEvent *event);
+
 };
 
 #endif // PASSWORDGENERATOR_H

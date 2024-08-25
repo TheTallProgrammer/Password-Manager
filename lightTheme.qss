@@ -1,0 +1,150 @@
+/*-----QWidget-----*/
+QWidget {
+    background-color: #FFFFFF; /* Pure white background for maximum brightness */
+    color: #333333; /* Dark grey text for great readability */
+    font-family: 'Bahnschrift Light'; /* Maintain the sleek, modern font */
+}
+
+/*-----QLabel-----*/
+QLabel {
+    background-color: transparent;
+    color: #333333; /* Dark grey text on a light background */
+    font-weight: bold;
+    font-size: 14px;
+    font-family: 'Bahnschrift Light';
+}
+
+/*-----QPushButton-----*/
+QPushButton {
+    background-color: #F0F0F0; /* Very light grey for buttons */
+    color: #0056B3; /* Deep blue for button text, providing a professional look */
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Bahnschrift Light';
+    border-radius: 8px;
+    padding: 10px;
+}
+
+QPushButton::disabled {
+    background-color: #E0E0E0; /* Slightly darker grey for disabled state */
+    color: #AAAAAA; /* Grey text for disabled appearance */
+}
+
+QPushButton::hover {
+    background-color: #D9D9D9; /* Light grey for hover state */
+}
+
+QPushButton::pressed {
+    background-color: #CCCCCC; /* Dark grey when pressed */
+}
+
+/*-----QCheckBox-----*/
+QCheckBox {
+    background-color: transparent;
+    color: #333333; /* Dark grey for visible contrast */
+    font-size: 12px;
+    font-weight: bold;
+    font-family: 'Bahnschrift Light';
+    border: none;
+    border-radius: 5px;
+}
+
+QCheckBox::indicator {
+    background-color: #F0F0F0; /* Very light grey background */
+    border: 1px solid #CCCCCC; /* Grey border */
+    width: 12px;
+    height: 12px;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #0056B3; /* Deep blue for checked state */
+    border: 1px solid #0056B3; /* Matching border color */
+}
+
+QCheckBox::indicator:unchecked:hover {
+    border: 1px solid #0056B3; /* Highlight with deep blue on hover */
+}
+
+QCheckBox::disabled {
+    color: #AAAAAA; /* Grey text for disabled state */
+}
+
+QCheckBox::indicator:disabled {
+    background-color: #E0E0E0; /* Grey background for disabled state */
+    border: 1px solid #AAAAAA;
+}
+
+/*-----QLineEdit-----*/
+QLineEdit {
+    background-color: #FFFFFF; /* White background for input fields */
+    color: #333333; /* Dark grey text for contrast */
+    font-family: 'Bahnschrift Light';
+    border: 1px solid #CCCCCC; /* Light grey border for subtle definition */
+    padding: 5px;
+}
+
+/*-----QTextEdit-----*/
+QTextEdit {
+    background-color: #FFFFFF; /* White background for text editing */
+    color: #333333; /* Dark grey text */
+    font-family: 'Bahnschrift Light';
+    border: 1px solid #CCCCCC; /* Consistent light grey border */
+    padding: 5px;
+}
+
+/*-----QListView-----*/
+QListView {
+    background-color: #FFFFFF; /* White background for consistency */
+    color: #333333; /* Dark grey text */
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Bahnschrift Light';
+    border-radius: 4px;
+    padding: 5px;
+}
+
+QListView::item {
+    background-color: #F0F0F0; /* Very light grey for items */
+    color: #333333;
+    padding: 10px;
+}
+
+QListView::item:selected {
+    background-color: #D9D9D9; /* Light grey for selected item */
+    color: #0056B3; /* Deep blue for selected text */
+}
+
+QListView::item:hover {
+    background-color: #D9D9D9; /* Light grey on hover */
+    color: #333333;
+}
+
+/*-----QTreeView, QTableView & QTableWidget, QHeaderView, QScrollBar-----*/
+/* Utilize similar color schemes defined for QWidget, QLabel, QPushButton, etc., to ensure uniformity across the interface */
+
+/*-----QSlider-----*/
+QSlider::groove:horizontal {
+    border: 1px solid #CCCCCC; /* Light grey border for groove */
+    height: 8px;
+    background: #F0F0F0; /* Very light grey for the groove */
+    margin: 2px 0;
+}
+
+QSlider::handle:horizontal {
+    background: #0056B3; /* Deep blue for the handle */
+    border: 1px solid #CCCCCC; /* Light grey border */
+    width: 18px;
+    height: 18px;
+    margin: -5px 0;
+    border-radius: 9px;
+}
+
+QSlider::add-page:horizontal {
+    background: #D9D9D9; /* Light grey for the area after the handle */
+}
+
+QSlider::sub-page:horizontal {
+    background: #0056B3; /* Deep blue for the filled part of the slider */
+}
+
+
