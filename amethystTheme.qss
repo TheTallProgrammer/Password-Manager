@@ -126,5 +126,7 @@ QListView::item:hover {
     color: #FFFFFF; /* White text */
 }
 
-
+QComboBox QAbstractItemView {
+outline: 0px;
+}
 

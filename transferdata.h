@@ -29,6 +29,7 @@ private slots:
 
 private:
     Ui::transferData *ui;
+    void saveEncryptedDataToFile(const QString &passId, const QByteArray &encryptedData);
 };
 
 #endif // TRANSFERDATA_H

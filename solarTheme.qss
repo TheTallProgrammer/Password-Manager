@@ -121,3 +121,98 @@ QSlider::sub-page:horizontal {
 }
 
 /* Additional styling for other widgets like QListView, QTreeView, QTableView, QHeaderView, QScrollBar can also be adapted to match this sunset theme. */
+
+/*-----QTableWidget/QTableView-----*/
+QTableWidget, QTableView {
+    background-color: #FFD9B3; /* Same light sunset orange as QLineEdit */
+    color: #664422; /* Earth tone for text */
+    border: 2px solid #FF8533; /* Sunset orange border matching QLineEdit and QTextEdit */
+    gridline-color: #FF8533; /* Grid lines matching the border color */
+    font-family: 'Bahnschrift Light';
+    font-size: 14px;
+    selection-background-color: #FF8533; /* Highlighted row background color */
+    selection-color: #FFFFFF; /* Highlighted row text color */
+}
+
+/*-----QHeaderView (for table headers)-----*/
+QHeaderView::section {
+    background-color: #FFB366; /* Lighter sunset color for headers */
+    color: #664422; /* Dark earth tone for text */
+    padding: 5px;
+    border: 1px solid #FF8533; /* Border matching other widgets */
+    font-family: 'Bahnschrift Light';
+    font-weight: bold;
+}
+
+QHeaderView::section:horizontal {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 1px solid #FF8533;
+    border-bottom: 1px solid #FF8533;
+}
+
+QHeaderView::section:vertical {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 1px solid #FF8533;
+    border-bottom: 1px solid #FF8533;
+}
+
+/*-----QScrollBar (for table scrollbars)-----*/
+QScrollBar:vertical {
+    background-color: #FFD9B3; /* Background of the scrollbar */
+    width: 16px;
+    margin: 22px 0 22px 0; /* Space at the top and bottom */
+}
+
+QScrollBar::handle:vertical {
+    background: #FF8533; /* Handle color matching the theme */
+    min-height: 20px;
+    border-radius: 8px;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    background: #FFB366; /* Buttons at the ends of the scrollbar */
+    height: 16px;
+    subcontrol-origin: margin;
+    border-radius: 8px;
+}
+
+QScrollBar::add-line:vertical:hover, QScrollBar::sub-line:vertical:hover {
+    background: #FFA04D; /* Lighter on hover */
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+QScrollBar:horizontal {
+    background-color: #FFD9B3; /* Background of the scrollbar */
+    height: 16px;
+    margin: 0px 22px 0px 22px; /* Space on the left and right */
+}
+
+QScrollBar::handle:horizontal {
+    background: #FF8533; /* Handle color matching the theme */
+    min-width: 20px;
+    border-radius: 8px;
+}
+
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    background: #FFB366; /* Buttons at the ends of the scrollbar */
+    width: 16px;
+    subcontrol-origin: margin;
+    border-radius: 8px;
+}
+
+QScrollBar::add-line:horizontal:hover, QScrollBar::sub-line:horizontal:hover {
+    background: #FFA04D; /* Lighter on hover */
+}
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: none;
+}
+
+QComboBox QAbstractItemView {
+outline: 0px;
+}

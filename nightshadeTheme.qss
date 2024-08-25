@@ -148,3 +148,101 @@ QSlider::sub-page:horizontal {
 }
 
 
+/*-----QTableWidget/QTableView-----*/
+QTableWidget, QTableView {
+    background-color: #0D1117; /* GitHub dark background */
+    color: #C9D1D9; /* Light gray text for readability */
+    gridline-color: #21262D; /* Grid lines color */
+    font-family: 'Bahnschrift Light'; /* Keep the modern font */
+    font-size: 14px;
+}
+
+QTableWidget::item, QTableView::item {
+    background-color: #0D1117; /* Background color for table items */
+    color: #C9D1D9; /* Text color for table items */
+    padding: 5px;
+    border: none;
+}
+
+QTableWidget::item:selected, QTableView::item:selected {
+    background-color: #30363D; /* Slightly lighter gray for selected item */
+    color: #58A6FF; /* GitHub blue for selected text */
+}
+
+QTableWidget::item:hover, QTableView::item:hover {
+    background-color: #21262D; /* Darker gray on hover */
+    color: #C9D1D9;
+}
+
+/*-----QHeaderView (for table headers)-----*/
+QHeaderView::section {
+    background-color: #21262D; /* Darker gray for header background */
+    color: #C9D1D9; /* Light gray text for headers */
+    font-family: 'Bahnschrift Light';
+    font-weight: bold;
+    font-size: 14px;
+    border: 1px solid #30363D; /* Border for header sections */
+    padding: 5px;
+}
+
+QHeaderView::section:horizontal {
+    border-left: 1px solid #0D1117;
+}
+
+QHeaderView::section:vertical {
+    border-top: 1px solid #0D1117;
+}
+
+/*-----QScrollBar (for table scrollbars)-----*/
+QScrollBar:vertical, QScrollBar:horizontal {
+    background: #0D1117; /* Background for the scrollbar */
+    width: 16px;
+}
+
+QScrollBar::handle:vertical, QScrollBar::handle:horizontal {
+    background: #21262D; /* Darker gray for the scrollbar handle */
+    min-height: 20px;
+    border-radius: 4px;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    background: #161B22; /* Very dark background for buttons */
+    border: none;
+    width: 16px;
+    height: 16px;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical,
+QScrollBar::left-arrow:horizontal, QScrollBar::right-arrow:horizontal {
+    image: url(:/images/arrow.png); /* Customize with your arrow image */
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: none;
+}
+
+/*-----QComboBox-----*/
+
+
+QComboBox::down-arrow {
+    width: 15px;  /* Larger width for the arrow */
+    height: 15px; /* Larger height for the arrow */
+    color: #58A6FF; /* Bright blue color for the arrow */
+
+}
+
+QComboBox QAbstractItemView {
+    background-color: #0D1117; /* Background color for the dropdown list */
+    color: #C9D1D9; /* Light gray text for the items */
+    border: 1px solid #30363D; /* Border around the dropdown list */
+    selection-background-color: #30363D; /* Slightly lighter gray for selected item */
+    selection-color: #58A6FF; /* GitHub blue for selected text */
+    font-family: 'Bahnschrift Light';
+}
+
+QComboBox QAbstractItemView {
+outline: 0px;
+}

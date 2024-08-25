@@ -31,8 +31,8 @@ MainWindow::MainWindow(QWidget *parent)
         ui->cipherKeyText_2->setText(globalCipherKey);
         ui->createPass->show();
 
-        // Apply the default theme "Nightshade"
-        handleUpdateTheme("Nightshade");
+        // Apply the default theme "Light"
+        handleUpdateTheme("Light");
     } else {
         if (loadFromFile(hashedPassword, salt, encryptedEmail, savedTheme)) {
             handleUpdateTheme(savedTheme);  // Apply the saved theme

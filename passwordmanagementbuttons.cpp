@@ -39,7 +39,7 @@ passwordManagementButtons::passwordManagementButtons(QWidget *parent)
     themeComboBox->addItem("Sunset");
 
     // Set a larger font to make it more prominent
-    QFont font("Bahnschrift Light", 16);  // Adjust the font size here (16 is an example)
+    QFont font("Bahnschrift Light", 14);  // Adjust the font size here (16 is an example)
     themeComboBox->setFont(font);
 
     themeComboBox->setEditable(true);

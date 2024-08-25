@@ -148,3 +148,87 @@ QSlider::sub-page:horizontal {
 }
 
 
+/*-----QTableWidget/QTableView-----*/
+QTableWidget, QTableView {
+    background-color: #FFFFFF; /* White background for the table */
+    color: #333333; /* Dark grey text for table content */
+    border: 1px solid #CCCCCC; /* Light grey border for table */
+    gridline-color: #E0E0E0; /* Slightly darker grey for gridlines */
+    font-family: 'Bahnschrift Light';
+    font-size: 14px;
+}
+
+QTableWidget::item, QTableView::item {
+    padding: 8px; /* Padding for table cells */
+    background-color: #F0F0F0; /* Very light grey for table items */
+    color: #333333; /* Dark grey text */
+}
+
+QTableWidget::item:selected, QTableView::item:selected {
+    background-color: #D9D9D9; /* Light grey for selected item */
+    color: #0056B3; /* Deep blue text for selected items */
+}
+
+/*-----QHeaderView (for table headers)-----*/
+QHeaderView::section {
+    background-color: #F0F0F0; /* Very light grey for header background */
+    color: #333333; /* Dark grey text for headers */
+    padding: 8px;
+    border: 1px solid #CCCCCC; /* Light grey border for headers */
+    font-family: 'Bahnschrift Light';
+    font-size: 14px;
+}
+
+QHeaderView::section:horizontal {
+    border-top: none;
+    border-left: none;
+    border-right: 1px solid #CCCCCC;
+}
+
+QHeaderView::section:vertical {
+    border-left: none;
+    border-top: none;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+/*-----QScrollBar (for table scrollbars)-----*/
+QScrollBar:vertical {
+    border: 1px solid #CCCCCC;
+    background: #F0F0F0; /* Very light grey background */
+    width: 16px;
+    margin: 18px 0 18px 0;
+}
+
+QScrollBar::handle:vertical {
+    background: #D9D9D9; /* Light grey for the scrollbar handle */
+    min-height: 20px;
+    border-radius: 8px;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    border: 1px solid #CCCCCC;
+    background: #F0F0F0;
+    height: 18px;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:vertical:hover, QScrollBar::sub-line:vertical:hover {
+    background: #D9D9D9; /* Darker grey on hover */
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+/* General ComboBox Styles */
+
+
+/* Individual items inside the dropdown list */
+QComboBox::item {
+    padding: 5px 10px; /* Spacing inside each item */
+    min-height: 30px; /* Consistent height for each item */
+}
+
+QComboBox QAbstractItemView {
+outline: 0px;
+}
