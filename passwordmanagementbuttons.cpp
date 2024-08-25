@@ -236,14 +236,12 @@ void passwordManagementButtons::on_exportPassButton_clicked()
     if(!tranData){
         tranData = std::make_unique<transferData>(this);
 
-        // Connect storePassword's emitBackClicked signal to handleBackStorePassword slot
+        // Connect back button signal to the handler
         connect(tranData.get(), &transferData::backButtonPressed, this, &passwordManagementButtons::handleTransBackPressed);
-
     }
     tranData->show();
     this->hide();
 }
-
 void passwordManagementButtons::handleTransBackPressed(){
     tranData->hide();
     this->show();
