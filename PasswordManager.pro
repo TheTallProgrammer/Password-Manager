@@ -17,7 +17,8 @@ SOURCES += \
     passwordmanagementbuttons.cpp \
     resetpassword.cpp \
     retrievepassword.cpp \
-    storepassword.cpp
+    storepassword.cpp \
+    transferdata.cpp
 
 HEADERS += \
     cryptoutils.h \
@@ -27,7 +28,8 @@ HEADERS += \
     passwordmanagementbuttons.h \
     resetpassword.h \
     retrievepassword.h \
-    storepassword.h
+    storepassword.h \
+    transferdata.h
 
 FORMS += \
     editpassworddata.ui \
@@ -36,7 +38,8 @@ FORMS += \
     passwordmanagementbuttons.ui \
     resetpassword.ui \
     retrievepassword.ui \
-    storepassword.ui
+    storepassword.ui \
+    transferdata.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
