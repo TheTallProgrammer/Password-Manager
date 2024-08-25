@@ -13,6 +13,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -26,6 +27,7 @@ public:
     QPushButton *resetLoginButton;
     QPushButton *deleteAllButton;
     QPushButton *logoutButton;
+    QWidget *themeWidget;
 
     void setupUi(QDialog *passwordManagementButtons)
     {
@@ -38,14 +40,14 @@ public:
         passwordManagementButtons->setFont(font);
         storePass = new QPushButton(passwordManagementButtons);
         storePass->setObjectName("storePass");
-        storePass->setGeometry(QRect(20, 50, 330, 100));
+        storePass->setGeometry(QRect(20, 130, 330, 100));
         QFont font1;
         font1.setFamilies({QString::fromUtf8("Bahnschrift Light")});
         font1.setPointSize(23);
         storePass->setFont(font1);
         retrievePass = new QPushButton(passwordManagementButtons);
         retrievePass->setObjectName("retrievePass");
-        retrievePass->setGeometry(QRect(20, 220, 330, 100));
+        retrievePass->setGeometry(QRect(20, 260, 330, 100));
         QFont font2;
         font2.setFamilies({QString::fromUtf8("Bahnschrift Light")});
         font2.setPointSize(21);
@@ -56,11 +58,11 @@ public:
         genPass->setFont(font1);
         exportPassButton = new QPushButton(passwordManagementButtons);
         exportPassButton->setObjectName("exportPassButton");
-        exportPassButton->setGeometry(QRect(450, 220, 330, 100));
+        exportPassButton->setGeometry(QRect(450, 260, 330, 100));
         exportPassButton->setFont(font1);
         resetLoginButton = new QPushButton(passwordManagementButtons);
         resetLoginButton->setObjectName("resetLoginButton");
-        resetLoginButton->setGeometry(QRect(450, 50, 330, 100));
+        resetLoginButton->setGeometry(QRect(450, 130, 330, 100));
         QFont font3;
         font3.setFamilies({QString::fromUtf8("Bahnschrift Light")});
         font3.setPointSize(22);
@@ -76,6 +78,9 @@ public:
         font4.setFamilies({QString::fromUtf8("Bahnschrift Light")});
         font4.setPointSize(24);
         logoutButton->setFont(font4);
+        themeWidget = new QWidget(passwordManagementButtons);
+        themeWidget->setObjectName("themeWidget");
+        themeWidget->setGeometry(QRect(270, 10, 261, 80));
 
         retranslateUi(passwordManagementButtons);
 

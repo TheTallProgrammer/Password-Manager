@@ -34,9 +34,11 @@ public slots:
     void on_createPassSubmitButton_2_clicked();
     void on_loginButton_4_clicked();
     void updatePassword(const QString &newPassword);
+    void handleUpdateTheme(QString selectedTheme);
 
 private slots:
     void on_copyCipherButton_2_clicked();
+
 
 private:
     Ui::MainWindow *ui;

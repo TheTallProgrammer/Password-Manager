@@ -31,6 +31,9 @@ public:
     explicit passwordManagementButtons(QWidget *parent = nullptr);
     ~passwordManagementButtons();
 
+signals:
+    void updateTheme(QString selectedTheme);
+
 private slots:
     // ====================
     // Button Click Handlers
@@ -62,6 +65,7 @@ private:
     std::unique_ptr<storePassword> storePass;
     QPointer<retrievePassword> retrievePass;
     void closeEvent(QCloseEvent *event);
+    void onThemeChanged(int index);
 };
 
 #endif // PASSWORDMANAGEMENTBUTTONS_H

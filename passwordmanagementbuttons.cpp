@@ -9,6 +9,9 @@
 #include <QJsonDocument>
 #include <QFileDialog>
 #include "cryptoutils.h"
+#include <QComboBox>
+#include <QHBoxLayout>
+#include <QLineEdit>
 
 // =============================
 // Constructor & Destructor
@@ -18,6 +21,38 @@ passwordManagementButtons::passwordManagementButtons(QWidget *parent)
     , ui(new Ui::passwordManagementButtons)
 {
     ui->setupUi(this);
+
+    // Create a QComboBox for themes
+    QComboBox *themeComboBox = new QComboBox(ui->themeWidget);
+
+    // Set the size policy to stretch to the full width and height of themeWidget
+    themeComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    // Add the themes to the comboBox
+    themeComboBox->addItem("Nightshade");
+    themeComboBox->addItem("Amethyst");
+    themeComboBox->addItem("Light");
+    themeComboBox->addItem("Sunset");
+
+    // Set a larger font to make it more prominent
+    QFont font("Bahnschrift Light", 16);  // Adjust the font size here (16 is an example)
+    themeComboBox->setFont(font);
+
+    // Set initial text to "Theme: Nightshade"
+    themeComboBox->setEditable(true);
+    themeComboBox->setCurrentText("Theme: Nightshade");
+    themeComboBox->lineEdit()->setAlignment(Qt::AlignCenter);
+    themeComboBox->lineEdit()->setReadOnly(true);
+
+    // Set the themeComboBox to fully cover the themeWidget
+    QHBoxLayout *themeLayout = new QHBoxLayout(ui->themeWidget);
+    themeLayout->addWidget(themeComboBox);
+    themeLayout->setContentsMargins(0, 0, 0, 0);  // Remove margins to ensure full coverage
+    ui->themeWidget->setLayout(themeLayout);
+
+    // Connect the comboBox to the onThemeChanged slot
+    connect(themeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this, &passwordManagementButtons::onThemeChanged);
 }
 
 passwordManagementButtons::~passwordManagementButtons()
@@ -26,6 +61,26 @@ passwordManagementButtons::~passwordManagementButtons()
         disconnect(myPassGen.get(), nullptr, this, nullptr);  // Ensure signals are disconnected
     }
     delete ui;
+}
+
+void passwordManagementButtons::onThemeChanged(int index)
+{
+    QComboBox *themeComboBox = qobject_cast<QComboBox*>(sender());
+    QString selectedTheme = "Nightshade";
+    if (!themeComboBox){
+        emit updateTheme(selectedTheme);
+        return;
+    }
+    QStringList themes = {"Nightshade", "Amethyst", "Light", "Sunset"};
+
+    if (index >= 0 && index < themes.size()) {
+        selectedTheme = themes.at(index);
+        themeComboBox->setCurrentText("Theme: " + selectedTheme);
+        qDebug() << selectedTheme + " theme selected";
+    }
+
+    emit updateTheme(selectedTheme);
+
 }
 
 void passwordManagementButtons::closeEvent(QCloseEvent *event)
