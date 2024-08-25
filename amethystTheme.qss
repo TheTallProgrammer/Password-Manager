@@ -130,3 +130,91 @@ QComboBox QAbstractItemView {
 outline: 0px;
 }
 
+/*-----QTableWidget/QTableView-----*/
+QTableWidget, QTableView {
+    background-color: #3A1D47; /* Dark amethyst background */
+    color: #E0D4E5; /* Light lavender for text */
+    font-family: 'Bahnschrift Light';
+    gridline-color: #5A3773; /* Darker purple grid lines */
+    selection-background-color: #6C488F; /* Lighter amethyst for selected cells */
+    selection-color: #FFFFFF; /* White text for selected cells */
+    border: 2px solid #501B6B; /* Medium amethyst border */
+}
+
+QTableWidget::item, QTableView::item {
+    background-color: #501B6B; /* Medium amethyst for item backgrounds */
+    color: #E0D4E5; /* Light lavender for item text */
+    padding: 5px;
+}
+
+QTableWidget::item:selected, QTableView::item:selected {
+    background-color: #7D5FA6; /* Very light purple on selection */
+    color: #FFFFFF; /* White text */
+}
+
+QTableWidget::item:hover, QTableView::item:hover {
+    background-color: #674D77; /* Darker purple on hover */
+    color: #FFFFFF; /* White text */
+}
+
+/*-----QHeaderView (for table headers)-----*/
+QHeaderView::section {
+    background-color: #501B6B; /* Medium amethyst background */
+    color: #E0D4E5; /* Light lavender text */
+    font-family: 'Bahnschrift Light';
+    font-weight: bold;
+    border: 1px solid #5A3773; /* Darker purple border */
+    padding: 8px;
+    text-align: center;
+}
+
+QHeaderView::section:horizontal {
+    background-color: #674D77; /* Darker purple background for horizontal header */
+    color: #FFFFFF; /* White text */
+}
+
+QHeaderView::section:vertical {
+    background-color: #674D77; /* Darker purple background for vertical header */
+    color: #FFFFFF; /* White text */
+}
+
+/*-----QScrollBar (for table scrollbars)-----*/
+QScrollBar:horizontal {
+    border: none;
+    background: #3A1D47; /* Dark amethyst background */
+    height: 15px;
+    margin: 0px 20px 0 20px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #6C488F; /* Lighter amethyst handle */
+    min-width: 20px;
+    border-radius: 4px;
+}
+
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    border: none;
+    background: none;
+}
+
+QScrollBar:vertical {
+    border: none;
+    background: #3A1D47; /* Dark amethyst background */
+    width: 15px;
+    margin: 20px 0px 20px 0px;
+}
+
+QScrollBar::handle:vertical {
+    background: #6C488F; /* Lighter amethyst handle */
+    min-height: 20px;
+    border-radius: 4px;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+}
+
+QScrollBar::add-page, QScrollBar::sub-page {
+    background: none;
+}

@@ -66,6 +66,7 @@ private:
     // ============================
     void saveEncryptedDataToFile(const QString &passId, const QByteArray &encryptedData);  // Saves encrypted data to a file
     QJsonObject loadAndDecryptDataFromFile(const QString &passId);  // Loads and decrypts data from a file (for testing)
+    bool doesPassIdExist(const QString &passId);
 };
 
 #endif // STOREPASSWORD_H

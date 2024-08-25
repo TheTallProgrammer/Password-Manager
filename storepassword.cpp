@@ -67,6 +67,13 @@ void storePassword::on_storePassButton_clicked()
         return;
     }
 
+    // Check if passId already exists
+    if (doesPassIdExist(passId)) {
+        // Display an error message to the user
+        QMessageBox::warning(this, "Error", "A password with this ID already exists. Please choose a different ID. If you can't see the password ID on the password viewer, then it was used with a different cipher.");
+        return;
+    }
+
     // Get the current date and time as a string
     QString dateStored = QDate::currentDate().toString(Qt::ISODate);
 
@@ -95,6 +102,7 @@ void storePassword::on_storePassButton_clicked()
     emit emitBackClicked();
     this->accept();
 }
+
 
 // =====================
 // File Handling Functions
@@ -140,3 +148,13 @@ void storePassword::saveEncryptedDataToFile(const QString &passId, const QByteAr
         qDebug() << "Decrypted JSON object:" << decryptedJson;
     }
 }
+
+bool storePassword::doesPassIdExist(const QString &passId)
+{
+    QString dirPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/PasswordManager";
+    QString filePath = dirPath + "/" + passId + ".bin";
+
+    QFile file(filePath);
+    return file.exists();
+}
+
