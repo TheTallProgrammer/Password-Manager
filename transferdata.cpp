@@ -12,3 +12,21 @@ transferData::~transferData()
 {
     delete ui;
 }
+
+void transferData::on_backButton_clicked()
+{
+    emit backButtonPressed();
+}
+
+
+void transferData::on_exportButton_clicked()
+{
+
+}
+
+
+void transferData::on_importButton_clicked()
+{
+
+}
+
