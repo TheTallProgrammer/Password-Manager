@@ -41,7 +41,6 @@ passwordManagementButtons::passwordManagementButtons(QWidget *parent)
     QFont font("Bahnschrift Light", 16);  // Adjust the font size here (16 is an example)
     themeComboBox->setFont(font);
 
-    // Set initial text to "Theme: Nightshade"
     themeComboBox->setEditable(true);
     themeComboBox->setCurrentText("Themes");
     themeComboBox->lineEdit()->setAlignment(Qt::AlignCenter);
@@ -53,10 +52,22 @@ passwordManagementButtons::passwordManagementButtons(QWidget *parent)
     themeLayout->setContentsMargins(0, 0, 0, 0);  // Remove margins to ensure full coverage
     ui->themeWidget->setLayout(themeLayout);
 
-    // Connect the comboBox to the onThemeChanged slot
     connect(themeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &passwordManagementButtons::onThemeChanged);
+
+    connect(themeComboBox, &QComboBox::currentTextChanged,
+            this, &passwordManagementButtons::onThemeTextChanged);
+
 }
+
+void passwordManagementButtons::onThemeTextChanged(const QString &text)
+{
+    if (text == "Nightshade") {
+        qDebug() << "Nightshade theme selected via text change";
+        emit updateTheme(text);  // Emit the signal to update the theme
+    }
+}
+
 
 passwordManagementButtons::~passwordManagementButtons()
 {
@@ -68,53 +79,21 @@ passwordManagementButtons::~passwordManagementButtons()
 
 void passwordManagementButtons::onThemeChanged(int index)
 {
-    QComboBox *themeComboBox = qobject_cast<QComboBox*>(sender());
-    QString selectedTheme = "Nightshade";
-
-    if (!themeComboBox) {
-        emit updateTheme(selectedTheme);
-        return;
-    }
-
     QStringList themes = {"Nightshade", "Amethyst", "Light", "Sunset"};
 
     if (index >= 0 && index < themes.size()) {
-        selectedTheme = themes.at(index);
-        qDebug() << selectedTheme + " theme selected"; // This is being printed
-    }
+        QString selectedTheme = themes.at(index);
+        qDebug() << selectedTheme + " theme selected";
 
-    // Add this debug line to verify emission
-    qDebug() << "Emitting updateTheme with selectedTheme:" << selectedTheme;
-
-    emit updateTheme(selectedTheme); // Make sure this is being called with the correct theme
-    QTimer::singleShot(0, this, [this, selectedTheme]() {
+        // Emit the signal to inform MainWindow about the selected theme
         emit updateTheme(selectedTheme);
-    });
-}
 
-// passwordmanagementbuttons.cpp
-void passwordManagementButtons::handleUpdateThemeComboBox(QString theme)
-{
-
-    QComboBox *themeComboBox = qobject_cast<QComboBox*>(sender());
-    // Example logic: Print the theme or update the combo box selection
-    qDebug() << "Theme received in password management buttons:" << theme;
-
-    // You can perform actions based on the theme, such as updating a combo box
-    // Assuming you have a combo box named themeComboBox
-    if (theme == "Nightshade") {
-        themeComboBox->setCurrentText("Theme: " + theme);
-    } else if (theme == "Amethyst") {
-        themeComboBox->setCurrentText("Theme: " + theme);
-    } else if (theme == "Light") {
-        themeComboBox->setCurrentText("Theme: " + theme);
-    } else if (theme == "Sunset") {
-        themeComboBox->setCurrentText("Theme: " + theme);
-    } else {
-        qDebug() << "Unknown theme received:" << theme;
+        QComboBox *themeComboBox = qobject_cast<QComboBox*>(sender());
+        if (themeComboBox) {
+            themeComboBox->setCurrentText(selectedTheme);  // Update the combo box text
+        }
     }
 }
-
 
 
 

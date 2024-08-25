@@ -23,7 +23,7 @@
       <x>-90</x>
       <y>-10</y>
       <width>1001</width>
-      <height>421</height>
+      <height>621</height>
      </rect>
     </property>
     <widget class="QLineEdit" name="passwordLoginEntry_4">
@@ -73,7 +73,7 @@
     <widget class="QPushButton" name="loginButton_4">
      <property name="geometry">
       <rect>
-       <x>390</x>
+       <x>395</x>
        <y>350</y>
        <width>181</width>
        <height>51</height>

@@ -54,7 +54,7 @@ public:
         login = new QWidget(centralwidget);
         login->setObjectName("login");
         login->setEnabled(true);
-        login->setGeometry(QRect(-90, -10, 1001, 421));
+        login->setGeometry(QRect(-90, -10, 1001, 621));
         passwordLoginEntry_4 = new QLineEdit(login);
         passwordLoginEntry_4->setObjectName("passwordLoginEntry_4");
         passwordLoginEntry_4->setGeometry(QRect(110, 110, 761, 61));
@@ -70,7 +70,7 @@ public:
         label_8->setAlignment(Qt::AlignmentFlag::AlignCenter);
         loginButton_4 = new QPushButton(login);
         loginButton_4->setObjectName("loginButton_4");
-        loginButton_4->setGeometry(QRect(390, 350, 181, 51));
+        loginButton_4->setGeometry(QRect(395, 350, 181, 51));
         loginButton_4->setFont(font);
         loginErrorLabel_4 = new QLabel(login);
         loginErrorLabel_4->setObjectName("loginErrorLabel_4");

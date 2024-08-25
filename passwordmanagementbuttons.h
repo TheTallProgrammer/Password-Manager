@@ -31,6 +31,7 @@ public:
     explicit passwordManagementButtons(QWidget *parent = nullptr);
     ~passwordManagementButtons();
 
+
 signals:
     void updateTheme(QString selectedTheme);
 
@@ -54,7 +55,7 @@ private slots:
     void on_exportPassButton_clicked();
 
 public slots:
-    void handleUpdateThemeComboBox(QString theme);
+    void onThemeTextChanged(const QString &text);
 
 private:
     // =====================

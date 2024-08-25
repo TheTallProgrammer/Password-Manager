@@ -91,7 +91,7 @@ public:
     {
         passwordManagementButtons->setWindowTitle(QCoreApplication::translate("passwordManagementButtons", "Dialog", nullptr));
         storePass->setText(QCoreApplication::translate("passwordManagementButtons", "Add New Password", nullptr));
-        retrievePass->setText(QCoreApplication::translate("passwordManagementButtons", "View/Manage passwords", nullptr));
+        retrievePass->setText(QCoreApplication::translate("passwordManagementButtons", "View/Manage Passwords", nullptr));
         genPass->setText(QCoreApplication::translate("passwordManagementButtons", "Password Generator", nullptr));
         exportPassButton->setText(QCoreApplication::translate("passwordManagementButtons", "Export Passwords", nullptr));
         resetLoginButton->setText(QCoreApplication::translate("passwordManagementButtons", "Change Login Password", nullptr));

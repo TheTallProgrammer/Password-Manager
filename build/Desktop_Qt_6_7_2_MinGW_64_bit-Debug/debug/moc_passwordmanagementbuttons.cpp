@@ -50,8 +50,8 @@ constexpr auto qt_meta_stringdata_CLASSpasswordManagementButtonsENDCLASS = QtMoc
     "on_retrievePass_clicked",
     "on_deleteAllButton_clicked",
     "on_exportPassButton_clicked",
-    "handleUpdateThemeComboBox",
-    "theme"
+    "onThemeTextChanged",
+    "text"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -142,9 +142,9 @@ Q_CONSTINIT const QMetaObject passwordManagementButtons::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_exportPassButton_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'handleUpdateThemeComboBox'
+        // method 'onThemeTextChanged'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QString, std::false_type>
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
     >,
     nullptr
 } };
@@ -167,7 +167,7 @@ void passwordManagementButtons::qt_static_metacall(QObject *_o, QMetaObject::Cal
         case 9: _t->on_retrievePass_clicked(); break;
         case 10: _t->on_deleteAllButton_clicked(); break;
         case 11: _t->on_exportPassButton_clicked(); break;
-        case 12: _t->handleUpdateThemeComboBox((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 12: _t->onThemeTextChanged((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
