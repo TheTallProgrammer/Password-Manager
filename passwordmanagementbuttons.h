@@ -70,6 +70,9 @@ private:
     QPointer<retrievePassword> retrievePass;
     void closeEvent(QCloseEvent *event);
     void onThemeChanged(int index);
+    void exportPasswords();
+    void importPasswords();
+    void saveImportedPasswordToFile(const QString &passId, const QByteArray &encryptedData);
 };
 
 #endif // PASSWORDMANAGEMENTBUTTONS_H
