@@ -6,12 +6,16 @@
 #include "passwordinfo.h"
 #include <QTimer>
 
-// Definitions for the global variables
-QString globalCipherKey;
-QString realPassword;
-QString realCipherKey;
+// ====================
+// Global Variables
+// ====================
+QString globalCipherKey;  // Global cipher key
+QString realPassword;  // Global real password
+QString realCipherKey;  // Global real cipher key
 
-
+// ====================
+// Constructor
+// ====================
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -60,6 +64,19 @@ MainWindow::MainWindow(QWidget *parent)
     });
 }
 
+// ====================
+// Destructor
+// ====================
+MainWindow::~MainWindow()
+{
+    globalCipherKey.clear();
+    delete ui;
+}
+
+// ====================
+// Private Methods
+// ====================
+
 void MainWindow::maskPasswordEntry(QLineEdit *lineEdit, QString &realInput)
 {
     QString currentText = lineEdit->text();
@@ -89,13 +106,6 @@ void MainWindow::maskPasswordEntry(QLineEdit *lineEdit, QString &realInput)
     lineEdit->setCursorPosition(length);  // Ensure cursor stays at the end
 
     qDebug() << "Real Input:" << realInput;
-}
-
-
-MainWindow::~MainWindow()
-{
-    globalCipherKey.clear();
-    delete ui;
 }
 
 void MainWindow::handleUpdateTheme(QString selectedTheme)
@@ -133,29 +143,10 @@ void MainWindow::handleUpdateTheme(QString selectedTheme)
     }
 }
 
-void MainWindow::on_createPassSubmitButton_2_clicked()
-{
-    QString firstPassEntry = ui->createPassEntry1_2->text();
-    QString secondPassEntry = ui->createPassEntry2_2->text();
-    QString email = ui->emailLabel_2->text();
-
-    if (firstPassEntry.length() < 8 || secondPassEntry.length() < 8) {
-        ui->creationError_2->setText("ERROR: Passwords must have at least 8 characters.");
-        ui->creationError_2->show();
-    }
-    else if (firstPassEntry != secondPassEntry) {
-        ui->creationError_2->setText("ERROR: Passwords Don't Match.");
-        ui->creationError_2->show();
-    } else {
-        ui->creationError_2->hide();
-        createPassword(firstPassEntry, email);
-    }
-}
-
 void MainWindow::createPassword(const QString &firstPassEntry, const QString &email) {
     QByteArray salt = CryptoUtils::hashData(QByteArray::number(QDateTime::currentMSecsSinceEpoch()), QByteArray());
     QByteArray hashedPassword = CryptoUtils::hashData(firstPassEntry.toUtf8(), salt);
-    QByteArray encryptedEmail = CryptoUtils::encryptData(email.toUtf8(), globalCipherKey); // No keyLength needed
+    QByteArray encryptedEmail = CryptoUtils::encryptData(email.toUtf8(), globalCipherKey);  // No keyLength needed
     QString defaultTheme = "Light";  // Default theme
 
 #ifdef QT_DEBUG
@@ -171,7 +162,7 @@ void MainWindow::createPassword(const QString &firstPassEntry, const QString &em
 #ifdef QT_DEBUG
         qDebug() << "Password, email, and theme saved successfully.";
         passwordInfo infoDialog(this, firstPassEntry);
-        infoDialog.exec(); // This should display the dialog modally
+        infoDialog.exec();  // This should display the dialog modally
 #endif
     } else {
         ui->creationError_2->setText("Password Couldn't Save.");
@@ -205,47 +196,6 @@ bool MainWindow::saveToFile(const QByteArray &hashedPassword, const QByteArray &
     file.close();
 
     return true;
-}
-
-void MainWindow::on_loginButton_4_clicked()
-{
-    // Use the actual password and cipher key stored in realPassword and realCipherKey
-    QString enteredPassword = realPassword;
-    QString enteredCipherKey = realCipherKey;
-
-    // Regular expression to check if the cipher key contains only letters and numbers
-    QRegularExpression alphanumericRegex("^[a-zA-Z0-9]+$");
-
-    qDebug() << "password: " << realPassword;
-    qDebug() << "cipher: " << realCipherKey;
-
-    if (enteredPassword.length() < 8) {
-        ui->loginErrorLabel_4->show();
-        ui->loginErrorLabel_4->setText("Password Length Insufficient.");
-    } else if (enteredCipherKey.isEmpty()) {
-        ui->loginErrorLabel_4->show();
-        ui->loginErrorLabel_4->setText("Cipher Key Required.");
-    } else if (enteredCipherKey.length() < 6) {
-        ui->loginErrorLabel_4->show();
-        ui->loginErrorLabel_4->setText("Cipher Key Length Too Short. Six Character Minimum.");
-    } else if (!alphanumericRegex.match(enteredCipherKey).hasMatch()) {
-        ui->loginErrorLabel_4->show();
-        ui->loginErrorLabel_4->setText("Cipher Key Invalid. No Symbols Allowed.");
-    } else {
-        ui->loginErrorLabel_4->hide();
-        globalCipherKey = enteredCipherKey;
-        promptForPassword(enteredPassword);  // Validate with the actual entered password
-    }
-}
-
-void MainWindow::promptForPassword(const QString &password) {
-    if (verifyPassword(password)) {
-        myButtonsPage->show();
-        this->hide();
-    } else {
-        ui->loginErrorLabel_4->setText("Incorrect Password.");
-        ui->loginErrorLabel_4->show();
-    }
 }
 
 bool MainWindow::verifyPassword(const QString &password) {
@@ -288,18 +238,86 @@ bool MainWindow::passwordExists() {
     return file.exists();
 }
 
-void MainWindow::updatePassword(const QString &newPassword) {
-#ifdef QT_DEBUG
-    qDebug() << "Received signal to update password.";
-#endif
-    createPassword(newPassword, QString()); // Pass empty email since it's just an update
-#ifdef QT_DEBUG
-    qDebug() << "Password updated.";
-#endif
+// ====================
+// Public Slots
+// ====================
+
+void MainWindow::on_createPassSubmitButton_2_clicked()
+{
+    QString firstPassEntry = ui->createPassEntry1_2->text();
+    QString secondPassEntry = ui->createPassEntry2_2->text();
+    QString email = ui->emailLabel_2->text();
+
+    if (firstPassEntry.length() < 8 || secondPassEntry.length() < 8) {
+        ui->creationError_2->setText("ERROR: Passwords must have at least 8 characters.");
+        ui->creationError_2->show();
+    }
+    else if (firstPassEntry != secondPassEntry) {
+        ui->creationError_2->setText("ERROR: Passwords Don't Match.");
+        ui->creationError_2->show();
+    } else {
+        ui->creationError_2->hide();
+        createPassword(firstPassEntry, email);
+    }
+}
+
+void MainWindow::on_loginButton_4_clicked()
+{
+    // Use the actual password and cipher key stored in realPassword and realCipherKey
+    QString enteredPassword = realPassword;
+    QString enteredCipherKey = realCipherKey;
+
+    // Regular expression to check if the cipher key contains only letters and numbers
+    QRegularExpression alphanumericRegex("^[a-zA-Z0-9]+$");
+
+    qDebug() << "password: " << realPassword;
+    qDebug() << "cipher: " << realCipherKey;
+
+    if (enteredPassword.length() < 8) {
+        ui->loginErrorLabel_4->show();
+        ui->loginErrorLabel_4->setText("Password Length Insufficient.");
+    } else if (enteredCipherKey.isEmpty()) {
+        ui->loginErrorLabel_4->show();
+        ui->loginErrorLabel_4->setText("Cipher Key Required.");
+    } else if (enteredCipherKey.length() < 6) {
+        ui->loginErrorLabel_4->show();
+        ui->loginErrorLabel_4->setText("Cipher Key Length Too Short. Six Character Minimum.");
+    } else if (!alphanumericRegex.match(enteredCipherKey).hasMatch()) {
+        ui->loginErrorLabel_4->show();
+        ui->loginErrorLabel_4->setText("Cipher Key Invalid. No Symbols Allowed.");
+    } else {
+        ui->loginErrorLabel_4->hide();
+        globalCipherKey = enteredCipherKey;
+        promptForPassword(enteredPassword);  // Validate with the actual entered password
+    }
 }
 
 void MainWindow::on_copyCipherButton_2_clicked()
 {
     QClipboard *clipboard = QApplication::clipboard();
     clipboard->setText(ui->cipherKeyText_2->text());
+}
+
+// ====================
+// Private Slots
+// ====================
+
+void MainWindow::promptForPassword(const QString &password) {
+    if (verifyPassword(password)) {
+        myButtonsPage->show();
+        this->hide();
+    } else {
+        ui->loginErrorLabel_4->setText("Incorrect Password.");
+        ui->loginErrorLabel_4->show();
+    }
+}
+
+void MainWindow::updatePassword(const QString &newPassword) {
+#ifdef QT_DEBUG
+    qDebug() << "Received signal to update password.";
+#endif
+    createPassword(newPassword, QString());  // Pass empty email since it's just an update
+#ifdef QT_DEBUG
+    qDebug() << "Password updated.";
+#endif
 }

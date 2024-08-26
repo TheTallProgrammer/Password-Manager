@@ -12,7 +12,10 @@
 #include <QMessageBox>
 #include "editpassworddata.h"
 
-// Constructor for the retrievePassword class
+// ======================
+// Constructor & Destructor
+// ======================
+
 retrievePassword::retrievePassword(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::retrievePassword)
@@ -26,21 +29,23 @@ retrievePassword::retrievePassword(QWidget *parent) :
 
     // Set the width of each column to equally distribute across the 800 width
     int columnWidth = 154;
-    ui->tableWidget->setColumnWidth(0, columnWidth); // Password ID
-    ui->tableWidget->setColumnWidth(1, columnWidth); // Date
-    ui->tableWidget->setColumnWidth(2, columnWidth); // Copy Password
-    ui->tableWidget->setColumnWidth(3, columnWidth); // Edit Button
-    ui->tableWidget->setColumnWidth(4, columnWidth); // Delete Button
+    ui->tableWidget->setColumnWidth(0, columnWidth);  // Password ID
+    ui->tableWidget->setColumnWidth(1, columnWidth);  // Date
+    ui->tableWidget->setColumnWidth(2, columnWidth);  // Copy Password
+    ui->tableWidget->setColumnWidth(3, columnWidth);  // Edit Button
+    ui->tableWidget->setColumnWidth(4, columnWidth);  // Delete Button
 
     loadPasswords();
 }
 
-// Destructor
 retrievePassword::~retrievePassword()
 {
     delete ui;
 }
 
+// ======================
+// Private Methods
+// ======================
 
 // Load and decrypt all saved passwords
 void retrievePassword::loadPasswords()
@@ -73,7 +78,6 @@ void retrievePassword::loadPasswords()
                 QString username = json["username"].toString();
                 QString thoughts = json["thoughts"].toString();
 
-
                 // Add a new row for this password entry
                 int rowCount = ui->tableWidget->rowCount();
                 ui->tableWidget->insertRow(rowCount);
@@ -99,8 +103,7 @@ void retrievePassword::loadPasswords()
                 // Add Edit button
                 QPushButton *editButton = new QPushButton("Edit");
                 connect(editButton, &QPushButton::clicked, this, [this, passId, password, dateStored, username, thoughts, rowCount]() {
-                    // Hide the retrievePassword window
-                    this->hide();
+                    this->hide();  // Hide the retrievePassword window
 
                     // Create and open the editPasswordData dialog
                     editDialog = new editPasswordData(this, passId, dateStored, password, username, thoughts);
@@ -110,7 +113,6 @@ void retrievePassword::loadPasswords()
 
                     editDialog->exec();  // Open the dialog modally
                     this->show();
-
                 });
                 ui->tableWidget->setCellWidget(rowCount, 3, editButton);
 
@@ -131,16 +133,14 @@ void retrievePassword::loadPasswords()
 // Slot to handle the overwrite data signal from editPasswordData
 void retrievePassword::handleOverwriteData(const QString &newPassId, const QString &dateStored, const QString &password, const QString &username, const QString &thoughts)
 {
-    // Handle the update in your retrievePassword class
-    saveUpdatedDataToFile(newPassId, newPassId, password, username, thoughts);
+    saveUpdatedDataToFile(newPassId, newPassId, password, username, thoughts);  // Handle the update in your retrievePassword class
 
     // Optionally reload data
     ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(0);
     loadPasswords();
 
-    // Show the retrievePassword window again
-    this->show();
+    this->show();  // Show the retrievePassword window again
 }
 
 // Function to save the updated data to the file
@@ -185,21 +185,17 @@ void retrievePassword::saveUpdatedDataToFile(const QString &oldPassId, const QSt
     }
 }
 
-
 // Delete password entry
 void retrievePassword::deletePassword(const QString &passId, int row)
 {
-    // Confirmation dialog
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this, "Delete Confirmation", "Are you sure you want to delete this password entry?",
                                   QMessageBox::Yes|QMessageBox::No);
 
     if (reply == QMessageBox::Yes) {
-        // Remove the file
         QString filePath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/PasswordManager/" + passId + ".bin";
         if (QFile::remove(filePath)) {
-            // Remove the row from the table
-            ui->tableWidget->removeRow(row);
+            ui->tableWidget->removeRow(row);  // Remove the row from the table
         } else {
             qDebug() << "Failed to delete the file: " << filePath;
         }
@@ -208,9 +204,13 @@ void retrievePassword::deletePassword(const QString &passId, int row)
     }
 }
 
+// ======================
+// Slot Implementations
+// ======================
+
 void retrievePassword::on_backButton_clicked()
 {
-    emit emitBackClicked(); // Emit the signal to inform the parent dialog
-    this->close(); // Close the dialog
-    deleteLater(); // Safely delete the instance
+    emit emitBackClicked();  // Emit the signal to inform the parent dialog
+    this->close();  // Close the dialog
+    deleteLater();  // Safely delete the instance
 }

@@ -38,8 +38,7 @@ PasswordGenerator::PasswordGenerator(QWidget *parent)
 
 PasswordGenerator::~PasswordGenerator()
 {
-    // Free the allocated memory upon program close
-    delete _passLength;
+    delete _passLength;  // Free the allocated memory upon program close
     delete _passComp;
     delete _letters;
     delete _numbers;
@@ -72,8 +71,7 @@ void PasswordGenerator::on_PassCompSlider_sliderMoved(int position)
 
 void PasswordGenerator::on_GenPass_clicked()
 {
-    // Generate a new password and display it in the GeneratedPassLabel
-    char* password = createPassword(*_passLength, *_passComp);
+    char* password = createPassword(*_passLength, *_passComp);  // Generate a new password
     ui->GeneratedPassLabel->setText(password);
     delete[] password;  // Free the allocated memory for the password
 }
@@ -95,8 +93,7 @@ void PasswordGenerator::on_exitButton_clicked()
 // =====================
 
 char* PasswordGenerator::createPassword(int len, int comp) {
-    // Dynamically allocate memory for a char array of the given size
-    char* array = new char[len + 1];  // +1 for the null terminator
+    char* array = new char[len + 1];  // Dynamically allocate memory for a char array of the given size (+1 for the null terminator)
     std::random_device rd;
     std::mt19937 gen(rd());
 
@@ -104,13 +101,13 @@ char* PasswordGenerator::createPassword(int len, int comp) {
     std::uniform_int_distribution<size_t> distr;
 
     switch(comp) {
-    case 1: // Letters only
+    case 1:  // Letters only
         distr = std::uniform_int_distribution<size_t>(0, _letters->size() - 1);
         break;
-    case 2: // Letters and numbers
+    case 2:  // Letters and numbers
         distr = std::uniform_int_distribution<size_t>(0, _letters->size() + _numbers->size() - 1);
         break;
-    case 3: // Letters, numbers, and symbols
+    case 3:  // Letters, numbers, and symbols
         distr = std::uniform_int_distribution<size_t>(0, _letters->size() + _numbers->size() + _symbols->size() - 1);
         break;
     default:
@@ -160,118 +157,149 @@ void PasswordGenerator::updateSymbols(bool checked, char symbol)
     }
 }
 
+// =====================
+// Checkbox State Change Handlers
+// =====================
+
 void PasswordGenerator::on_checkBox_1_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '&');
 }
+
 void PasswordGenerator::on_checkBox_2_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '@');
 }
+
 void PasswordGenerator::on_checkBox_3_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '{');
     updateSymbols(arg1 == Qt::Checked, '}');
 }
+
 void PasswordGenerator::on_checkBox_4_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '#');
 }
+
 void PasswordGenerator::on_checkBox_5_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '[');
     updateSymbols(arg1 == Qt::Checked, ']');
 }
+
 void PasswordGenerator::on_checkBox_6_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '=');
 }
+
 void PasswordGenerator::on_checkBox_7_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '(');
     updateSymbols(arg1 == Qt::Checked, ')');
 }
+
 void PasswordGenerator::on_checkBox_8_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '-');
 }
+
 void PasswordGenerator::on_checkBox_9_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '?');
 }
+
 void PasswordGenerator::on_checkBox_10_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '`');
 }
+
 void PasswordGenerator::on_checkBox_11_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '\\');
 }
+
 void PasswordGenerator::on_checkBox_12_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '/');
 }
+
 void PasswordGenerator::on_checkBox_13_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '|');
 }
+
 void PasswordGenerator::on_checkBox_14_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '*');
 }
+
 void PasswordGenerator::on_checkBox_15_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '"');
 }
+
 void PasswordGenerator::on_checkBox_16_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, ':');
 }
+
 void PasswordGenerator::on_checkBox_17_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, ';');
 }
+
 void PasswordGenerator::on_checkBox_18_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '<');
     updateSymbols(arg1 == Qt::Checked, '>');
 }
+
 void PasswordGenerator::on_checkBox_19_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '~');
 }
+
 void PasswordGenerator::on_checkBox_20_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '$');
 }
+
 void PasswordGenerator::on_checkBox_21_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '!');
 }
+
 void PasswordGenerator::on_checkBox_22_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '%');
 }
+
 void PasswordGenerator::on_checkBox_23_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '^');
 }
+
 void PasswordGenerator::on_checkBox_24_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '_');
 }
+
 void PasswordGenerator::on_checkBox_25_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '+');
 }
+
 void PasswordGenerator::on_checkBox_26_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '\'');
 }
+
 void PasswordGenerator::on_checkBox_27_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, ',');
 }
+
 void PasswordGenerator::on_checkBox_28_stateChanged(int arg1)
 {
     updateSymbols(arg1 == Qt::Checked, '.');

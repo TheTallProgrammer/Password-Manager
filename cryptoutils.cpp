@@ -2,6 +2,10 @@
 #include <QCryptographicHash>
 #include <QRandomGenerator>
 
+// ====================
+// Public Methods
+// ====================
+
 // Generates a shorter, more user-friendly key
 QString CryptoUtils::generateShortKey(int length) {
     const QString possibleCharacters("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
@@ -15,8 +19,7 @@ QString CryptoUtils::generateShortKey(int length) {
 
 // Generates a key using the cipher key
 QByteArray CryptoUtils::generateKey(const QString &cipherKey) {
-    // Hash the cipher key using SHA-256 to generate a fixed-length key
-    QByteArray hashedKey = QCryptographicHash::hash(cipherKey.toUtf8(), QCryptographicHash::Sha256);
+    QByteArray hashedKey = QCryptographicHash::hash(cipherKey.toUtf8(), QCryptographicHash::Sha256);  // Hash the cipher key using SHA-256 to generate a fixed-length key
     return hashedKey;  // Return the hashed key
 }
 
@@ -34,7 +37,7 @@ QByteArray CryptoUtils::encryptData(const QByteArray &data, const QString &ciphe
 
 // Decrypts data using the same XOR operation with the generated key
 QByteArray CryptoUtils::decryptData(const QByteArray &encryptedData, const QString &cipherKey) {
-    return encryptData(encryptedData, cipherKey); // XOR decryption is the same as encryption
+    return encryptData(encryptedData, cipherKey);  // XOR decryption is the same as encryption
 }
 
 // Hashes the data using a SHA256 hash function with optional salt

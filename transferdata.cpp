@@ -11,12 +11,13 @@
 #include <QDebug>          // For qDebug
 #include <QFileDialog>     // For QFileDialog
 #include <QString>         // For QString
-#include "mainwindow.h"  // Include MainWindow to access its methods
-// Additionally, if CryptoUtils is a custom class, include its header file
+#include "mainwindow.h"    // Include MainWindow to access its methods
 #include "cryptoutils.h"   // Assuming CryptoUtils is defined in cryptoutils.h
 #include "storepassword.h"
 
-
+// =====================
+// Constructor & Destructor
+// =====================
 transferData::transferData(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::transferData)
@@ -30,11 +31,14 @@ transferData::~transferData()
     delete ui;
 }
 
+// =====================
+// UI Signal Handlers
+// =====================
+
 void transferData::on_backButton_clicked()
 {
     emit backButtonPressed();
 }
-
 
 void transferData::on_exportButton_clicked()
 {
@@ -78,11 +82,9 @@ void transferData::on_exportButton_clicked()
 
     qDebug() << "Aggregated JSON:" << QJsonDocument(aggregatedJson).toJson();  // Debug: Check the final JSON
 
-    // Convert the aggregated JSON object to a JSON document
-    QJsonDocument finalDoc(aggregatedJson);
+    QJsonDocument finalDoc(aggregatedJson);  // Convert the aggregated JSON object to a JSON document
 
-    // Open a file dialog to allow the user to choose where to save the JSON file
-    QString saveFileName = QFileDialog::getSaveFileName(this, "Export Passwords", QDir::homePath(), "JSON Files (*.json)");
+    QString saveFileName = QFileDialog::getSaveFileName(this, "Export Passwords", QDir::homePath(), "JSON Files (*.json)");  // Open a file dialog to allow the user to choose where to save the JSON file
 
     if (!saveFileName.isEmpty()) {
         QFile saveFile(saveFileName);
@@ -99,25 +101,20 @@ void transferData::on_exportButton_clicked()
     }
 }
 
-
 void transferData::on_importButton_clicked()
 {
-    // Step 1: Prompt user to select a file
-    QString fileName = QFileDialog::getOpenFileName(this, "Import Passwords", QDir::homePath(), "JSON Files (*.json)");
+    QString fileName = QFileDialog::getOpenFileName(this, "Import Passwords", QDir::homePath(), "JSON Files (*.json)");  // Step 1: Prompt user to select a file
 
-    // Step 2: Check if the dialog was canceled
     if (fileName.isNull()) {
-        return; // If the user clicked cancel, just return without showing a warning
+        return;  // Step 2: Check if the dialog was canceled
     }
 
-    // Step 3: Ensure the file has a .json extension
-    if (!fileName.endsWith(".json", Qt::CaseInsensitive)) {
+    if (!fileName.endsWith(".json", Qt::CaseInsensitive)) {  // Step 3: Ensure the file has a .json extension
         QMessageBox::warning(this, "Import Failed", "Selected file is not a JSON file.");
         return;
     }
 
-    // Step 4: Open and read the file
-    QFile file(fileName);
+    QFile file(fileName);  // Step 4: Open and read the file
     if (!file.open(QIODevice::ReadOnly)) {
         QMessageBox::warning(this, "Import Failed", "Failed to open the selected file.");
         return;
@@ -126,8 +123,7 @@ void transferData::on_importButton_clicked()
     QByteArray jsonData = file.readAll();
     file.close();
 
-    // Step 5: Parse the JSON data
-    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData);
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData);  // Step 5: Parse the JSON data
     if (jsonDoc.isNull() || !jsonDoc.isObject()) {
         QMessageBox::warning(this, "Import Failed", "The JSON file is not in the correct format.");
         return;
@@ -148,21 +144,20 @@ void transferData::on_importButton_clicked()
             return;
         }
 
-        // Step 7: Convert the JSON object back to a JSON string
-        QJsonDocument passDoc(passwordObject);
+        QJsonDocument passDoc(passwordObject);  // Step 7: Convert the JSON object back to a JSON string
         QByteArray passJsonData = passDoc.toJson();
 
-        // Step 8: Encrypt the JSON data using the globalCipherKey
-        QByteArray encryptedData = CryptoUtils::encryptData(passJsonData, globalCipherKey);
+        QByteArray encryptedData = CryptoUtils::encryptData(passJsonData, globalCipherKey);  // Step 8: Encrypt the JSON data using the globalCipherKey
 
-        // Step 9: Save the encrypted data to the appropriate file
-        saveEncryptedDataToFile(passwordObject["passId"].toString(), encryptedData);
+        saveEncryptedDataToFile(passwordObject["passId"].toString(), encryptedData);  // Step 9: Save the encrypted data to the appropriate file
     }
 
-    // Step 10: Display a success message
-    QMessageBox::information(this, "Import Successful", "Passwords imported successfully.");
+    QMessageBox::information(this, "Import Successful", "Passwords imported successfully.");  // Step 10: Display a success message
 }
 
+// =====================
+// File Handling Functions
+// =====================
 
 void transferData::saveEncryptedDataToFile(const QString &passId, const QByteArray &encryptedData)
 {
@@ -191,12 +186,10 @@ void transferData::saveEncryptedDataToFile(const QString &passId, const QByteArr
 
     qDebug() << "Password data saved and encrypted in file:" << filePath;
 
-    // Decrypt the data to verify it can be correctly decrypted
-    QByteArray decryptedData = CryptoUtils::decryptData(encryptedData, globalCipherKey);
+    QByteArray decryptedData = CryptoUtils::decryptData(encryptedData, globalCipherKey);  // Decrypt the data to verify it can be correctly decrypted
     qDebug() << "Decrypted data (raw):" << decryptedData;
 
-    // Optionally convert the decrypted data back to JSON for further verification
-    QJsonDocument decryptedDoc = QJsonDocument::fromJson(decryptedData);
+    QJsonDocument decryptedDoc = QJsonDocument::fromJson(decryptedData);  // Optionally convert the decrypted data back to JSON for further verification
     if (decryptedDoc.isNull()) {
         qDebug() << "Failed to convert decrypted data to JSON. The data may be corrupted or incorrectly decrypted.";
     } else {
@@ -204,4 +197,3 @@ void transferData::saveEncryptedDataToFile(const QString &passId, const QByteArr
         qDebug() << "Decrypted JSON object:" << decryptedJson;
     }
 }
-
