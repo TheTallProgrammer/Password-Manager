@@ -163,16 +163,16 @@
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>390</x>
+       <x>275</x>
        <y>210</y>
-       <width>201</width>
+       <width>421</width>
        <height>41</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <family>Bahnschrift Light</family>
-       <pointsize>18</pointsize>
+       <pointsize>20</pointsize>
       </font>
      </property>
      <property name="text">
@@ -295,7 +295,7 @@
      <property name="font">
       <font>
        <family>Bahnschrift Light</family>
-       <pointsize>20</pointsize>
+       <pointsize>17</pointsize>
       </font>
      </property>
      <property name="text">
@@ -305,9 +305,9 @@
     <widget class="QLabel" name="creationError_2">
      <property name="geometry">
       <rect>
-       <x>250</x>
+       <x>90</x>
        <y>590</y>
-       <width>481</width>
+       <width>801</width>
        <height>20</height>
       </rect>
      </property>
@@ -363,11 +363,11 @@
      <property name="font">
       <font>
        <family>Bahnschrift Light</family>
-       <pointsize>15</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
-      <string>This is a generated cipher key for you to use. Every time you open the app, you'll need to enter a cipher key. Feel free to use this one or use your own. Your cipher keys must be consistent or else data retrieval will contain encrypted data if used with different keys. It is not recommended to save the keys on your local machine.</string>
+      <string>Here’s your generated cipher key. You’ll need a key each time you open the app. You can use this one or your own, but always use the same key to avoid data issues. Don’t save keys on your local machine.</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -401,9 +401,9 @@
     <widget class="QLabel" name="emailLabel_2">
      <property name="geometry">
       <rect>
-       <x>410</x>
+       <x>404</x>
        <y>0</y>
-       <width>161</width>
+       <width>171</width>
        <height>41</height>
       </rect>
      </property>
@@ -415,6 +415,9 @@
      </property>
      <property name="text">
       <string>Enter Email:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
     <widget class="QLabel" name="label_13">
@@ -429,7 +432,7 @@
      <property name="font">
       <font>
        <family>Bahnschrift Light</family>
-       <pointsize>19</pointsize>
+       <pointsize>17</pointsize>
       </font>
      </property>
      <property name="text">

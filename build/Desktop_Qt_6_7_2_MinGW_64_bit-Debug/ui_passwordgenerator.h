@@ -119,13 +119,13 @@ public:
         PassComp->setReadOnly(true);
         PassCompLabel = new QLabel(PasswordGenerator);
         PassCompLabel->setObjectName("PassCompLabel");
-        PassCompLabel->setGeometry(QRect(280, 10, 151, 20));
+        PassCompLabel->setGeometry(QRect(280, 10, 161, 20));
         GenPass = new QPushButton(PasswordGenerator);
         GenPass->setObjectName("GenPass");
         GenPass->setGeometry(QRect(490, 30, 261, 75));
         QFont font1;
         font1.setFamilies({QString::fromUtf8("Yu Gothic Medium")});
-        font1.setPointSize(20);
+        font1.setPointSize(17);
         GenPass->setFont(font1);
         PassLengthSlider = new QSlider(PasswordGenerator);
         PassLengthSlider->setObjectName("PassLengthSlider");

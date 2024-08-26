@@ -24,7 +24,7 @@ retrievePassword::retrievePassword(QWidget *parent) :
     ui->tableWidget->setHorizontalHeaderLabels({"Password ID", "Date", "Copy Password", "Edit", "Delete"});
 
     // Set the width of each column to equally distribute across the 800 width
-    int columnWidth = 151;
+    int columnWidth = 154;
     ui->tableWidget->setColumnWidth(0, columnWidth); // Password ID
     ui->tableWidget->setColumnWidth(1, columnWidth); // Date
     ui->tableWidget->setColumnWidth(2, columnWidth); // Copy Password

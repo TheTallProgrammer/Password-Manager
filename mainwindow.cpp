@@ -3,6 +3,8 @@
 #include "CryptoUtils.h"  // Include the utility
 #include <QDebug>  // Include for debugging
 #include <QRegularExpression>  // Include for regex support
+#include "passwordinfo.h"
+
 
 QString globalCipherKey;
 
@@ -112,7 +114,7 @@ void MainWindow::createPassword(const QString &firstPassEntry, const QString &em
     QByteArray salt = CryptoUtils::hashData(QByteArray::number(QDateTime::currentMSecsSinceEpoch()), QByteArray());
     QByteArray hashedPassword = CryptoUtils::hashData(firstPassEntry.toUtf8(), salt);
     QByteArray encryptedEmail = CryptoUtils::encryptData(email.toUtf8(), globalCipherKey); // No keyLength needed
-    QString defaultTheme = "Nightshade";  // Default theme
+    QString defaultTheme = "Light";  // Default theme
 
 #ifdef QT_DEBUG
     qDebug() << "Generated salt:" << salt.toHex();
@@ -126,6 +128,8 @@ void MainWindow::createPassword(const QString &firstPassEntry, const QString &em
         ui->creationError_2->setText("Password Created Successfully");
 #ifdef QT_DEBUG
         qDebug() << "Password, email, and theme saved successfully.";
+        passwordInfo infoDialog(this, firstPassEntry);
+        infoDialog.exec(); // This should display the dialog modally
 #endif
     } else {
         ui->creationError_2->setText("Password Couldn't Save.");
@@ -137,8 +141,6 @@ void MainWindow::createPassword(const QString &firstPassEntry, const QString &em
     myButtonsPage->show();
     this->hide();
 }
-
-
 
 
 bool MainWindow::saveToFile(const QByteArray &hashedPassword, const QByteArray &salt, const QByteArray &encryptedEmail, const QString &theme) {

@@ -10,7 +10,6 @@ QLabel {
     background-color: transparent;
     color: #C9D1D9; /* Light gray to match the GitHub style */
     font-weight: bold;
-    font-size: 14px;
     font-family: 'Bahnschrift Light';
 }
 
@@ -18,7 +17,6 @@ QLabel {
 QPushButton {
     background-color: #21262D; /* Darker gray for buttons */
     color: #58A6FF; /* GitHub's blue for button text */
-    font-size: 14px;
     font-weight: bold;
     font-family: 'Bahnschrift Light';
     border-radius: 8px;
@@ -42,7 +40,6 @@ QPushButton::pressed {
 QCheckBox {
     background-color: transparent;
     color: #C9D1D9; /* Light gray text for visibility */
-    font-size: 12px;
     font-weight: bold;
     font-family: 'Bahnschrift Light';
     border: none;
@@ -96,7 +93,6 @@ QTextEdit {
 QListView {
     background-color: #0D1117; /* Background color same as QWidget */
     color: #C9D1D9; /* Text color same as QWidget */
-    font-size: 14px;
     font-weight: bold;
     font-family: 'Bahnschrift Light';
     border-radius: 4px;
@@ -147,14 +143,12 @@ QSlider::sub-page:horizontal {
     background: #58A6FF; /* GitHub blue for the filled part of the slider */
 }
 
-
 /*-----QTableWidget/QTableView-----*/
 QTableWidget, QTableView {
     background-color: #0D1117; /* GitHub dark background */
     color: #C9D1D9; /* Light gray text for readability */
     gridline-color: #21262D; /* Grid lines color */
     font-family: 'Bahnschrift Light'; /* Keep the modern font */
-    font-size: 14px;
 }
 
 QTableWidget::item, QTableView::item {
@@ -180,7 +174,6 @@ QHeaderView::section {
     color: #C9D1D9; /* Light gray text for headers */
     font-family: 'Bahnschrift Light';
     font-weight: bold;
-    font-size: 14px;
     border: 1px solid #30363D; /* Border for header sections */
     padding: 5px;
 }
@@ -226,12 +219,10 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
 
 /*-----QComboBox-----*/
 
-
 QComboBox::down-arrow {
     width: 15px;  /* Larger width for the arrow */
     height: 15px; /* Larger height for the arrow */
     color: #58A6FF; /* Bright blue color for the arrow */
-
 }
 
 QComboBox QAbstractItemView {
@@ -244,7 +235,7 @@ QComboBox QAbstractItemView {
 }
 
 QComboBox QAbstractItemView {
-outline: 0px;
+    outline: 0px;
 }
 
 QComboBox {
@@ -253,3 +244,9 @@ QComboBox {
     background-color: #0D1117;  /* Background color */
     color: #58A6FF;  /* Text color */
 }
+
+/*-----QTableView Corner Button-----*/
+QTableCornerButton::section {
+    background-color: #0D1117; /* Match the background color of the table */
+}
+

@@ -14,6 +14,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     passwordgenerator.cpp \
+    passwordinfo.cpp \
     passwordmanagementbuttons.cpp \
     resetpassword.cpp \
     retrievepassword.cpp \
@@ -24,6 +25,7 @@ HEADERS += \
     cryptoutils.h \
     editpassworddata.h \
     mainwindow.h \
+    passwordInfo.h \
     passwordgenerator.h \
     passwordmanagementbuttons.h \
     resetpassword.h \
@@ -35,6 +37,7 @@ FORMS += \
     editpassworddata.ui \
     mainwindow.ui \
     passwordgenerator.ui \
+    passwordinfo.ui \
     passwordmanagementbuttons.ui \
     resetpassword.ui \
     retrievepassword.ui \

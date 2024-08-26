@@ -11,7 +11,6 @@ QLabel {
     background-color: transparent;
     color: #805533; /* Darker shade of earth tone for labels */
     font-weight: bold;
-    font-size: 14px;
     font-family: 'Bahnschrift Light';
 }
 
@@ -20,7 +19,6 @@ QPushButton {
     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
                                       stop:0 #FFB366, stop:1 #FF8533); /* Vertical gradient from light to darker sunset colors */
     color: #FFFFFF; /* White text for contrast */
-    font-size: 14px;
     font-weight: bold;
     font-family: 'Bahnschrift Light';
     border-radius: 8px;
@@ -44,7 +42,6 @@ QPushButton::pressed {
 QCheckBox {
     background-color: transparent;
     color: #FF8533; /* Sunset orange for text */
-    font-size: 12px;
     font-weight: bold;
     font-family: 'Bahnschrift Light';
     border: none;
@@ -129,7 +126,6 @@ QTableWidget, QTableView {
     border: 2px solid #FF8533; /* Sunset orange border matching QLineEdit and QTextEdit */
     gridline-color: #FF8533; /* Grid lines matching the border color */
     font-family: 'Bahnschrift Light';
-    font-size: 14px;
     selection-background-color: #FF8533; /* Highlighted row background color */
     selection-color: #FFFFFF; /* Highlighted row text color */
 }
@@ -214,5 +210,10 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
 }
 
 QComboBox QAbstractItemView {
-outline: 0px;
+    outline: 0px;
+}
+
+/*-----QTableView Corner Button-----*/
+QTableCornerButton::section {
+    background-color: #FFD9B3; /* Match the background color of the table */
 }
