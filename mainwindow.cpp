@@ -4,9 +4,13 @@
 #include <QDebug>  // Include for debugging
 #include <QRegularExpression>  // Include for regex support
 #include "passwordinfo.h"
+#include <QTimer>
 
-
+// Definitions for the global variables
 QString globalCipherKey;
+QString realPassword;
+QString realCipherKey;
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -45,6 +49,45 @@ MainWindow::MainWindow(QWidget *parent)
     // Connect the updateTheme signal to the handleUpdateTheme slot
     connect(myButtonsPage.get(), &passwordManagementButtons::updateTheme,
             this, &MainWindow::handleUpdateTheme);
+
+    connect(ui->passwordLoginEntry_4, &QLineEdit::textChanged, this, [this]() {
+        maskPasswordEntry(ui->passwordLoginEntry_4, realPassword);
+    });
+
+    connect(ui->cipherText, &QLineEdit::textChanged, this, [this]() {
+        maskPasswordEntry(ui->cipherText, realCipherKey);
+    });
+}
+
+void MainWindow::maskPasswordEntry(QLineEdit *lineEdit, QString &realInput)
+{
+    QString currentText = lineEdit->text();
+    int length = currentText.length();
+
+    // Calculate the number of new characters added
+    int newCharsCount = length - realInput.length();
+
+    if (newCharsCount > 0) {
+        // Append the new characters to realInput
+        realInput += currentText.right(newCharsCount);
+    } else if (newCharsCount < 0) {
+        // If characters were deleted, adjust realInput accordingly
+        realInput = realInput.left(length);
+    }
+
+    QString maskedText;
+    if (length > 1) {
+        maskedText = QString(length - 1, '*') + currentText.right(1);
+    } else {
+        maskedText = currentText;
+    }
+
+    lineEdit->blockSignals(true);  // Prevent recursion
+    lineEdit->setText(maskedText);
+    lineEdit->blockSignals(false);
+    lineEdit->setCursorPosition(length);  // Ensure cursor stays at the end
+
+    qDebug() << "Real Input:" << realInput;
 }
 
 
@@ -89,9 +132,6 @@ void MainWindow::handleUpdateTheme(QString selectedTheme)
     }
 }
 
-
-
-
 void MainWindow::on_createPassSubmitButton_2_clicked()
 {
     QString firstPassEntry = ui->createPassEntry1_2->text();
@@ -110,6 +150,7 @@ void MainWindow::on_createPassSubmitButton_2_clicked()
         createPassword(firstPassEntry, email);
     }
 }
+
 void MainWindow::createPassword(const QString &firstPassEntry, const QString &email) {
     QByteArray salt = CryptoUtils::hashData(QByteArray::number(QDateTime::currentMSecsSinceEpoch()), QByteArray());
     QByteArray hashedPassword = CryptoUtils::hashData(firstPassEntry.toUtf8(), salt);
@@ -142,7 +183,6 @@ void MainWindow::createPassword(const QString &firstPassEntry, const QString &em
     this->hide();
 }
 
-
 bool MainWindow::saveToFile(const QByteArray &hashedPassword, const QByteArray &salt, const QByteArray &encryptedEmail, const QString &theme) {
     const QString &filePath = passwordFilePath();
 
@@ -166,16 +206,19 @@ bool MainWindow::saveToFile(const QByteArray &hashedPassword, const QByteArray &
     return true;
 }
 
-
 void MainWindow::on_loginButton_4_clicked()
 {
-    QString password = ui->passwordLoginEntry_4->text();
-    QString enteredCipherKey = ui->cipherText->text();
+    // Use the actual password and cipher key stored in realPassword and realCipherKey
+    QString enteredPassword = realPassword;
+    QString enteredCipherKey = realCipherKey;
 
     // Regular expression to check if the cipher key contains only letters and numbers
     QRegularExpression alphanumericRegex("^[a-zA-Z0-9]+$");
 
-    if (password.length() < 8) {
+    qDebug() << "password: " << realPassword;
+    qDebug() << "cipher: " << realCipherKey;
+
+    if (enteredPassword.length() < 8) {
         ui->loginErrorLabel_4->show();
         ui->loginErrorLabel_4->setText("Password Length Insufficient.");
     } else if (enteredCipherKey.isEmpty()) {
@@ -190,7 +233,7 @@ void MainWindow::on_loginButton_4_clicked()
     } else {
         ui->loginErrorLabel_4->hide();
         globalCipherKey = enteredCipherKey;
-        promptForPassword(password);
+        promptForPassword(enteredPassword);  // Validate with the actual entered password
     }
 }
 
@@ -213,7 +256,6 @@ bool MainWindow::verifyPassword(const QString &password) {
     QByteArray hashedPassword = CryptoUtils::hashData(password.toUtf8(), salt);
     return hashedPassword == savedHashedPassword;
 }
-
 
 bool MainWindow::loadFromFile(QByteArray &hashedPassword, QByteArray &salt, QByteArray &encryptedEmail, QString &theme) {
     QFile file(passwordFilePath());

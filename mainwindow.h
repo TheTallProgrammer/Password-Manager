@@ -16,6 +16,7 @@
 #include "passwordgenerator.h"
 #include "passwordmanagementbuttons.h"
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -55,8 +56,11 @@ private:
     bool verifyPassword(const QString &password);
     bool loadFromFile(QByteArray &hashedPassword, QByteArray &salt, QByteArray &encryptedEmail, QString &theme);
     QString generateCipherKey();
+    void maskPasswordEntry(QLineEdit *lineEdit, QString &realInput);
 };
 
 extern QString globalCipherKey;
+extern QString realPassword;
+extern QString realCipherKey;
 
 #endif // MAINWINDOW_H
