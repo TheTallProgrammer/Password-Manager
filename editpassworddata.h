@@ -3,29 +3,45 @@
 
 #include <QDialog>
 
+// ====================
+// Namespace
+// ====================
 namespace Ui {
-class editPasswordData;
+class editPasswordData; // Forward declaration of the editPasswordData class
 }
 
+// ====================
+// Class Declaration
+// ====================
 class editPasswordData : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // Enable Qt's signal and slot mechanism
 
 public:
-    explicit editPasswordData(QWidget *parent = nullptr,  QString passId = "_passid",  QString dateStored = "_date",  QString password = "_password",  QString username = "_username",  QString thoughts = "_thoughts");
-    ~editPasswordData();
+    // ====================
+    // Public Methods
+    // ====================
+    explicit editPasswordData(QWidget *parent = nullptr,  QString passId = "_passid",  QString dateStored = "_date",  QString password = "_password",  QString username = "_username",  QString thoughts = "_thoughts"); // Constructor with default parameters
+    ~editPasswordData(); // Destructor
 
 signals:
-    void overwriteData(const QString &passId, const QString &dateStored, const QString &password, const QString &username, const QString &thoughts);
+    // ====================
+    // Signals
+    // ====================
+    void overwriteData(const QString &passId, const QString &dateStored, const QString &password, const QString &username, const QString &thoughts); // Signal to overwrite data
 
 private slots:
-
-    void on_backButton_clicked();
-
-    void on_saveButton_clicked();
+    // ====================
+    // Private Slots
+    // ====================
+    void on_backButton_clicked(); // Slot for back button click
+    void on_saveButton_clicked(); // Slot for save button click
 
 private:
-    Ui::editPasswordData *ui;
+    // ====================
+    // Private Members
+    // ====================
+    Ui::editPasswordData *ui; // Pointer to the UI
 };
 
 #endif // EDITPASSWORDDATA_H

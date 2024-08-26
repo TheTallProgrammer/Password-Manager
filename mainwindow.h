@@ -16,51 +16,75 @@
 #include "passwordgenerator.h"
 #include "passwordmanagementbuttons.h"
 
-
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
 }
 QT_END_NAMESPACE
 
+// ====================
+// MainWindow Class
+// ====================
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+    // ====================
+    // Public Methods
+    // ====================
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit MainWindow(QWidget *parent = nullptr);  // Constructor
+    ~MainWindow();  // Destructor
 
+    // ====================
+    // Signals
+    // ====================
 signals:
-    void themeLoaded(QString theme);
+    void themeLoaded(QString theme);  // Emit theme loaded signal
 
+    // ====================
+    // Public Slots
+    // ====================
 public slots:
-    void on_createPassSubmitButton_2_clicked();
-    void on_loginButton_4_clicked();
-    void updatePassword(const QString &newPassword);
-    void handleUpdateTheme(QString selectedTheme);
+    void on_createPassSubmitButton_2_clicked();  // Handle create password button click
+    void on_loginButton_4_clicked();  // Handle login button click
+    void updatePassword(const QString &newPassword);  // Update password slot
+    void handleUpdateTheme(QString selectedTheme);  // Handle theme update
 
+    // ====================
+    // Private Slots
+    // ====================
 private slots:
-    void on_copyCipherButton_2_clicked();
+    void on_copyCipherButton_2_clicked();  // Handle copy cipher button click
 
+    // ====================
+    // Private Methods
+    // ====================
 private:
-    Ui::MainWindow *ui;
-    std::unique_ptr<passwordManagementButtons> myButtonsPage;
-    QString cachedPasswordFilePath;
+    QString passwordFilePath();  // Get password file path
+    bool passwordExists();  // Check if password exists
+    void createPassword(const QString &firstPassEntry, const QString &email);  // Create password
+    bool saveToFile(const QByteArray &hashedPassword, const QByteArray &salt, const QByteArray &encryptedEmail, const QString &theme);  // Save to file
+    void promptForPassword(const QString &password);  // Prompt for password
+    bool verifyPassword(const QString &password);  // Verify password
+    bool loadFromFile(QByteArray &hashedPassword, QByteArray &salt, QByteArray &encryptedEmail, QString &theme);  // Load from file
+    QString generateCipherKey();  // Generate cipher key
+    void maskPasswordEntry(QLineEdit *lineEdit, QString &realInput);  // Mask password entry
 
-    QString passwordFilePath();
-    bool passwordExists();
-    void createPassword(const QString &firstPassEntry, const QString &email);
-    bool saveToFile(const QByteArray &hashedPassword, const QByteArray &salt, const QByteArray &encryptedEmail, const QString &theme);
-    void promptForPassword(const QString &password);
-    bool verifyPassword(const QString &password);
-    bool loadFromFile(QByteArray &hashedPassword, QByteArray &salt, QByteArray &encryptedEmail, QString &theme);
-    QString generateCipherKey();
-    void maskPasswordEntry(QLineEdit *lineEdit, QString &realInput);
+    // ====================
+    // Private Members
+    // ====================
+private:
+    Ui::MainWindow *ui;  // User interface pointer
+    std::unique_ptr<passwordManagementButtons> myButtonsPage;  // Pointer to buttons page
+    QString cachedPasswordFilePath;  // Cached password file path
 };
 
-extern QString globalCipherKey;
-extern QString realPassword;
-extern QString realCipherKey;
+// ====================
+// External Variables
+// ====================
+extern QString globalCipherKey;  // Global cipher key
+extern QString realPassword;  // Real password
+extern QString realCipherKey;  // Real cipher key
 
 #endif // MAINWINDOW_H
