@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->createPass->hide();
     ui->login->hide();
+    setWindowTitle("Falkenberg's Password Manager");
 
     QPalette errorPalette = ui->creationError_2->palette();
     errorPalette.setColor(QPalette::WindowText, Qt::red);

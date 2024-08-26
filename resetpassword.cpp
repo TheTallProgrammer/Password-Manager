@@ -15,6 +15,7 @@ resetPassword::resetPassword(QWidget *parent)
     palette_loginErr.setColor(QPalette::WindowText, Qt::red);  // Set the error label text color to red
     ui->errorLabel->setPalette(palette_loginErr);
     ui->errorLabel->hide();  // Hide the error label initially
+    setWindowTitle("Falkenberg's Password Manager");
 }
 
 resetPassword::~resetPassword()

@@ -29,6 +29,7 @@ editPasswordData::editPasswordData(QWidget *parent, QString passId, QString date
     ui->passwordEdit->setText(password);
     ui->usernameEdit->setText(username);
     ui->thoughtsEdit->setText(thoughts);
+    setWindowTitle("Falkenberg's Password Manager");
 
 }
 

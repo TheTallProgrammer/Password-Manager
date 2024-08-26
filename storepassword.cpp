@@ -18,6 +18,7 @@ storePassword::storePassword(QWidget *parent)
     : QDialog(parent), ui(new Ui::storePassword)
 {
     ui->setupUi(this);
+    setWindowTitle("Falkenberg's Password Manager");
 }
 
 storePassword::~storePassword()

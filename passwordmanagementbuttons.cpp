@@ -37,6 +37,7 @@ passwordManagementButtons::passwordManagementButtons(QWidget *parent)
     themeComboBox->addItem("Amethyst");
     themeComboBox->addItem("Light");
     themeComboBox->addItem("Sunset");
+    setWindowTitle("Falkenberg's Password Manager");
 
     // Set a larger font to make it more prominent
     QFont font("Bahnschrift Light", 14);  // Adjust the font size here (16 is an example)

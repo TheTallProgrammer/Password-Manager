@@ -11,6 +11,7 @@ passwordInfo::passwordInfo(QWidget *parent, const QString &password) :
 {
     ui->setupUi(this);
     // Set up any UI elements or text here if needed
+    setWindowTitle("Falkenberg's Password Manager");
 }
 
 passwordInfo::~passwordInfo()

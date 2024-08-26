@@ -13,6 +13,7 @@ PasswordGenerator::PasswordGenerator(QWidget *parent)
 {
     ui->setupUi(this);
     ui->excludeChar->hide();
+    setWindowTitle("Falkenberg's Password Manager");
 
     _passLength = new int(1);
     _passComp = new int(1);

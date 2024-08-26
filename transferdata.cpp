@@ -22,6 +22,7 @@ transferData::transferData(QWidget *parent)
     , ui(new Ui::transferData)
 {
     ui->setupUi(this);
+    setWindowTitle("Falkenberg's Password Manager");
 }
 
 transferData::~transferData()

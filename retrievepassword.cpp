@@ -18,6 +18,7 @@ retrievePassword::retrievePassword(QWidget *parent) :
     ui(new Ui::retrievePassword)
 {
     ui->setupUi(this);
+    setWindowTitle("Falkenberg's Password Manager");
 
     // Set up the table widget with 4 columns
     ui->tableWidget->setColumnCount(5);
