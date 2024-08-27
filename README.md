@@ -20,7 +20,7 @@
     - [Flexible Import/Export Options](#5-flexible-importexport-options)
         - [Exporting Your Passwords](#exporting-your-passwords)
         - [Importing Your Passwords](#importing-your-passwords)
-    - [Security Features & Customization](#6-security-features--customization)
+    - [Security Features & Customization](#6-security-features-and-customization)
 2. [Beta Release Notice](#-beta-release-notice)
 
 
@@ -86,7 +86,7 @@ Managing your passwords is straightforward and hassle-free:
 
 <div align="center"> <img src="importDemo.gif" alt="Import Demo" width="80%" /> </div>
 
-### 6. 🛡️ Security Features & Customization
+### 6. 🛡️ Security Features And Customization
 
 - **Hidden Keystrokes:** The login interface hides keystrokes as you type your password, offering enhanced security in public spaces.
 	<div align="center"> <img src="loginDemo.gif" alt="Security Features Demo" width="80%" /> </div>
