@@ -159,22 +159,14 @@ void retrievePassword::saveUpdatedDataToFile(const QString &oldPassId, const QSt
     QString oldFilePath = dirPath + oldPassId + ".bin";
     QString newFilePath = dirPath + newPassId + ".bin";
 
-    qDebug() << "Old Pass ID:" << oldPassId;
-    qDebug() << "New Pass ID:" << newPassId;
-    qDebug() << "Old File Path:" << oldFilePath;
-    qDebug() << "New File Path:" << newFilePath;
-
     // Check if the passId has been changed
     if (oldPassId != newPassId) {
-        qDebug() << "Pass ID has changed.";
 
         // Check if the new passId already exists
         if (doesPassIdExist(newPassId)) {
             qWarning() << "A file with the new Pass ID already exists:" << newFilePath;
             return;
         }
-
-        qDebug() << "No existing file with new Pass ID. Proceeding to delete the old file.";
 
         // Delete the old file
         if (!QFile::remove(oldFilePath)) {
@@ -187,7 +179,6 @@ void retrievePassword::saveUpdatedDataToFile(const QString &oldPassId, const QSt
         // Create a new file with the new Pass ID
         QFile newFile(newFilePath);
         if (newFile.open(QIODevice::WriteOnly)) {
-            qDebug() << "New file opened successfully for writing.";
 
             QJsonObject json;
             json["passId"] = newPassId;
@@ -204,7 +195,6 @@ void retrievePassword::saveUpdatedDataToFile(const QString &oldPassId, const QSt
             out << encryptedData;
             newFile.close();
 
-            qDebug() << "Password entry saved in new file:" << newFilePath;
         } else {
             qWarning() << "Could not open new file for writing:" << newFilePath;
         }
@@ -214,7 +204,6 @@ void retrievePassword::saveUpdatedDataToFile(const QString &oldPassId, const QSt
         // If Pass ID hasn't changed, overwrite the existing file
         QFile file(oldFilePath);
         if (file.open(QIODevice::WriteOnly)) {
-            qDebug() << "Existing file opened successfully for writing.";
 
             QJsonObject json;
             json["passId"] = newPassId;
@@ -231,7 +220,7 @@ void retrievePassword::saveUpdatedDataToFile(const QString &oldPassId, const QSt
             out << encryptedData;
             file.close();
 
-            qDebug() << "Password entry updated in existing file:" << oldFilePath;
+
         } else {
             qWarning() << "Could not open existing file for writing:" << oldFilePath;
         }
@@ -259,6 +248,11 @@ void retrievePassword::deletePassword(const QString &passId, int row)
         QString filePath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/PasswordManager/" + passId + ".bin";
         if (QFile::remove(filePath)) {
             ui->tableWidget->removeRow(row);  // Remove the row from the table
+
+            // Clear and reload the table to ensure consistency
+            ui->tableWidget->clearContents();
+            ui->tableWidget->setRowCount(0);
+            loadPasswords();
         } else {
             qDebug() << "Failed to delete the file: " << filePath;
         }
@@ -266,6 +260,7 @@ void retrievePassword::deletePassword(const QString &passId, int row)
         qDebug() << "Deletion canceled by the user.";
     }
 }
+
 
 // ======================
 // Slot Implementations

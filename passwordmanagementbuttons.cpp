@@ -65,7 +65,6 @@ passwordManagementButtons::passwordManagementButtons(QWidget *parent)
 void passwordManagementButtons::onThemeTextChanged(const QString &text)
 {
     if (text == "Nightshade") {
-        qDebug() << "Nightshade theme selected via text change";
         emit updateTheme(text);  // Emit the signal to update the theme
     }
 }

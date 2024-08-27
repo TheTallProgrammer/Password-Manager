@@ -64,7 +64,6 @@ void storePassword::on_storePassButton_clicked()
 
     // Ensure passId and password fields are not empty
     if (passId.isEmpty() || password.isEmpty()) {
-        qDebug() << "ERROR: passId or password field is empty. Cannot store the password.";
         return;
     }
 
@@ -89,12 +88,8 @@ void storePassword::on_storePassButton_clicked()
     QJsonDocument doc(json);
     QByteArray jsonData = doc.toJson();
 
-    // Show the original data before encryption
-    qDebug() << "Original JSON data:" << jsonData;
-
     // Encrypt the JSON data using CryptoUtils with globalCipherKey from MainWindow
     QByteArray encryptedData = CryptoUtils::encryptData(jsonData, globalCipherKey);
-    qDebug() << "Encrypted data (hex):" << encryptedData.toHex();
 
     // Save the encrypted data to a file
     saveEncryptedDataToFile(passId, encryptedData);
@@ -114,7 +109,7 @@ void storePassword::saveEncryptedDataToFile(const QString &passId, const QByteAr
     QString dirPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/PasswordManager";
     QString filePath = dirPath + "/" + passId + ".bin";
 
-    qDebug() << "Attempting to save the encrypted data to file at:" << filePath;
+
 
     QDir dir(dirPath);
     if (!dir.exists()) {
@@ -134,19 +129,18 @@ void storePassword::saveEncryptedDataToFile(const QString &passId, const QByteAr
     out << encryptedData;
     file.close();
 
-    qDebug() << "Password data saved and encrypted in file:" << filePath;
+
 
     // Decrypt the data to verify it can be correctly decrypted
     QByteArray decryptedData = CryptoUtils::decryptData(encryptedData, globalCipherKey);
-    qDebug() << "Decrypted data (raw):" << decryptedData;
 
     // Optionally convert the decrypted data back to JSON for further verification
     QJsonDocument decryptedDoc = QJsonDocument::fromJson(decryptedData);
     if (decryptedDoc.isNull()) {
-        qDebug() << "Failed to convert decrypted data to JSON. The data may be corrupted or incorrectly decrypted.";
+
     } else {
         QJsonObject decryptedJson = decryptedDoc.object();
-        qDebug() << "Decrypted JSON object:" << decryptedJson;
+
     }
 }
 

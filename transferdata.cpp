@@ -65,7 +65,6 @@ void transferData::on_exportButton_clicked()
 
             // Decrypt the data using the globalCipherKey from MainWindow
             QByteArray decryptedData = CryptoUtils::decryptData(encryptedData, globalCipherKey);
-            qDebug() << "Decrypted Data:" << decryptedData;  // Debug: Check the decrypted data
 
             QJsonDocument jsonDoc = QJsonDocument::fromJson(decryptedData);
 
@@ -164,19 +163,15 @@ void transferData::saveEncryptedDataToFile(const QString &passId, const QByteArr
     QString dirPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/PasswordManager";
     QString filePath = dirPath + "/" + passId + ".bin";
 
-    qDebug() << "Attempting to save the encrypted data to file at:" << filePath;
-
     QDir dir(dirPath);
     if (!dir.exists()) {
         if (!dir.mkpath(".")) {
-            qWarning() << "Could not create directory:" << dirPath;
             return;
         }
     }
 
     QFile file(filePath);
     if (!file.open(QIODevice::WriteOnly)) {
-        qWarning() << "Could not open file for writing:" << filePath;
         return;
     }
 
@@ -184,16 +179,12 @@ void transferData::saveEncryptedDataToFile(const QString &passId, const QByteArr
     out << encryptedData;
     file.close();
 
-    qDebug() << "Password data saved and encrypted in file:" << filePath;
-
-    QByteArray decryptedData = CryptoUtils::decryptData(encryptedData, globalCipherKey);  // Decrypt the data to verify it can be correctly decrypted
-    qDebug() << "Decrypted data (raw):" << decryptedData;
+    QByteArray decryptedData = CryptoUtils::decryptData(encryptedData, globalCipherKey);
 
     QJsonDocument decryptedDoc = QJsonDocument::fromJson(decryptedData);  // Optionally convert the decrypted data back to JSON for further verification
     if (decryptedDoc.isNull()) {
         qDebug() << "Failed to convert decrypted data to JSON. The data may be corrupted or incorrectly decrypted.";
     } else {
         QJsonObject decryptedJson = decryptedDoc.object();
-        qDebug() << "Decrypted JSON object:" << decryptedJson;
     }
 }

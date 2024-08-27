@@ -36,7 +36,6 @@ void resetPassword::closeEvent(QCloseEvent *event)
 // Handles the cancel button click event
 void resetPassword::on_cancelButton_clicked()
 {
-    qDebug() << "Cancel button clicked, emitting resetCanceled signal.";
     emit resetCanceled();  // Emit the signal before clearing the entries
     ui->passEntryOne->clear();  // Clear the first password entry
     ui->passEntryTwo->clear();  // Clear the second password entry
@@ -57,7 +56,6 @@ void resetPassword::on_confirmButton_clicked()
         ui->errorLabel->setText("Passwords Don't Match");
         ui->errorLabel->show();  // Show the error label with the appropriate message
     } else {
-        qDebug() << "Passwords match, emitting passwordUpdated signal.";
         emit passwordUpdated(passOne);  // Emit the new password if validation passes
         ui->passEntryOne->clear();  // Clear the first password entry
         ui->passEntryTwo->clear();  // Clear the second password entry

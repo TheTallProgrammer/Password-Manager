@@ -104,8 +104,6 @@ void MainWindow::maskPasswordEntry(QLineEdit *lineEdit, QString &realInput)
     lineEdit->setText(maskedText);
     lineEdit->blockSignals(false);
     lineEdit->setCursorPosition(length);  // Ensure cursor stays at the end
-
-    qDebug() << "Real Input:" << realInput;
 }
 
 void MainWindow::handleUpdateTheme(QString selectedTheme)
@@ -149,26 +147,15 @@ void MainWindow::createPassword(const QString &firstPassEntry, const QString &em
     QByteArray encryptedEmail = CryptoUtils::encryptData(email.toUtf8(), globalCipherKey);  // No keyLength needed
     QString defaultTheme = "Light";  // Default theme
 
-#ifdef QT_DEBUG
-    qDebug() << "Generated salt:" << salt.toHex();
-    qDebug() << "Hashed password:" << hashedPassword.toHex();
-    qDebug() << "Encrypted email:" << encryptedEmail.toHex();
-#endif
-
     bool passSaved = saveToFile(hashedPassword, salt, encryptedEmail, defaultTheme);
 
     if (passSaved) {
         ui->creationError_2->setText("Password Created Successfully");
-#ifdef QT_DEBUG
-        qDebug() << "Password, email, and theme saved successfully.";
         passwordInfo infoDialog(this, firstPassEntry);
         infoDialog.exec();  // This should display the dialog modally
-#endif
+
     } else {
         ui->creationError_2->setText("Password Couldn't Save.");
-#ifdef QT_DEBUG
-        qDebug() << "Failed to save password, email, and theme.";
-#endif
     }
 
     myButtonsPage->show();
@@ -270,9 +257,6 @@ void MainWindow::on_loginButton_4_clicked()
     // Regular expression to check if the cipher key contains only letters and numbers
     QRegularExpression alphanumericRegex("^[a-zA-Z0-9]+$");
 
-    qDebug() << "password: " << realPassword;
-    qDebug() << "cipher: " << realCipherKey;
-
     if (enteredPassword.length() < 8) {
         ui->loginErrorLabel_4->show();
         ui->loginErrorLabel_4->setText("Password Length Insufficient.");
@@ -313,11 +297,6 @@ void MainWindow::promptForPassword(const QString &password) {
 }
 
 void MainWindow::updatePassword(const QString &newPassword) {
-#ifdef QT_DEBUG
-    qDebug() << "Received signal to update password.";
-#endif
     createPassword(newPassword, QString());  // Pass empty email since it's just an update
-#ifdef QT_DEBUG
-    qDebug() << "Password updated.";
-#endif
+
 }
