@@ -69,7 +69,7 @@ Create highly secure passwords using true randomization:
 - **Random & Strong:** Ensures your passwords are truly random and extremely difficult to crack.
 
 
-<img src="genDemo.gif" alt="Password Generator Demo" width="60%" />
+<img src="genDemo.gif" alt="Password Generator Demo" width="80%" />
 
 
 ### 4. Simple & Intuitive Management Interface
@@ -79,7 +79,7 @@ Managing your passwords is straightforward and hassle-free:
 - **No Clutter:** A clean interface with essential features easily accessible—no hidden menus or complicated settings.
 - **Streamlined Workflow:** Six simple buttons to manage your passwords, plus an always-visible logout button.
 
-<img src="view.PNG" alt="Password Management Demo" width="60%" />
+<img src="view.PNG" alt="Password Management Demo" width="80%" />
 
 
 #### Adding Passwords
@@ -89,7 +89,7 @@ Managing your passwords is straightforward and hassle-free:
 - **🔑 Pass:** The actual password, securely encrypted.
 - **📝 Thought Bank:** A notes section for security questions, hints, or additional context.
 
-<img src="addPasswordDemo.gif" alt="Adding Password Demo" width="60%" />
+<img src="addPasswordDemo.gif" alt="Adding Password Demo" width="80%" />
 
 
 ### 5. Flexible Import/Export Options
@@ -100,7 +100,7 @@ Managing your passwords is straightforward and hassle-free:
 - **Raw Text Format:** Exported data is in raw text form for easy re-importing, but remember to handle these files securely since they are not encrypted.
 
 
-<img src="exportDemo.gif" alt="Export Demo" width="60%" />
+<img src="exportDemo.gif" alt="Export Demo" width="80%" />
 
 
 #### Importing Your Passwords
@@ -108,22 +108,22 @@ Managing your passwords is straightforward and hassle-free:
 - **Specific Format:** Import files must be JSON files created by Falkenberg's Password Manager, as they require a specific format.
 - **Future Features:** Support for importing JSON files from other password managers is in development.
 
-<img src="importDemo.gif" alt="Import Demo" width="60%" />
+<img src="importDemo.gif" alt="Import Demo" width="80%" />
 
 
 ### 6. Security Features and Customization
 
 - **Hidden Keystrokes:** The login interface hides keystrokes as you type your password, offering enhanced security in public spaces.
 
-	 <img src="loginDemo.gif" alt="Security Features Demo" width="60%" />
+	 <img src="loginDemo.gif" alt="Security Features Demo" width="80%" />
 
 - **Delete All:** Instantly wipe all saved passwords for any used cipher key if you feel your system is compromised.
 
-	 <img src="deleteAllDemo.gif" alt="Delete All Demo" width="60%" />
+	 <img src="deleteAllDemo.gif" alt="Delete All Demo" width="80%" />
 
 - **Theme Customization:** Choose from four unique themes: Nightshade, Sunset, Light, and Amethyst.
 
-	 <img src="themesDemo.gif" alt="Themes Demo" width="60%" />
+	 <img src="themesDemo.gif" alt="Themes Demo" width="80%" />
 
 
 ---
