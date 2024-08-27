@@ -20,7 +20,7 @@
     - [Flexible Import/Export Options](#5-flexible-importexport-options)
         - [Exporting Your Passwords](#exporting-your-passwords)
         - [Importing Your Passwords](#importing-your-passwords)
-    - [Security Features & Customization](#6-security-features-and-customization)
+    - [Security Features and Customization](#6-🛡️-security-features-and-customization)
 2. [Beta Release Notice](#-beta-release-notice)
 
 
