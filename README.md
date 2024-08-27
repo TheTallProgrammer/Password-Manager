@@ -13,7 +13,7 @@
 
 > **Note:** This application currently only works on Windows machines.
 
-**Note on Microsoft Defender:**
+### **Note on Microsoft Defender:**
 
 > **Important Notice:** You might encounter a warning from Microsoft Defender when downloading or running Falkenberg's Password Manager. This happens because the application isn't signed with a digital certificate (the key provided by Windows to verify that software comes from a reliable source). Rest assured, there is no malicious intent behind this software. Feel free to inspect the source code if you have any concerns. The warning is likely triggered by the packaging tool I used, "Inno," and I’m actively looking for a workaround. I would really appreciate your support and feedback as you try it out.
 
