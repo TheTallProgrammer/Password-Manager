@@ -123,6 +123,7 @@ This version of Falkenberg's Password Manager is a beta release and represents m
 
 <p align="center">
 > **Important:** This application is designed to function strictly offline—your data is never sent to the cloud, ensuring that there is no remote access. Future versions may include optional cloud features, primarily for password recovery, but local security will always be the core focus.
+
 </p>
 
 <p align="center">
