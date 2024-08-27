@@ -1,5 +1,7 @@
 <h1 align="center">🔒 Falkenberg's Password Manager (Beta)</h1>
 
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
 <div align="center">
     <img src="icon.png" alt="App Icon" width="150" />
 </div>
@@ -136,4 +138,4 @@ This version of Falkenberg's Password Manager is a beta release and represents m
 Your feedback is crucial for improving the application's reliability and performance. If you encounter any issues, please consider submitting a bug report.
 </p>
 
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
