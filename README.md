@@ -1,10 +1,8 @@
-# 🔒 Falkenberg's Password Manager (Beta)
+# <img src="icon.png" alt="App Icon" width="150" /> Falkenberg's Password Manager (Beta)
 
 **Falkenberg's Password Manager** is a secure, lightweight, and 100% local password management solution designed for users who prioritize offline security. Operating entirely on your local machine, it ensures your passwords remain accessible even in the most challenging network conditions.
 
 > **Note:** This application currently only works on Windows machines.
-
-<img src="icon.png" alt="App Icon" width="150" />
 
 ## 🌟 Key Features
 
