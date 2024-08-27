@@ -1,4 +1,4 @@
-# Falkenberg's Password Manager (Beta)
+<h1 align="center">🔒 Falkenberg's Password Manager (Beta)</h1>
 <div align="center">
     <img src="icon.png" alt="App Icon" width="150" />
 </div>
