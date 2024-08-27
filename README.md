@@ -1,3 +1,4 @@
+
 <h1 align="center">🔒 Falkenberg's Password Manager (Beta)</h1>
 <div align="center">
     <img src="icon.png" alt="App Icon" width="150" />
@@ -73,12 +74,11 @@ Managing your passwords is straightforward and hassle-free:
 ### 6. 🛡️ Security Features & Customization
 
 - **Hidden Keystrokes:** The login interface hides keystrokes as you type your password, offering enhanced security in public spaces.
+	- ![Security Features Demo](loginDemo.gif)
 - **Delete All:** Instantly wipe all saved passwords for any used cipher key if you feel your system is compromised.
+	- ![Delete All Demo](deleteAllDemo.gif)
 - **Theme Customization:** Choose from four unique themes: Nightshade, Sunset, Light, and Amethyst.
-
-![Security Features Demo](loginDemo.gif)
-
-![Themes Demo](themesDemo.gif)
+	- ![Themes Demo](themesDemo.gif)
 
 ---
 
