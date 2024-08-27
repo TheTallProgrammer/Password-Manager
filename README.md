@@ -1,4 +1,4 @@
-<h1 align="center">🔒 Falkenberg's Password Manager (Beta)</h1>
+<h1 align="center">🔒 Falkenberg's Password Manager</h1>
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE.txt)
 
@@ -30,7 +30,7 @@
         - [Exporting Your Passwords](#exporting-your-passwords)
         - [Importing Your Passwords](#importing-your-passwords)
     - [Security Features and Customization](#6-security-features-and-customization)
-2. [Beta Release Notice](#-beta-release-notice)
+2. [Release Notice](#-release-notice)
 
 ## 🌟 Key Features
 
@@ -128,9 +128,9 @@ Managing your passwords is straightforward and hassle-free:
 
 ---
 
-## 🚀 Beta Release Notice
+## 🚀 Release Notice
 
-This version of Falkenberg's Password Manager is a beta release and represents my second major application as a college student, following my first project, Stock Contender. While every feature has been thoroughly tested, some bugs may still occur.
+Falkenberg's Password Manager represents my second major application as a college student, following my first project, Stock Contender. While every feature has been thoroughly tested, some bugs may still occur.
 
 
 > **Important:** This application is designed to function strictly offline—your data is never sent to the cloud, ensuring that there is no remote access. Future versions may include optional cloud features, primarily for password recovery, but local security will always be the core focus.
