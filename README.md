@@ -78,9 +78,7 @@ Managing your passwords is straightforward and hassle-free:
 - **Delete All:** Instantly wipe all saved passwords for any used cipher key if you feel your system is compromised.
 	<div align="center"> <img src="deleteAllDemo.gif" alt="Delete All Demo" width="80%" /> </div>
 - **Theme Customization:** Choose from four unique themes: Nightshade, Sunset, Light, and Amethyst.
-	`<div align="center">
- <img src="themesDemo.gif" alt="Themes Demo" width="80%" />
-</div>`
+<div align="center"> <img src="themesDemo.gif" alt="Themes Demo" width="80%" /> </div>
 
 ---
 
