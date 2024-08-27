@@ -74,7 +74,7 @@ Managing your passwords is straightforward and hassle-free:
 - **No Clutter:** A clean interface with essential features easily accessible—no hidden menus or complicated settings.
 - **Streamlined Workflow:** Six simple buttons to manage your passwords, plus an always-visible logout button.
 
-<img src="view.png" alt="Password Management Demo" width="60%" />
+<img src="view.PNG" alt="Password Management Demo" width="60%" />
 
 
 #### Adding Passwords
