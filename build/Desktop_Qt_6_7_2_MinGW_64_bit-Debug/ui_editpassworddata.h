@@ -51,7 +51,10 @@ public:
         saveButton = new QPushButton(editPasswordData);
         saveButton->setObjectName("saveButton");
         saveButton->setGeometry(QRect(410, 520, 161, 71));
-        saveButton->setFont(font1);
+        QFont font2;
+        font2.setFamilies({QString::fromUtf8("Bahnschrift Light")});
+        font2.setPointSize(15);
+        saveButton->setFont(font2);
         passwordIdEdit = new QTextEdit(editPasswordData);
         passwordIdEdit->setObjectName("passwordIdEdit");
         passwordIdEdit->setGeometry(QRect(50, 30, 691, 70));

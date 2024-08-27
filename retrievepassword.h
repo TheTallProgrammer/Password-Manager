@@ -51,6 +51,7 @@ private slots:
 private:
     void updatePasswordEntry(const QString &oldPassId, const QString &newPassId, const QString &password, const QString &user, const QString &thoughts);  // Update password entry
     void saveUpdatedDataToFile(const QString &oldPassId, const QString &newPassId, const QString &password, const QString &user, const QString &thoughts);  // Save updated data to file
+    bool doesPassIdExist(const QString &passId);
 
     // ====================
     // Private Members

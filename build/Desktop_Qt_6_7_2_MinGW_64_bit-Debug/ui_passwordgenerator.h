@@ -110,7 +110,8 @@ public:
         PassLength->setReadOnly(true);
         PassLengthLabel = new QLabel(PasswordGenerator);
         PassLengthLabel->setObjectName("PassLengthLabel");
-        PassLengthLabel->setGeometry(QRect(70, 10, 131, 16));
+        PassLengthLabel->setGeometry(QRect(60, 10, 151, 16));
+        PassLengthLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
         PassComp = new QLineEdit(PasswordGenerator);
         PassComp->setObjectName("PassComp");
         PassComp->setGeometry(QRect(280, 30, 150, 75));
@@ -119,7 +120,7 @@ public:
         PassComp->setReadOnly(true);
         PassCompLabel = new QLabel(PasswordGenerator);
         PassCompLabel->setObjectName("PassCompLabel");
-        PassCompLabel->setGeometry(QRect(280, 10, 161, 20));
+        PassCompLabel->setGeometry(QRect(280, 10, 181, 20));
         GenPass = new QPushButton(PasswordGenerator);
         GenPass->setObjectName("GenPass");
         GenPass->setGeometry(QRect(490, 30, 261, 75));

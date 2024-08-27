@@ -77,7 +77,7 @@ public:
         thoughtText->setFont(font1);
         label_4 = new QLabel(storePassword);
         label_4->setObjectName("label_4");
-        label_4->setGeometry(QRect(340, 300, 111, 20));
+        label_4->setGeometry(QRect(330, 300, 131, 20));
         label_4->setFont(font);
         label_4->setAlignment(Qt::AlignmentFlag::AlignCenter);
         backButton = new QPushButton(storePassword);

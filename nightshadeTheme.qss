@@ -234,9 +234,7 @@ QComboBox QAbstractItemView {
     font-family: 'Bahnschrift Light';
 }
 
-QComboBox QAbstractItemView {
-    outline: 0px;
-}
+qtablewidget::item, QComboBox, QComboBox QAbstractItemView {    outline: 0px;}
 
 QComboBox {
     border: 1px solid #58A6FF;  /* Set all borders to red */

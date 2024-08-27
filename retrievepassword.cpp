@@ -35,6 +35,7 @@ retrievePassword::retrievePassword(QWidget *parent) :
     ui->tableWidget->setColumnWidth(3, columnWidth);  // Edit Button
     ui->tableWidget->setColumnWidth(4, columnWidth);  // Delete Button
 
+    ui->tableWidget->setFocusPolicy(Qt::NoFocus);
     loadPasswords();
 }
 
@@ -130,59 +131,121 @@ void retrievePassword::loadPasswords()
     }
 }
 
-// Slot to handle the overwrite data signal from editPasswordData
 void retrievePassword::handleOverwriteData(const QString &newPassId, const QString &dateStored, const QString &password, const QString &username, const QString &thoughts)
 {
-    saveUpdatedDataToFile(newPassId, newPassId, password, username, thoughts);  // Handle the update in your retrievePassword class
+    // Retrieve the old pass ID from the selected row
+    int selectedRow = ui->tableWidget->currentRow();
+    if (selectedRow != -1) {
+        QString oldPassId = ui->tableWidget->item(selectedRow, 0)->text();
 
-    // Optionally reload data
-    ui->tableWidget->clearContents();
-    ui->tableWidget->setRowCount(0);
-    loadPasswords();
+        // Pass the oldPassId and newPassId to the saveUpdatedDataToFile method
+        saveUpdatedDataToFile(oldPassId, newPassId, password, username, thoughts);
 
-    this->show();  // Show the retrievePassword window again
+        // Optionally reload data
+        ui->tableWidget->clearContents();
+        ui->tableWidget->setRowCount(0);
+        loadPasswords();
+
+        this->show();  // Show the retrievePassword window again
+    } else {
+        qWarning() << "No row selected to update.";
+    }
 }
 
-// Function to save the updated data to the file
+
 void retrievePassword::saveUpdatedDataToFile(const QString &oldPassId, const QString &newPassId, const QString &password, const QString &username, const QString &thoughts)
 {
     QString dirPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/PasswordManager/";
     QString oldFilePath = dirPath + oldPassId + ".bin";
     QString newFilePath = dirPath + newPassId + ".bin";
 
-    // If the passId has changed, rename the file
+    qDebug() << "Old Pass ID:" << oldPassId;
+    qDebug() << "New Pass ID:" << newPassId;
+    qDebug() << "Old File Path:" << oldFilePath;
+    qDebug() << "New File Path:" << newFilePath;
+
+    // Check if the passId has been changed
     if (oldPassId != newPassId) {
-        if (QFile::exists(newFilePath)) {
-            qWarning() << "A file with the new passId already exists:" << newFilePath;
+        qDebug() << "Pass ID has changed.";
+
+        // Check if the new passId already exists
+        if (doesPassIdExist(newPassId)) {
+            qWarning() << "A file with the new Pass ID already exists:" << newFilePath;
             return;
         }
-        if (!QFile::rename(oldFilePath, newFilePath)) {
-            qWarning() << "Failed to rename the file from" << oldFilePath << "to" << newFilePath;
+
+        qDebug() << "No existing file with new Pass ID. Proceeding to delete the old file.";
+
+        // Delete the old file
+        if (!QFile::remove(oldFilePath)) {
+            qWarning() << "Failed to delete the old file:" << oldFilePath;
             return;
+        } else {
+            qDebug() << "Successfully deleted the old file:" << oldFilePath;
         }
-    }
 
-    QFile file(newFilePath);
-    if (file.open(QIODevice::WriteOnly)) {
-        QJsonObject json;
-        json["passId"] = newPassId;
-        json["password"] = password;
-        json["username"] = username;
-        json["thoughts"] = thoughts;
-        json["dateStored"] = QDate::currentDate().toString(Qt::ISODate);
+        // Create a new file with the new Pass ID
+        QFile newFile(newFilePath);
+        if (newFile.open(QIODevice::WriteOnly)) {
+            qDebug() << "New file opened successfully for writing.";
 
-        QJsonDocument doc(json);
-        QByteArray jsonData = doc.toJson();
-        QByteArray encryptedData = CryptoUtils::encryptData(jsonData, globalCipherKey);
+            QJsonObject json;
+            json["passId"] = newPassId;
+            json["password"] = password;
+            json["username"] = username;
+            json["thoughts"] = thoughts;
+            json["dateStored"] = QDate::currentDate().toString(Qt::ISODate);
 
-        QDataStream out(&file);
-        out << encryptedData;
-        file.close();
+            QJsonDocument doc(json);
+            QByteArray jsonData = doc.toJson();
+            QByteArray encryptedData = CryptoUtils::encryptData(jsonData, globalCipherKey);
 
-        qDebug() << "Password entry updated in file:" << newFilePath;
+            QDataStream out(&newFile);
+            out << encryptedData;
+            newFile.close();
+
+            qDebug() << "Password entry saved in new file:" << newFilePath;
+        } else {
+            qWarning() << "Could not open new file for writing:" << newFilePath;
+        }
     } else {
-        qWarning() << "Could not open file for writing:" << newFilePath;
+        qDebug() << "Pass ID has not changed. Overwriting the existing file.";
+
+        // If Pass ID hasn't changed, overwrite the existing file
+        QFile file(oldFilePath);
+        if (file.open(QIODevice::WriteOnly)) {
+            qDebug() << "Existing file opened successfully for writing.";
+
+            QJsonObject json;
+            json["passId"] = newPassId;
+            json["password"] = password;
+            json["username"] = username;
+            json["thoughts"] = thoughts;
+            json["dateStored"] = QDate::currentDate().toString(Qt::ISODate);
+
+            QJsonDocument doc(json);
+            QByteArray jsonData = doc.toJson();
+            QByteArray encryptedData = CryptoUtils::encryptData(jsonData, globalCipherKey);
+
+            QDataStream out(&file);
+            out << encryptedData;
+            file.close();
+
+            qDebug() << "Password entry updated in existing file:" << oldFilePath;
+        } else {
+            qWarning() << "Could not open existing file for writing:" << oldFilePath;
+        }
     }
+}
+
+
+bool retrievePassword::doesPassIdExist(const QString &passId)
+{
+    QString dirPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/PasswordManager";
+    QString filePath = dirPath + "/" + passId + ".bin";
+
+    QFile file(filePath);
+    return file.exists();
 }
 
 // Delete password entry
