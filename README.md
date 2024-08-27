@@ -55,7 +55,7 @@ Create highly secure passwords using true randomization:
 - **Random & Strong:** Ensures your passwords are truly random and extremely difficult to crack.
 
 <div align="center">
-    <img src="genDemo.gif" alt="Password Generator Demo" width="80%" />
+    <img src="genDemo.gif" alt="Password Generator Demo" width="60%" />
 </div>
 
 ### 4. Simple & Intuitive Management Interface
@@ -67,7 +67,7 @@ Managing your passwords is straightforward and hassle-free:
 - **Dark Theme:** Switch to a dark theme easily with a top-bar option—no need to dig through settings.
 
 <div align="center">
-    <img src="viewPasswordsDemo.gif" alt="Password Management Demo" width="80%" />
+    <img src="viewPasswordsDemo.gif" alt="Password Management Demo" width="60%" />
 </div>
 
 #### Adding Passwords
@@ -78,7 +78,7 @@ Managing your passwords is straightforward and hassle-free:
 - **📝 Thought Bank:** A notes section for security questions, hints, or additional context.
 
 <div align="center">
-    <img src="addPasswordDemo.gif" alt="Adding Password Demo" width="80%" />
+    <img src="addPasswordDemo.gif" alt="Adding Password Demo" width="60%" />
 </div>
 
 ### 5. Flexible Import/Export Options
@@ -89,7 +89,7 @@ Managing your passwords is straightforward and hassle-free:
 - **Raw Text Format:** Exported data is in raw text form for easy re-importing, but remember to handle these files securely since they are not encrypted.
 
 <div align="center">
-    <img src="exportDemo.gif" alt="Export Demo" width="80%" />
+    <img src="exportDemo.gif" alt="Export Demo" width="60%" />
 </div>
 
 #### Importing Your Passwords
@@ -98,22 +98,22 @@ Managing your passwords is straightforward and hassle-free:
 - **Future Features:** Support for importing JSON files from other password managers is in development.
 
 <div align="center">
-    <img src="importDemo.gif" alt="Import Demo" width="80%" />
+    <img src="importDemo.gif" alt="Import Demo" width="60%" />
 </div>
 
 ### 6. Security Features and Customization
 
 - **Hidden Keystrokes:** The login interface hides keystrokes as you type your password, offering enhanced security in public spaces.
 	<div align="center">
-	    <img src="loginDemo.gif" alt="Security Features Demo" width="80%" />
+	    <img src="loginDemo.gif" alt="Security Features Demo" width="60%" />
 	</div>
 - **Delete All:** Instantly wipe all saved passwords for any used cipher key if you feel your system is compromised.
 	<div align="center">
-	    <img src="deleteAllDemo.gif" alt="Delete All Demo" width="80%" />
+	    <img src="deleteAllDemo.gif" alt="Delete All Demo" width="60%" />
 	</div>
 - **Theme Customization:** Choose from four unique themes: Nightshade, Sunset, Light, and Amethyst.
 	<div align="center">
-	    <img src="themesDemo.gif" alt="Themes Demo" width="80%" />
+	    <img src="themesDemo.gif" alt="Themes Demo" width="60%" />
 	</div>
 
 ---
