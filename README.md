@@ -7,10 +7,11 @@
 <div align="center">
 
 **Falkenberg's Password Manager** is a secure, lightweight, and 100% local password management solution designed for users who prioritize offline security. Operating entirely on your local machine, it ensures your passwords remain accessible even in the most challenging network conditions.
+</div>
 
 > **Note:** This application currently only works on Windows machines.
 
-</div>
+
 
 ## 📑 Table of Contents
 
@@ -121,9 +122,9 @@ Managing your passwords is straightforward and hassle-free:
 
 This version of Falkenberg's Password Manager is a beta release and represents my second major application as a college student, following my first project, Stock Contender. While every feature has been thoroughly tested, some bugs may still occur.
 
-
+<div align="center">
 > **Important:** This application is designed to function strictly offline—your data is never sent to the cloud, ensuring that there is no remote access. Future versions may include optional cloud features, primarily for password recovery, but local security will always be the core focus.
-
+</div>
 
 
 <p align="center">
