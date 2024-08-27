@@ -1,4 +1,4 @@
-
+<div align="center">
 <h1 align="center">🔒 Falkenberg's Password Manager (Beta)</h1>
 <div align="center">
     <img src="icon.png" alt="App Icon" width="150" />
@@ -103,4 +103,4 @@ This version of Falkenberg's Password Manager is a beta release and represents m
 > **Important:** This application is designed to function strictly offline—your data is never sent to the cloud, ensuring that there is no remote access. Future versions may include optional cloud features, primarily for password recovery, but local security will always be the core focus.
 
 Your feedback is crucial for improving the application's reliability and performance. If you encounter any issues, please consider submitting a bug report.
-
+</div>
