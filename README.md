@@ -9,6 +9,21 @@
 
 > **Note:** This application currently only works on Windows machines.
 
+## 📑 Table of Contents
+
+1. [Key Features](#-key-features)
+    - [Purely Local & Secure](#1-purely-local--secure)
+    - [Robust Encryption & Hashing](#2-robust-encryption--hashing)
+    - [Strong Password Generator](#3-strong-password-generator)
+    - [Simple & Intuitive Management Interface](#4-simple--intuitive-management-interface)
+        - [Adding Passwords](#adding-passwords)
+    - [Flexible Import/Export Options](#5-flexible-importexport-options)
+        - [Exporting Your Passwords](#exporting-your-passwords)
+        - [Importing Your Passwords](#importing-your-passwords)
+    - [Security Features & Customization](#6-security-features--customization)
+2. [Beta Release Notice](#-beta-release-notice)
+
+
 ## 🌟 Key Features
 
 ### 1. Purely Local & Secure
