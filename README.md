@@ -71,7 +71,6 @@ Managing your passwords is straightforward and hassle-free:
 <div align="center"> <img src="addPasswordDemo.gif" alt="Adding Password Demo" width="80%" /> </div>
 
 ### 5. 📁 Flexible Import/Export Options
-
 #### Exporting Your Passwords
 
 - **Easy Backup:** Transfer your passwords across devices with an easy-to-use export function.
@@ -86,7 +85,7 @@ Managing your passwords is straightforward and hassle-free:
 
 <div align="center"> <img src="importDemo.gif" alt="Import Demo" width="80%" /> </div>
 
-### 6. 🛡️ Security Features And Customization
+### 6. 🛡️ Security Features and Customization
 
 - **Hidden Keystrokes:** The login interface hides keystrokes as you type your password, offering enhanced security in public spaces.
 	<div align="center"> <img src="loginDemo.gif" alt="Security Features Demo" width="80%" /> </div>
