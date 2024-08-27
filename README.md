@@ -14,8 +14,8 @@
 1. [Key Features](#-key-features)
     - [Purely Local & Secure](#1-purely-local--secure)
     - [Robust Encryption & Hashing](#2-robust-encryption--hashing)
-    - [Strong Password Generator](#3-🔧-strong-password-generator)
-    - [Simple & Intuitive Management Interface](#4-🛠️-simple--intuitive-management-interface)
+    - [Strong Password Generator](#3-strong-password-generator)
+    - [Simple & Intuitive Management Interface](#4-simple--intuitive-management-interface)
         - [Adding Passwords](#adding-passwords)
     - [Flexible Import/Export Options](#5-flexible-importexport-options)
         - [Exporting Your Passwords](#exporting-your-passwords)
@@ -42,7 +42,7 @@ Falkenberg's Password Manager leverages industry-standard encryption techniques 
 
 <div align="center"> <img src="hashDemo.gif" alt="Encryption & Hashing Demo" width="100%" /> </div>
 
-### 3. 🔧 Strong Password Generator
+### 3. Strong Password Generator
 
 Create highly secure passwords using true randomization:
 
@@ -51,7 +51,7 @@ Create highly secure passwords using true randomization:
 
 <div align="center"> <img src="genDemo.gif" alt="Password Generator Demo" width="80%" /> </div>
 
-### 4. 🛠️ Simple & Intuitive Management Interface
+### 4. Simple & Intuitive Management Interface
 
 Managing your passwords is straightforward and hassle-free:
 
