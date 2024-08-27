@@ -1,9 +1,8 @@
 <div align="center">
-<h1 align="center">🔒 Falkenberg's Password Manager (Beta)</h1>
-<div align="center">
-    <img src="icon.png" alt="App Icon" width="150" />
-</div>
 
+<h1>🔒 Falkenberg's Password Manager (Beta)</h1>
+
+<img src="icon.png" alt="App Icon" width="150" />
 
 **Falkenberg's Password Manager** is a secure, lightweight, and 100% local password management solution designed for users who prioritize offline security. Operating entirely on your local machine, it ensures your passwords remain accessible even in the most challenging network conditions.
 
@@ -40,7 +39,7 @@ Falkenberg's Password Manager leverages industry-standard encryption techniques 
 - **🔑 Hashing:** Login passwords are securely hashed with SHA256, optionally salted, and stored separately from your encrypted passwords.
 - **🔐 Unlimited Cipher Keys:** Use multiple cipher keys for different sets of passwords, enhancing security through compartmentalization.
 
-<div align="center"> <img src="hashDemo.gif" alt="Encryption & Hashing Demo" width="100%" /> </div>
+<img src="hashDemo.gif" alt="Encryption & Hashing Demo" width="100%" />
 
 ### 3. Strong Password Generator
 
@@ -49,7 +48,7 @@ Create highly secure passwords using true randomization:
 - **Customizable:** Set the length, complexity, and character types to generate passwords that meet your specific needs.
 - **Random & Strong:** Ensures your passwords are truly random and extremely difficult to crack.
 
-<div align="center"> <img src="genDemo.gif" alt="Password Generator Demo" width="80%" /> </div>
+<img src="genDemo.gif" alt="Password Generator Demo" width="80%" />
 
 ### 4. Simple & Intuitive Management Interface
 
@@ -59,7 +58,7 @@ Managing your passwords is straightforward and hassle-free:
 - **Streamlined Workflow:** Six simple buttons to manage your passwords, plus an always-visible logout button.
 - **Dark Theme:** Switch to a dark theme easily with a top-bar option—no need to dig through settings.
 
-<div align="center"> <img src="viewPasswordsDemo.gif" alt="Password Management Demo" width="80%" /> </div>
+<img src="viewPasswordsDemo.gif" alt="Password Management Demo" width="80%" />
 
 #### Adding Passwords
 
@@ -68,7 +67,7 @@ Managing your passwords is straightforward and hassle-free:
 - **🔑 Pass:** The actual password, securely encrypted.
 - **📝 Thought Bank:** A notes section for security questions, hints, or additional context.
 
-<div align="center"> <img src="addPasswordDemo.gif" alt="Adding Password Demo" width="80%" /> </div>
+<img src="addPasswordDemo.gif" alt="Adding Password Demo" width="80%" />
 
 ### 5. Flexible Import/Export Options
 #### Exporting Your Passwords
@@ -76,23 +75,23 @@ Managing your passwords is straightforward and hassle-free:
 - **Easy Backup:** Transfer your passwords across devices with an easy-to-use export function.
 - **Raw Text Format:** Exported data is in raw text form for easy re-importing, but remember to handle these files securely since they are not encrypted.
 
-<div align="center"> <img src="exportDemo.gif" alt="Export Demo" width="80%" /> </div>
+<img src="exportDemo.gif" alt="Export Demo" width="80%" />
 
 #### Importing Your Passwords
 
 - **Specific Format:** Import files must be JSON files created by Falkenberg's Password Manager, as they require a specific format.
 - **Future Features:** Support for importing JSON files from other password managers is in development.
 
-<div align="center"> <img src="importDemo.gif" alt="Import Demo" width="80%" /> </div>
+<img src="importDemo.gif" alt="Import Demo" width="80%" />
 
 ### 6. Security Features and Customization
 
 - **Hidden Keystrokes:** The login interface hides keystrokes as you type your password, offering enhanced security in public spaces.
-	<div align="center"> <img src="loginDemo.gif" alt="Security Features Demo" width="80%" /> </div>
+	<img src="loginDemo.gif" alt="Security Features Demo" width="80%" />
 - **Delete All:** Instantly wipe all saved passwords for any used cipher key if you feel your system is compromised.
-	<div align="center"> <img src="deleteAllDemo.gif" alt="Delete All Demo" width="80%" /> </div>
+	<img src="deleteAllDemo.gif" alt="Delete All Demo" width="80%" />
 - **Theme Customization:** Choose from four unique themes: Nightshade, Sunset, Light, and Amethyst.
-<div align="center"> <img src="themesDemo.gif" alt="Themes Demo" width="80%" /> </div>
+<img src="themesDemo.gif" alt="Themes Demo" width="80%" />
 
 ---
 
@@ -103,4 +102,5 @@ This version of Falkenberg's Password Manager is a beta release and represents m
 > **Important:** This application is designed to function strictly offline—your data is never sent to the cloud, ensuring that there is no remote access. Future versions may include optional cloud features, primarily for password recovery, but local security will always be the core focus.
 
 Your feedback is crucial for improving the application's reliability and performance. If you encounter any issues, please consider submitting a bug report.
+
 </div>
